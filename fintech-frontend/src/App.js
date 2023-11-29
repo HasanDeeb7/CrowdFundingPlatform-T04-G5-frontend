@@ -1,19 +1,22 @@
-import logo from "./logo.svg";
+
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Profile from "./Pages/Profile";
-import Dashboard from "./Pages/Dashboard";
-import Campaigns from "./Pages/Campaigns";
-import Login from "./Pages/Login";
-import SignUp from "./Pages/SignUp";
-import Donations from "./Pages/Donations";
-import SingleCampaign from "./Pages/SingleCampaign";
-import AdminCampaignRequests from "./Pages/AdminCampaignRequests";
+import Profile from "./Pages/Profile.jsx";
+import Dashboard from "./Pages/Dashboard.jsx";
+import Campaigns from "./Pages/Campaigns.jsx";
+import Login from "./Pages/Login.jsx";
+import SignUp from "./Pages/SignUp.jsx";
+import Donations from "./Pages/Donations.jsx";
+import SingleCampaign from "./Pages/SingleCampaign.jsx";
+import AdminCampaignRequests from "./Pages/AdminCampaignRequests.jsx";
+import Sidebar from "./Layouts/Sidebar.jsx";
+import AdminUsers from "./Pages/AdminUsers.jsx";
 
 function App() {
   return (
     <div className="App">
-      <SideBar />
+   
+      <Sidebar />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
