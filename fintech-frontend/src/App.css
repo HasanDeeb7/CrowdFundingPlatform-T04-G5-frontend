@@ -2,24 +2,38 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: white;
 }
-:rout{
+:root {
   --primary-bg-clr: #0a0b0c; /* for all page bg */
   --secandary-bg-clr: #1c1f21; /* cards, navbar, tables bg */
   --primary-gold-clr: #c27613; /*primary buttons bg, secandary buttons border, pagination */
-  --light-gold-clr: #ffc42e;  /* pagination, progress, steps */
-  --white-text-clr:#fff; /* for text*/
-  --card-border-radius:30px; /* border radius for cards, and sidenav items*/
+  --light-gold-clr: #ffc42e; /* pagination, progress, steps */
+  --white-text-clr: #fff; /* for text*/
+  --card-border-radius: 30px; /* border radius for cards, and sidenav items*/
   --button-border-radius: 40px; /* for buttons*/
   --image-border-radius: 50%;
   --secondary-button-clr: transparent; /*bg color for secandary buttons*/
 }
-h1{
-  font-size: 40px ;
+h1 {
+  font-size: 40px;
 }
-h2{
+h2 {
   font-size: 30px;
 }
-h3{
+h3 {
   font-size: 20px;
+}
+
+.App {
+  background-color: var(--primary-bg-clr);
+  height: 100vh;
+  display: flex;
+  /* margin: 3rem 10rem; */
+}
+.sideNavContainer{
+  flex-basis: 25%;
+}
+.mainContent{
+  width: 75%;
 }

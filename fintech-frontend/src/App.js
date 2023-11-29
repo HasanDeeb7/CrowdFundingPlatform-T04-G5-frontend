@@ -15,8 +15,12 @@ import AdminUsers from "./Pages/AdminUsers.jsx";
 function App() {
   return (
     <div className="App">
-   
+      <section className="sideNavContainer">
       <Sidebar />
+      </section>
+        
+
+      <main className="mainContent">
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
@@ -30,6 +34,7 @@ function App() {
         {/* <Route path="/profile" element={<Admin />} />
         <Route path="/profile" element={<Profile />} /> */}
       </Routes>
+        </main>
     </div>
   );
 }
