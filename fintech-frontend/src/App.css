@@ -6,7 +6,7 @@
 }
 :root {
   --primary-bg-clr: #0a0b0c; /* for all page bg */
-  --secandary-bg-clr: #1c1f21; /* cards, navbar, tables bg */
+  --secondary-bg-clr: #1c1f21; /* cards, navbar, tables bg */
   --primary-gold-clr: #c27613; /*primary buttons bg, secandary buttons border, pagination */
   --light-gold-clr: #ffc42e; /* pagination, progress, steps */
   --white-text-clr: #fff; /* for text*/
@@ -29,11 +29,10 @@ h3 {
   background-color: var(--primary-bg-clr);
   height: 100vh;
   display: flex;
-  /* margin: 3rem 10rem; */
 }
-.sideNavContainer{
+.sideNavContainer {
   flex-basis: 25%;
 }
-.mainContent{
+.mainContent {
   width: 75%;
 }

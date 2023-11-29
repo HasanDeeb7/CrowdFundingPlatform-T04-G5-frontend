@@ -16,5 +16,5 @@ const fakeUsers = Array.from({ length: 5 }, (_, index) => {
     
   };
 });
-console.log(fakeUsers);
-console.log(generateRandomRole());
+
+export default fakeUsers
