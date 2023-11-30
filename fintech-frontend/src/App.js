@@ -8,7 +8,7 @@ import SignUp from "./Pages/SignUp.jsx";
 import Donations from "./Pages/Donations.jsx";
 import SingleCampaign from "./Pages/SingleCampaign.jsx";
 import AdminCampaignRequests from "./Pages/AdminCampaignRequests.jsx";
-import Sidebar from "./Layouts/Sidebar.jsx";
+import Sidebar from "./Layouts/Sidebar/Sidebar.jsx";
 import AdminUsers from "./Pages/AdminUsers.jsx";
 import "rsuite/dist/rsuite.min.css";
 import { CustomProvider } from "rsuite";

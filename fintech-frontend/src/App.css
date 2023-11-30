@@ -1,3 +1,5 @@
+@import "rsuite/dist/rsuite.css";
+
 * {
   margin: 0;
   padding: 0;
@@ -35,4 +37,8 @@ h3 {
 }
 .mainContent {
   width: 75%;
+}
+ul,
+ol {
+  margin-bottom: 0px;
 }
