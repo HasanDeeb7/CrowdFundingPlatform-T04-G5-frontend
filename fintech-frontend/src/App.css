@@ -4,7 +4,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: white;
 }
 :root {
   --primary-bg-clr: #0a0b0c; /* for all page bg */
