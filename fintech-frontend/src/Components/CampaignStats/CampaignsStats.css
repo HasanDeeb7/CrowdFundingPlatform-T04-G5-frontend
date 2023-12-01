@@ -1,0 +1,68 @@
+.campaignStats {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.statsCard {
+  background-color: var(--secondary-bg-clr);
+  width: 400px;
+  height: 610px;
+  border-radius: var(--card-border-radius);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  box-shadow: -5px 6px 187px -42px rgba(0,0,0,1);
+
+}
+.fundsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.fundsContainer span {
+  font-size: 24px;
+}
+.topDonorsList{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.topDonorsList li {
+  list-style: none;
+}
+.topDonorsItem {
+  display: flex;
+  font-size: 25px;
+  gap: 20px;
+  align-items: center;
+}
+.topDonorsItem svg{
+    color: var(--light-gold-clr);
+}
+.donorItemName {
+  position: relative;
+  width: 145px;
+}
+.donorItemName::after {
+  display: block;
+  content: " ";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--light-gold-clr);
+  right: 0%;
+  top: 55%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.firstDonor{
+    border-top: 1px solid var(--light-gold-clr);
+    margin-top: 10px;
+    padding-top:10px ;
+}
+.firstDonation{
+    font-size: 20px;
+    font-weight: 700;
+}
+

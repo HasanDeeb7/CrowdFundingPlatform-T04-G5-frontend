@@ -1,18 +1,26 @@
-import { Progress, Table } from "rsuite";
+import { Pagination, Progress, Table } from "rsuite";
 import { useState } from "react";
 import fakeCampaigns from "../../FakeData/fakeCampaigns";
 import { getPercentage } from "../../utils/getPercentage";
+import "./CampaignsTableComponents.css";
+import { NavLink } from "react-router-dom";
 const { Column, HeaderCell, Cell } = Table;
-const data = fakeCampaigns;
 
 function ComponentsTableComponent() {
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();
   const [loading, setLoading] = useState(false);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+
+  const handleChangeLimit = (dataKey) => {
+    setPage(1);
+    setLimit(dataKey);
+  };
 
   const getData = () => {
     if (sortColumn && sortType) {
-      return data.sort((a, b) => {
+      return fakeCampaigns.sort((a, b) => {
         let x = a[sortColumn];
         let y = b[sortColumn];
         if (typeof x === "string") {
@@ -28,8 +36,13 @@ function ComponentsTableComponent() {
         }
       });
     }
-    return data;
+    return fakeCampaigns;
   };
+  const data = getData().filter((v, i) => {
+    const start = limit * (page - 1);
+    const end = start + limit;
+    return i >= start && i < end;
+  });
 
   const handleSortColumn = (sortColumn, sortType) => {
     setLoading(true);
@@ -40,11 +53,19 @@ function ComponentsTableComponent() {
     }, 500);
   };
 
+  const ActionCell = ({ rowData, dataKey, onClick, ...props }) => {
+    return (
+      <Cell {...props} style={{ padding: "6px" }}>
+        <NavLink to={"/singlecampaign"} state={rowData} onClick={()=> console.log(rowData)}>View More</NavLink>
+      </Cell>
+    );
+  };
+
   return (
     <>
       <Table
         height={420}
-        data={getData()}
+        data={data}
         sortColumn={sortColumn}
         sortType={sortType}
         onSortColumn={handleSortColumn}
@@ -53,7 +74,11 @@ function ComponentsTableComponent() {
       >
         <Column align="center" color="red" fixed sortable>
           <HeaderCell color="red">Id</HeaderCell>
-          <Cell dataKey="id" color="red" />
+          <Cell
+            dataKey="id"
+            color="red"
+            onClick={(rowData) => console.log(rowData)}
+          />
         </Column>
 
         <Column width={200} fixed sortable>
@@ -80,7 +105,7 @@ function ComponentsTableComponent() {
                   <Progress
                     percent={progressData}
                     showInfo={true}
-                    strokeColor="var(--light-gold-clr)"
+                    // strokeColor="var(--light-gold-clr)"
                     status={status}
                   />
                 </div>
@@ -89,11 +114,37 @@ function ComponentsTableComponent() {
           </Cell>
         </Column>
 
-        <Column width={"100%"} style={{ marginLeft: "100px" }} sortable>
+        <Column width={400} style={{ marginLeft: "100px" }} sortable>
           <HeaderCell>status</HeaderCell>
           <Cell dataKey="status" />
         </Column>
+
+        <Column flexGrow={1}>
+          <HeaderCell>...</HeaderCell>
+          <ActionCell dataKey="id" />
+        </Column>
       </Table>
+
+      <div style={{ padding: 20 }}>
+        <Pagination
+          prev
+          next
+          first
+          last
+          ellipsis
+          boundaryLinks
+          maxButtons={5}
+          size="xs"
+          layout={["total", "-", "limit", "|", "pager", "skip"]}
+          total={fakeCampaigns.length}
+          limitOptions={[10, 30, 50]}
+          limit={limit}
+          activePage={page}
+          onChangePage={setPage}
+          onChangeLimit={handleChangeLimit}
+          className="custom-pagination"
+        />
+      </div>
     </>
   );
 }
