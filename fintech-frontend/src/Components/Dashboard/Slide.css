@@ -1,0 +1,31 @@
+.container {
+  height: 626px;
+  overflow-y: hidden;
+  background-color: var(--secondary-bg-clr);
+  border-radius: var(--card-border-radius);
+}
+.container .child {
+  height: 90%;
+  overflow-y: scroll;
+}
+.container .child::-webkit-scrollbar {
+  display: none;
+}
+.sub {
+  display: flex;
+  padding: 10px;
+  border-bottom: 2px solid var(--primary-gold-clr);
+}
+.sub .second {
+  margin-left: 20px;
+}
+.sub .second p {
+  margin-bottom: 10px;
+}
+.child a {
+  color: white;
+}
+.child a:hover {
+  color: var(--primary-gold-clr);
+  text-decoration: none;
+}

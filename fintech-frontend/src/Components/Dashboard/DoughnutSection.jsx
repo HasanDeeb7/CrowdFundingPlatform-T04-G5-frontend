@@ -6,11 +6,12 @@ function DoughnutSection() {
   return (
     <div
       style={{
-        width: "35%",
+        width: "90%",
         height: "300px",
         backgroundColor: "var(--secondary-bg-clr)",
         margin: "30px",
         padding: "15px",
+        borderRadius: "var(--card-border-radius)",
       }}
     >
       <Doughnut
