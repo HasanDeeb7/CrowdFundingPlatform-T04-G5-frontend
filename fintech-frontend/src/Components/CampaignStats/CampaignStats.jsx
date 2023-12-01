@@ -21,7 +21,7 @@ function CampaignStats({ data }) {
 
   return (
     <div className="campaignStats">
-      {isDonationModalOpen ? <DonationModal /> : ""}
+      {isDonationModalOpen ? <DonationModal closeHandler={()=> setIsDonationModalOpen(false)} /> : ""}
       <div className="statsCard">
         <div className="fundsContainer">
           <span>

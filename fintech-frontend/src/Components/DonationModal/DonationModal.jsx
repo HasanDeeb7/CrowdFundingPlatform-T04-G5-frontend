@@ -1,9 +1,10 @@
 import { Steps } from "rsuite";
 import "./DonationModal.css";
 
-function DonationModal() {
+function DonationModal({ closeHandler }) {
   return (
-    <div className="modalContainer">
+    <>
+      <div className="modalContainer" onClick={closeHandler}></div>
       <div className="modalItemsWrapper">
         <Steps current={0}>
           <Steps.Item />
@@ -11,7 +12,7 @@ function DonationModal() {
           <Steps.Item />
         </Steps>
       </div>
-    </div>
+    </>
   );
 }
 

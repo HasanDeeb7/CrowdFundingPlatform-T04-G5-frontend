@@ -10,7 +10,7 @@ function SingleCampaign() {
   console.log(data);
   return (
     <div className="singleCampaignContainer">
-      <DonationModal/>
+      {/* <DonationModal/> */}
       <CampgainsDetails data={data} img={img} />
       <CampaignStats data={data} />
     </div>
