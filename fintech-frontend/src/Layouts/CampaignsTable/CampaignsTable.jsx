@@ -1,9 +1,13 @@
-import React from 'react'
-import CampaignsTableComponent from '../../Components/CampaignsTableComponent/CampaignsTableComponent.jsx'
+import React from "react";
+import CampaignsTableComponent from "../../Components/CampaignsTableComponent/CampaignsTableComponent.jsx";
 function CampaignsTable() {
   return (
-    <div className='campaignsTableComponentWrapper'><CampaignsTableComponent /></div>
-  )
+    <>
+      <div className="campaignsTableComponentWrapper">
+        <CampaignsTableComponent />
+      </div>
+    </>
+  );
 }
 
-export default CampaignsTable
+export default CampaignsTable;
