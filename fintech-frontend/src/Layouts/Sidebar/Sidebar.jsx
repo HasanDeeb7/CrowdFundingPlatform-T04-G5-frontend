@@ -2,6 +2,7 @@ import React from "react";
 import { Sidenav, Nav } from "rsuite";
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import GroupIcon from "@rsuite/icons/legacy/Group";
+import DonationIcon from "@rsuite/icons/legacy/Search";
 import "./Sidebar.css";
 function Sidebar() {
   const [expanded, setExpanded] = React.useState(true);

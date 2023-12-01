@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Profile from "./Pages/Profile.jsx";
-import Dashboard from "./Pages/Dashboard.jsx";
+import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
 import Campaigns from "./Pages/Campaigns/Campaigns.jsx";
 import Login from "./Pages/Login.jsx";
 import SignUp from "./Pages/SignUp.jsx";
