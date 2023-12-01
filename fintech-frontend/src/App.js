@@ -1,11 +1,11 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Profile from "./Pages/Profile.jsx";
+import Profile from "./Pages/ProfilesPage/Profile.jsx";
 import Dashboard from "./Pages/Dashboard.jsx";
 import Campaigns from "./Pages/Campaigns/Campaigns.jsx";
 import Login from "./Pages/Login.jsx";
 import SignUp from "./Pages/SignUp.jsx";
-import Donations from "./Pages/Donations.jsx";
+import Donations from "./Pages/DonationsPage/Donations.jsx";
 import SingleCampaign from "./Pages/SingleCampaign.jsx";
 import AdminCampaignRequests from "./Pages/AdminCampaignRequests.jsx";
 import Sidebar from "./Layouts/Sidebar/Sidebar.jsx";
