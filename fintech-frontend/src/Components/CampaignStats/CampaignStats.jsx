@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Progress from "rsuite/Progress";
 import { getPercentage } from "../../utils/getPercentage";
 import "./CampaignsStats.css";
 import { FaHandHoldingHeart } from "react-icons/fa6";
 import { animate, useMotionValue, useTransform, motion } from "framer-motion";
 import Button from "../Button/Button";
+import DonationModal from "../DonationModal/DonationModal";
 
 function CampaignStats({ data }) {
   const progressData = getPercentage(data.amountContributed, data.target);
   const status = progressData === 100 ? "success" : "active";
   const firstDonation = useMotionValue(0);
   const rounded = useTransform(firstDonation, (latest) => Math.round(latest));
+  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
   useEffect(() => {
     const controls = animate(firstDonation, 2500);
 
@@ -19,6 +21,7 @@ function CampaignStats({ data }) {
 
   return (
     <div className="campaignStats">
+      {isDonationModalOpen ? <DonationModal /> : ""}
       <div className="statsCard">
         <div className="fundsContainer">
           <span>
@@ -65,7 +68,10 @@ function CampaignStats({ data }) {
             <span className="donorItemName">Bill Gates</span>{" "}
             <span className="donorItemAmount">$2,500</span>
           </span>
-          <Button action='Donate' />
+          <Button
+            action="Donate"
+            onClick={() => setIsDonationModalOpen(true)}
+          />
         </div>
       </div>
     </div>

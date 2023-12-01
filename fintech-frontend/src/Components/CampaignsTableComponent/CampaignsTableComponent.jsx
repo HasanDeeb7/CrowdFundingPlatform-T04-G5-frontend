@@ -56,7 +56,14 @@ function ComponentsTableComponent() {
   const ActionCell = ({ rowData, dataKey, onClick, ...props }) => {
     return (
       <Cell {...props} style={{ padding: "6px" }}>
-        <NavLink to={"/singlecampaign"} state={rowData} onClick={()=> console.log(rowData)}>View More</NavLink>
+        <NavLink
+          to={"/singlecampaign"}
+          style={{ color: "var(--light-gold-clr" }}
+          state={rowData}
+          onClick={() => console.log(rowData)}
+        >
+          View More
+        </NavLink>
       </Cell>
     );
   };
@@ -78,6 +85,7 @@ function ComponentsTableComponent() {
             dataKey="id"
             color="red"
             onClick={(rowData) => console.log(rowData)}
+            className="tableCell"
           />
         </Column>
 
@@ -105,7 +113,7 @@ function ComponentsTableComponent() {
                   <Progress
                     percent={progressData}
                     showInfo={true}
-                    // strokeColor="var(--light-gold-clr)"
+                    strokeColor="var(--light-gold-clr)"
                     status={status}
                   />
                 </div>
@@ -143,6 +151,7 @@ function ComponentsTableComponent() {
           onChangePage={setPage}
           onChangeLimit={handleChangeLimit}
           className="custom-pagination"
+          // style={}
         />
       </div>
     </>
