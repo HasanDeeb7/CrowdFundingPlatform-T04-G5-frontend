@@ -1,7 +1,0 @@
-.filterButton {
-  background-color: rgba(32, 32, 33, 57%);
-  color: var(--white-text-clr);
-}
-.filterButton:hover {
-  color: black;
-}

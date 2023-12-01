@@ -5,6 +5,7 @@ import './Campaigns.css'
 function Campaigns() {
   return (
     <div className="CampaignsPageWrapper">
+      <h1>Campaigns</h1>
       <SearchFilter />
       <CampaignsTable />
     </div>
