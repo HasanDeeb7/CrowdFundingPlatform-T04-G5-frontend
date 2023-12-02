@@ -1,21 +1,23 @@
 import React from 'react'
 import { Table, Button } from 'rsuite';
-import fakeDonations  from '../../FakeData/fakeDonations.js'
+import { useDataContext } from '../../useContext/context.ts';
 import './Content.css'
 import '../../App.css'
 // import Test from '../../Components/CampaignsTableComponent/CampaignsTableComponent.jsx'
 
 const { Column, HeaderCell, Cell } = Table;
-const data = fakeDonations
+
 
 function Content() {
+
+  const data = useDataContext()
   
   return (
     <div>
       
       <Table
       className='tableDonations'
-      height={400}
+      height={480}
       data={data}
       onRowClick={rowData => {
         console.log(rowData);
