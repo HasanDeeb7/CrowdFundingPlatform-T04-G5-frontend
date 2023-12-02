@@ -1,7 +1,7 @@
 .donateBtnPrimary {
   background-color: var(--primary-gold-clr);
-  width: 100px;
-  padding: 10px;
+  width: 150px;
+  padding: 7px;
   border-radius: var(--card-border-radius);
   transition: all 0.2s ease;
   align-self: center;
@@ -16,8 +16,8 @@
   color: var(--primary-gold-clr);
 }
 .donateBtnSecondary {
-  width: 100px;
-  padding: 10px;
+  width: 150px;
+  padding: 7px;
   border-radius: var(--card-border-radius);
   transition: all 0.2s ease;
   align-self: center;

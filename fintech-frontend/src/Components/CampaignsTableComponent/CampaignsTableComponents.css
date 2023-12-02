@@ -5,8 +5,3 @@
   color: var(--light-gold-clr);
   border-color: var(--light-gold-clr);
 }
-.custom-pagination
-  .rs-picker-select-menu-item.rs-picker-select-menu-item-active {
-  color: var(--light-gold-clr);
-}
-
