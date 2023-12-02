@@ -1,0 +1,32 @@
+.headerProfile{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.imageProfile{
+    width: 200px;
+    border-radius: 100%;
+}
+
+.singleBorder{
+    text-align: center;
+    width: 250px;
+    min-width: 200px;
+    background-color: var(--secondary-bg-clr);
+    padding: 5px;
+    border-radius: 20px;
+    border: none;
+}
+
+.borderContainer{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+
+.information{
+    display: flex;
+    column-gap: 20px;
+    justify-content: space-around;
+}

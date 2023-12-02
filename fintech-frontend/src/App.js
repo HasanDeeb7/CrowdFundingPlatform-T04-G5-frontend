@@ -13,6 +13,7 @@ import "rsuite/dist/rsuite.min.css";
 import { CustomProvider } from "rsuite";
 import SingleCampaign from "./Pages/SingleCampaign/SingleCampaign.jsx";
 
+
 function App() {
   return (
     <CustomProvider theme="dark">
