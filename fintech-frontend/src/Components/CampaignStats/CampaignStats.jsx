@@ -21,7 +21,11 @@ function CampaignStats({ data }) {
 
   return (
     <div className="campaignStats">
-      {isDonationModalOpen ? <DonationModal closeHandler={()=> setIsDonationModalOpen(false)} /> : ""}
+      {isDonationModalOpen ? (
+        <DonationModal closeHandler={() => setIsDonationModalOpen(false)} />
+      ) : (
+        ""
+      )}
       <div className="statsCard">
         <div className="fundsContainer">
           <span>
@@ -37,6 +41,7 @@ function CampaignStats({ data }) {
           </div>
         </div>
         <div className="topDonors">
+          <h4> Top Donors</h4>
           <ul className="topDonorsList">
             <li>
               <span className="topDonorsItem">

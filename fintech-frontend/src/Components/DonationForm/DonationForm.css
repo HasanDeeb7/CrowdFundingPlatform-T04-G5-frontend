@@ -1,0 +1,31 @@
+.donationFormContainer{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+.donationFormContainer h3{
+    align-self: center;
+    font-size: 25px;
+}
+.donationInputWrapper, .donationTotalBalance{
+    display: flex;
+    justify-content: space-between;
+    font-size: 23px;
+    align-items: center;
+}
+.donationInputWrapper .rs-input-group{
+    border: 1px solid rgba(255, 255, 255, .5);
+}
+.donationInputWrapper .rs-input-group:hover{
+    border: 1px solid var(--light-gold-clr);
+}
+.donationInputWrapper .rs-input-group:focus-within, .rs-input-group:not(.rs-input-group-disabled).rs-input-group-focus {
+    outline: 1px solid var(--light-gold-clr);
+    border: 1px solid var(--light-gold-clr);
+}
+.donationTotalBalance{
+    padding-top: 2rem;
+    border-top: 3px solid white;
+}
