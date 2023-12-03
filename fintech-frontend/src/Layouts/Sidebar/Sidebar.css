@@ -15,9 +15,11 @@ a.item.rs-sidenav-item.rs-sidenav-item-active {
   color: var(--primary-gold-clr);
   border-radius: var(--button-border-radius) 0 0 var(--button-border-radius);
 }
+.rs-sidenav-nav.rs-nav.rs-nav-default.rs-nav-vertical {
+  color: white;
+}
 @media (max-width: 767px) {
   .rs-sidenav-toggle {
     display: none;
-    /* rs-sidenav-collapse-out */
   }
 }

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Sidenav, Nav } from "rsuite";
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import GroupIcon from "@rsuite/icons/legacy/Group";
