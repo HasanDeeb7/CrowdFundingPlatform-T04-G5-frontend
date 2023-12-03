@@ -4,16 +4,7 @@ import React from "react";
 
 function DoughnutSection() {
   return (
-    <div
-      style={{
-        width: "90%",
-        height: "300px",
-        backgroundColor: "var(--secondary-bg-clr)",
-        margin: "30px",
-        padding: "15px",
-        borderRadius: "var(--card-border-radius)",
-      }}
-    >
+    <div className="doughnut">
       <Doughnut
         data={{
           labels: ["Donation"],

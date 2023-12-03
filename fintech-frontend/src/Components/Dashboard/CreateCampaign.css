@@ -1,0 +1,20 @@
+.create {
+  background-color: var(--primary-gold-clr);
+  width: 250px;
+  color: white;
+  padding: 10px;
+  border-radius: var(--card-border-radius);
+  transition: all 0.2s ease;
+  align-self: center;
+  border: none;
+  outline: none;
+  margin: 30px 30px 20px;
+  font-size: 20px;
+  border: 1px solid var(--secondary-bg-clr);
+}
+
+.create:hover {
+  background-color: transparent;
+  border: 1px solid var(--primary-gold-clr);
+  color: var(--primary-gold-clr);
+}

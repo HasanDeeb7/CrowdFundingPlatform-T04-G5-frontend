@@ -1,3 +1,21 @@
 .secondSection {
+  align-items: center;
   display: flex;
+}
+.second1 {
+  width: 50%;
+}
+.second2 {
+  width: 50%;
+}
+@media (max-width: 920px) {
+  .secondSection {
+    flex-direction: column;
+  }
+  .second1 {
+    width: 90%;
+  }
+  .second2 {
+    width: 90%;
+  }
 }

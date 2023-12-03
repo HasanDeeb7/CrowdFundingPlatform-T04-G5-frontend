@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../images/Ellipse 9.png";
-import { Button, ButtonToolbar } from "rsuite";
 import { Link } from "react-router-dom";
+import Button from "../Button/Button";
 
 export default function SubSlide({ data }) {
   const description = data.description.split(" ").slice(0, 30).join(" ");
@@ -18,6 +18,8 @@ export default function SubSlide({ data }) {
           <p>{description}</p>
         </Link>
         {/* {role=== "admin"?
+        <Button action="Accept" />
+        <Button btnType="secondary" action="deny" />
         :null} */}
       </div>
     </div>

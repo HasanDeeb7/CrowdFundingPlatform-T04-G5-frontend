@@ -5,16 +5,7 @@ import fakeCampaigns from "../../FakeData/fakeCampaigns";
 
 function ChartsSeaction() {
   return (
-    <div
-      style={{
-        width: "90%",
-        height: "300px",
-        backgroundColor: "var(--secondary-bg-clr)",
-        margin: "30px",
-        padding: "15px",
-        borderRadius: "var(--card-border-radius)",
-      }}
-    >
+    <div className="chart">
       <Line
         data={{
           labels: fakeCampaigns.map((data) => data.title),

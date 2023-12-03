@@ -3,6 +3,7 @@ import Card from "../../Components/Dashboard/Card";
 import fakeDonations from "../../FakeData/fakeDonations";
 import fakeCampaigns from "../../FakeData/fakeCampaigns";
 import "./FirstSection.css";
+import CreateCampaign from "../../Components/Dashboard/CreateCampaign";
 
 function FirstSection() {
   let count = 0;
@@ -39,12 +40,18 @@ function FirstSection() {
           <Card title="Number of donated campaigns" value={count} />
           <Card title="Total funds donated" value={totalDonation} />
         </div>
-      ) : role === "Donor" ? ( */}
+      ) : role === "donor" ? (
       <div className="firstSection">
         <Card title="Number of ongoing campaigns" value={activeCampaign} />
         <Card title="Number of completed campaigns" value={completedCampaign} />
+      </div> 
+         ) :
+      role === "creator"?( */}
+      <div className="firstSection">
+        <CreateCampaign action="Create Campaign" />
       </div>
-      {/*   ) : null} */}
+      {/* ):
+       null}  */}
     </div>
   );
 }

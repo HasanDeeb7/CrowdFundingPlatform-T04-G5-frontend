@@ -7,7 +7,8 @@
   align-self: center;
   border: none;
   outline: none;
-  margin-top:20px ;
+  margin-top: 20px;
+  border: 1px solid var(--secondary-bg-clr);
 }
 
 .donateBtnPrimary:hover {
@@ -21,6 +22,7 @@
   border-radius: var(--card-border-radius);
   transition: all 0.2s ease;
   align-self: center;
+  margin-left: 5px;
   background-color: transparent;
   border: 1px solid var(--primary-gold-clr);
   color: var(--primary-gold-clr);
