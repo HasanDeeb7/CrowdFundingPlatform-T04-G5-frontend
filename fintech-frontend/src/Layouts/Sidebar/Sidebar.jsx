@@ -56,7 +56,7 @@ function Sidebar() {
             </Nav.Item>
             <Nav.Item
               as={NavLink}
-              href="/Dashboard"
+              href="/"
               eventKey="2"
               className="item"
               icon={

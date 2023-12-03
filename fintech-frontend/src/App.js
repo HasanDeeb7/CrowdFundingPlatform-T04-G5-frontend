@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Profile from "./Pages/ProfilesPage/Profile.jsx";
 import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
 import Campaigns from "./Pages/Campaigns/Campaigns.jsx";
-import Login from "./Pages/Login.jsx";
+import Login from "./Pages/LoginPage/Login.jsx";
 import SignUp from "./Pages/SignUp.jsx";
 import Donations from "./Pages/DonationsPage/Donations.jsx";
 import AdminCampaignRequests from "./Pages/AdminCampaignRequests.jsx";

@@ -5,9 +5,8 @@
   border-radius: var(--card-border-radius);
   transition: all 0.2s ease;
   align-self: center;
-  border: none;
+  border: 1px solid transparent;
   outline: none;
-  margin-top: 20px;
   border: 1px solid var(--secondary-bg-clr);
 }
 
