@@ -39,13 +39,10 @@ function Sidebar() {
     <div>
       <Sidenav appearance="" className="sidebar" expanded={expanded}>
         <Sidenav.Body>
-          <Nav
-            as={NavLink}
-            href="/profile"
-            activeKey={activeKey}
-            onSelect={setActiveKey}
-          >
+          <Nav activeKey={activeKey} onSelect={setActiveKey}>
             <Nav.Item
+              as={NavLink}
+              href="/profile"
               eventKey="1"
               className="item"
               icon={
