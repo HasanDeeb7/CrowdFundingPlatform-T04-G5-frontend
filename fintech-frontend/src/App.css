@@ -30,13 +30,15 @@ h3 {
 }
 .containerRoutes {
   overflow-y: auto;
+  width: 100%;
 }
 .containerRoutes::-webkit-scrollbar {
   display: none;
 }
 .mainContent {
   display: flex;
-  /* transition-duration: 2s; */
+  justify-content: space-between;
+  width: 100%;
 }
 .rs-sidenav-collapse-in {
   width: 350px !important;
