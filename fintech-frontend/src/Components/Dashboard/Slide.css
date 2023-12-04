@@ -31,6 +31,9 @@
 .container1 .child::-webkit-scrollbar {
   display: none;
 }
+.child .donateBtnPrimary {
+  margin-top: 10px;
+}
 .sub {
   display: flex;
   padding: 10px;
