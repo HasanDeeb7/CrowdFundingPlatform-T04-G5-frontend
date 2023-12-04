@@ -1,0 +1,25 @@
+.sidebar {
+  background-color: var(--secondary-bg-clr);
+  height: 100vh;
+  padding-top: 10%;
+}
+a.item.item {
+  font-size: 20px;
+  margin: 30px 0 !important;
+}
+a.item.item:hover {
+  color: var(--primary-gold-clr);
+}
+a.item.rs-sidenav-item.rs-sidenav-item-active {
+  background-color: var(--primary-bg-clr);
+  color: var(--primary-gold-clr);
+  border-radius: var(--button-border-radius) 0 0 var(--button-border-radius);
+}
+.rs-sidenav-nav.rs-nav.rs-nav-default.rs-nav-vertical {
+  color: white;
+}
+@media (max-width: 767px) {
+  .rs-sidenav-toggle {
+    display: none;
+  }
+}

@@ -1,0 +1,14 @@
+.signupContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 80%;
+    padding: 2rem;
+    align-items: center;
+}
+.inputRow{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}

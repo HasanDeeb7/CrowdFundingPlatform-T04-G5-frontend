@@ -1,0 +1,17 @@
+@import "rsuite/dist/rsuite.css";
+
+.searchInput {
+  background-color: var(--secandary-bg-clr);
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  border-radius: 0;
+}
+.searchInput:hover {
+  border-color: var(--light-gold-clr);
+  outline-color: var(--light-gold-clr);
+}
+.searchInput:focus {
+  outline: 0;
+}

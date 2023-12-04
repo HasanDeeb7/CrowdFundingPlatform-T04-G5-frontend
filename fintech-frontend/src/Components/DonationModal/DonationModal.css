@@ -1,0 +1,38 @@
+.modalContainer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modalItemsWrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  padding: 3rem 2rem;
+  height: 700px;
+  background-color: var(--secondary-bg-clr);
+  border-radius: var(--card-border-radius);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.rs-steps-item-status-finish .rs-steps-item-icon-wrapper,
+.rs-steps-item-status-finish .rs-steps-item-tail,
+.rs-steps-item-status-finish .rs-steps-item-title::after,
+.rs-steps-item-status-process .rs-steps-item-icon-wrapper {
+  background-color: var(--light-gold-clr);
+  border-color: var(--light-gold-clr);
+  color: var(--secondary-bg-clr);
+}

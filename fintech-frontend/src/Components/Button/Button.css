@@ -1,0 +1,33 @@
+.donateBtnPrimary {
+  background-color: var(--primary-gold-clr);
+  width: 150px;
+  padding: 7px;
+  border-radius: var(--card-border-radius);
+  transition: all 0.2s ease;
+  align-self: center;
+  border: 1px solid transparent;
+  outline: none;
+  border: 1px solid var(--secondary-bg-clr);
+}
+
+.donateBtnPrimary:hover {
+  background-color: transparent;
+  border: 1px solid var(--primary-gold-clr);
+  color: var(--primary-gold-clr);
+}
+.donateBtnSecondary {
+  width: 150px;
+  padding: 7px;
+  border-radius: var(--card-border-radius);
+  transition: all 0.2s ease;
+  align-self: center;
+  margin-left: 5px;
+  background-color: transparent;
+  border: 1px solid var(--primary-gold-clr);
+  color: var(--primary-gold-clr);
+}
+.donateBtnSecondary:hover {
+  border-radius: var(--card-border-radius);
+  background-color: var(--primary-gold-clr);
+  color: white;
+}

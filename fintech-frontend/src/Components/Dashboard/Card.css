@@ -1,0 +1,18 @@
+div .card {
+  width: fit-content;
+  margin: 30px;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: var(--card-border-radius);
+  background-color: var(--secondary-bg-clr);
+}
+div .card p {
+  color: var(--primary-gold-clr);
+  font-size: 25px;
+}
+@media (max-width: 920px) {
+  div .card {
+    margin: 30px 7%;
+  }
+}

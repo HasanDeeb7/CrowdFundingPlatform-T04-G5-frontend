@@ -1,0 +1,10 @@
+.firstSection {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 920px) {
+  .firstSection {
+    align-items: center;
+    flex-direction: column;
+  }
+}
