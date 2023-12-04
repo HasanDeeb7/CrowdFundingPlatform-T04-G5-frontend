@@ -1,6 +1,7 @@
 .firstSection {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .firstSection button{
   width: 200px;
