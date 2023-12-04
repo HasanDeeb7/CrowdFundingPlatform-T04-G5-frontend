@@ -1,20 +1,59 @@
-.create {
-  background-color: var(--primary-gold-clr);
-  width: 250px;
-  color: white;
-  padding: 10px;
-  border-radius: var(--card-border-radius);
-  transition: all 0.2s ease;
-  align-self: center;
-  border: none;
-  outline: none;
-  margin: 30px 30px 20px;
-  font-size: 20px;
-  border: 1px solid var(--secondary-bg-clr);
+.createModalContainer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.createModalItemsWrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  padding: 3rem 2rem;
+  height: 700px;
+  background-color: var(--secondary-bg-clr);
+  border-radius: var(--card-border-radius);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  overflow: hidden;
+  align-items: center;
 
-.create:hover {
+}
+.createCampaignForm {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  margin: 3rem 0;
+  width: 100%;
+  align-items: center;
+}
+.hidden {
+  display: none;
+}
+.uploadBtn {
+  cursor: pointer;
+  padding: 10px;
+  background-color: var(--light-gold-clr);
+  color: rgb(22, 19, 19);
+  border: 1px solid transparent;
+  border-radius: var(--card-border-radius);
+  transition: all .3s ease
+}
+.uploadBtn:hover{
   background-color: transparent;
-  border: 1px solid var(--primary-gold-clr);
-  color: var(--primary-gold-clr);
+  border: 1px solid var(--light-gold-clr);
+  color: var(--light-gold-clr);
 }
