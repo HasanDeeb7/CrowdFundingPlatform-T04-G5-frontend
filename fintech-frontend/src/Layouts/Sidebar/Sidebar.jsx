@@ -14,8 +14,10 @@ import { Link } from "react-router-dom";
 import UserContext from "../../useContext/userContext";
 function Sidebar() {
   const [expanded, setExpanded] = React.useState(true);
+
   const [activeKey, setActiveKey] = React.useState("2");
   const {setUser} = useContext(UserContext)
+
 
   const NavLink = forwardRef(({ href, children, ...rest }, ref) => (
     <Link ref={ref} to={href} {...rest}>

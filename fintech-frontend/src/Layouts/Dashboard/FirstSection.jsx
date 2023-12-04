@@ -60,7 +60,9 @@ function FirstSection() {
       </div> 
          ) :null}*/}
       <div className="firstSection">
-        <CreateCampaign action="Create Campaign" />
+
+        {/* <CreateCampaign action="Create Campaign" /> */}
+
         <Card title="Number of ongoing campaigns" value={activeCampaign} />
         <Card title="Number of completed campaigns" value={completedCampaign} />
         <Card title="Number of Creators" value={counterCreator} />
