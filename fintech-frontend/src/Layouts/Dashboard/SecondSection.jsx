@@ -21,7 +21,7 @@ function SecondSection() {
         <ChartsSeaction />
       </div>
       <div className="second2">
-        <Slide />
+        <Slide page="dashboard" />
       </div>
     </div>
   );

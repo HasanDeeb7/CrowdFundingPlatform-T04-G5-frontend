@@ -31,3 +31,20 @@
   background-color: var(--primary-gold-clr);
   color: white;
 }
+.request {
+  margin-top: 0px;
+}
+@media (max-width: 550px) {
+  .donateBtnSecondary {
+    margin-top: 5px;
+    margin-left: 0;
+  }
+  .request {
+    margin-bottom: 5px;
+  }
+}
+@media (max-width: 1400px) {
+  .request {
+    margin-bottom: 5px;
+  }
+}

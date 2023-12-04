@@ -46,6 +46,23 @@
   color: var(--primary-gold-clr);
   text-decoration: none;
 }
+.secondRequest {
+  display: flex;
+  align-items: center;
+}
+.secondRequest a {
+  width: 70%;
+}
+.secondRequest div {
+  width: 25%;
+  text-align: center;
+}
+.requestContainer {
+  height: 700px;
+}
+.requestContainer .child {
+  height: 98%;
+}
 @media (max-width: 920px) {
   .container1 h3 {
     font-size: 25px;
@@ -60,9 +77,26 @@
   .container1 {
     margin: 0 3% 30px;
   }
+  .secondRequest {
+    flex-direction: column;
+    align-items: start;
+  }
+  .secondRequest div {
+    width: 100%;
+    margin-top: 10px;
+    text-align: start;
+  }
 }
 @media (max-width: 420px) {
   .container1 .child {
     height: 85%;
+  }
+}
+@media (max-width: 500px) {
+  div.second a p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 10em;
   }
 }

@@ -7,7 +7,7 @@ import fakeDonations from "../../FakeData/fakeDonations";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 
-function Slide() {
+function Slide({ page }) {
   let pending = [];
   // request pending for admin
   fakeCampaigns.map((data) => {
@@ -16,10 +16,12 @@ function Slide() {
     }
   });
   return (
-    <div className="container1">
-      <h3>compaigns interacted with</h3>
-      {/* <div className="child"> */}
-      {/* {
+    <>
+      {page === "dashboard" ? (
+        <div className="container1">
+          <h3>compaigns interacted with</h3>
+          {/* <div className="child"> */}
+          {/* {
         role=="donor"?
         fakeDonations.map((data)=>{
           {return this.name===data.donorName?
@@ -30,26 +32,45 @@ function Slide() {
         }):
         role==="creator"?
         fakeDonors.slice(0,10).map((data)=>(<SubSlide data={data}/>)): */}
-      {/* role==="admin"?
-        
-        {pending.slice(0, 5).map((data) => (
-          <SubSlide data={data} />
-        ))}
-        */}
-      {/*  } */}
-      {/* </div> */}
-      <div className="child">
-        {pending.slice(0, 5).map((data) => (
-          <SubSlide data={data} />
-        ))}
-        {/* {role==="admin"?
-      <Link to="all request page"> */}
-        <Button action="more" />
-        {/* </Link>
-      :null} */}
-      </div>
-    </div>
+          {/* {role === "admin"
+            ? pending
+                .slice(0, 5)
+                .map((data) => <SubSlide data={data} page="dashboard" />)
+            : null}
+          {role === "admin" ? (
+            <Link to="AllRequest">
+              <Button action="more" />
+            </Link>
+          ) : null} */}
+          {/* } */}
+          {/* </div> */}
+          <div className="child">
+            {pending.slice(0, 5).map((data) => (
+              <SubSlide data={data} page="dashboard" />
+            ))}
+            {/* {role==="admin" ? */}
+
+            <Link to="AllRequest">
+              <Button action="more" />
+            </Link>
+            {/* :null} */}
+          </div>
+        </div>
+      ) : (
+        <div className="container1 requestContainer">
+          {/* <div className="child">
+    {role=="admin" ?
+    pending.map((data) => <SubSlide data={data} />):null} 
+          
+          </div> */}
+          <div className="child">
+            {pending.map((data) => (
+              <SubSlide data={data} />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
-
 export default Slide;

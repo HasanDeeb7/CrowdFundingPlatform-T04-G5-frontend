@@ -13,6 +13,7 @@ import "rsuite/dist/rsuite.min.css";
 import { CustomProvider } from "rsuite";
 import SingleCampaign from "./Pages/SingleCampaign/SingleCampaign.jsx";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute.jsx";
+import AllRequests from "./Layouts/AllRequesets/AllRequests.jsx";
 
 function App() {
   const user = { username: "BabaYaga", role: "admin" };
@@ -33,8 +34,16 @@ function App() {
                 <Route path="/campaigns" element={<Campaigns />} />
                 <Route path="/donations" element={<Donations />} />
                 <Route path="/singlecampaign" element={<SingleCampaign />} />
+                <Route path="/AllRequest" element={<AllRequests />} />
               </Route>
-              <Route element={<ProtectedRoute isAllowed={user && user.role === 'admin'} redirectPath="/" />}>
+              <Route
+                element={
+                  <ProtectedRoute
+                    isAllowed={user && user.role === "admin"}
+                    redirectPath="/"
+                  />
+                }
+              >
                 <Route
                   path="/adminrequests"
                   element={<AdminCampaignRequests />}
