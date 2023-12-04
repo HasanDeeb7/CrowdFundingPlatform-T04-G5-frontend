@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-between;
 }
+.firstSection button{
+  width: 200px;
+}
 @media (max-width: 920px) {
   .firstSection {
     align-items: center;

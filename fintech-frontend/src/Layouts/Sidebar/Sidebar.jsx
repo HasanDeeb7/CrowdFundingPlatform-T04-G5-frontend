@@ -22,6 +22,10 @@ function Sidebar() {
       {children}
     </Link>
   ));
+  function logOut(){
+    setUser(null)
+    localStorage.removeItem('userData')
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -126,7 +130,7 @@ function Sidebar() {
               as={NavLink}
               href="#"
               icon={<ExitIcon style={{ fontSize: "25px", height: "25px" }} />}
-              onClick={()=> setUser(null)}
+              onClick={logOut}
             >
               Log out
             </Nav.Item>

@@ -4,6 +4,7 @@ import fakeDonations from "../../FakeData/fakeDonations";
 import fakeCampaigns from "../../FakeData/fakeCampaigns";
 import "./FirstSection.css";
 import CreateCampaign from "../../Components/Dashboard/CreateCampaign";
+import Button from "../../Components/Button/Button";
 
 function FirstSection() {
   let count = 0;
@@ -49,7 +50,7 @@ function FirstSection() {
          ) :
       role === "creator"?( */}
       <div className="firstSection">
-        <CreateCampaign action="Create Campaign" />
+        <Button action='New Campaign' />
       </div>
       {/* ):
        null}  */}

@@ -3,18 +3,24 @@ import "./LoginForm.css";
 import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
 import axios from "axios";
-import { Navigate, redirect, useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import UserContext from "../../useContext/userContext";
 function LoginForm() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
-  const [isDisabled, setIsDisabled] = useState(false)
-  const { user, setUser } = useContext(UserContext);
+  const [isDisabled, setIsDisabled] = useState(false);
+  useEffect(() => {
+    if (user) {
+      return navigate("/", { replace: true });
+    }
+  }, []);
+
   async function signIn() {
-    setIsDisabled(true)
+    setIsDisabled(true);
     try {
       const data = await axios.get("http://localhost:4000/login", {
         params: credentials,
@@ -22,15 +28,16 @@ function LoginForm() {
       if (data) {
         console.log(data);
         setUser(data.data);
-        setIsDisabled(false)
-        return navigate('/', {replace: true});
+        setIsDisabled(false);
+        localStorage.setItem("userData", JSON.stringify(data.data));
+        return navigate("/", { replace: true });
       }
     } catch (error) {
       console.log(error);
-      setIsDisabled(false)
+      setIsDisabled(false);
     }
   }
-  
+
   return (
     <div className="loginFormContainer">
       <h3>SignIn</h3>

@@ -20,7 +20,12 @@ import { useEffect, useState } from "react";
 function App() {
   const [user, setUser] = useState(null);
   axios.defaults.withCredentials = true;
-  useEffect(() => console.log(user), [user]);
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (userData) {
+      setUser(userData);
+    }
+  }, []);
   return (
     <CustomProvider theme="dark">
       <UserContext.Provider value={{ user, setUser }}>
