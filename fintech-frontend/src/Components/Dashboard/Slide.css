@@ -1,14 +1,14 @@
 .doughnut {
   height: 300px;
   background-color: var(--secondary-bg-clr);
-  margin: 30px;
+  margin: 30px 0;
   padding: 15px;
   border-radius: var(--card-border-radius);
 }
 .chart {
   height: 300px;
   background-color: var(--secondary-bg-clr);
-  margin: 30px;
+  margin: 30px 0 0;
   padding: 15px;
   border-radius: var(--card-border-radius);
 }
@@ -17,7 +17,8 @@
   height: 626px;
   overflow-y: hidden;
   padding: 10px;
-  margin: 30px;
+  margin-left: 30px;
+  margin-top: 30px;
   background-color: var(--secondary-bg-clr);
   border-radius: var(--card-border-radius);
 }
@@ -53,19 +54,19 @@
   .container1 h3 {
     font-size: 25px;
   }
-  .doughnut {
-    margin: 30px 3%;
-  }
-  .chart {
-    margin: 30px 3%;
-  }
-
   .container1 {
-    margin: 0 3% 30px;
+    margin-top: 30px;
+    margin-left: 0;
   }
 }
 @media (max-width: 420px) {
   .container1 .child {
     height: 85%;
+  }
+  .sub div.second a p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 10em;
   }
 }

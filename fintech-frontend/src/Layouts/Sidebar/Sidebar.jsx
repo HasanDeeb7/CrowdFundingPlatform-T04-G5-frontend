@@ -13,7 +13,7 @@ import "./Sidebar.css";
 import { Link } from "react-router-dom";
 function Sidebar() {
   const [expanded, setExpanded] = React.useState(true);
-  const [activeKey, setActiveKey] = React.useState("2");
+  const [activeKey, setActiveKey] = React.useState("1");
 
   const NavLink = forwardRef(({ href, children, ...rest }, ref) => (
     <Link ref={ref} to={href} {...rest}>
@@ -44,19 +44,8 @@ function Sidebar() {
           <Nav activeKey={activeKey} onSelect={setActiveKey}>
             <Nav.Item
               as={NavLink}
-              href="/profile"
-              eventKey="1"
-              className="item"
-              icon={
-                <UserInfoIcon style={{ fontSize: "25px", height: "25px" }} />
-              }
-            >
-              Profile
-            </Nav.Item>
-            <Nav.Item
-              as={NavLink}
               href="/"
-              eventKey="2"
+              eventKey="1"
               className="item"
               icon={
                 <DashboardIcon style={{ fontSize: "25px", height: "25px" }} />
@@ -65,7 +54,7 @@ function Sidebar() {
               Dashboard
             </Nav.Item>
             <Nav.Item
-              eventKey="3"
+              eventKey="2"
               className="item"
               as={NavLink}
               href="/Campaigns"
@@ -78,7 +67,7 @@ function Sidebar() {
               Campaign
             </Nav.Item>
             <Nav.Item
-              eventKey="4"
+              eventKey="3"
               className="item"
               as={NavLink}
               href="/donations"
@@ -93,7 +82,7 @@ function Sidebar() {
             {/* {role === "admin" ? ( */}
             <>
               <Nav.Item
-                eventKey="5"
+                eventKey="4"
                 className="item"
                 as={NavLink}
                 href="/adminrequests"
@@ -106,7 +95,7 @@ function Sidebar() {
                 All Requests
               </Nav.Item>
               <Nav.Item
-                eventKey="6"
+                eventKey="5"
                 className="item"
                 as={NavLink}
                 href="/adminusers"
@@ -118,6 +107,17 @@ function Sidebar() {
               </Nav.Item>
             </>
             {/*  ) : null} */}
+            <Nav.Item
+              as={NavLink}
+              href="/profile"
+              eventKey="6"
+              className="item lastItem"
+              icon={
+                <UserInfoIcon style={{ fontSize: "25px", height: "25px" }} />
+              }
+            >
+              Profile
+            </Nav.Item>
             <Nav.Item
               eventKey="7"
               className="item"
