@@ -13,6 +13,7 @@ function CampaignStats({ data }) {
   const firstDonation = useMotionValue(0);
   const rounded = useTransform(firstDonation, (latest) => Math.round(latest));
   const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
+  
   useEffect(() => {
     const controls = animate(firstDonation, 2500);
 

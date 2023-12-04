@@ -38,6 +38,7 @@ function DonationForm({ donationAmount, setDonationAmount, setCurrentStep }) {
             <Input
               type="number"
               value={donationAmount}
+              defaultValue={0}
               onChange={(value) => setDonationAmount(value)}
             />
             <InputGroup.Addon>.00</InputGroup.Addon>
