@@ -13,7 +13,7 @@ import "./Sidebar.css";
 import { Link } from "react-router-dom";
 function Sidebar() {
   const [expanded, setExpanded] = React.useState(true);
-  const [activeKey, setActiveKey] = React.useState("1");
+  const [activeKey, setActiveKey] = React.useState("2");
 
   const NavLink = forwardRef(({ href, children, ...rest }, ref) => (
     <Link ref={ref} to={href} {...rest}>
@@ -28,13 +28,10 @@ function Sidebar() {
       }
     };
 
-    // Initial check on component mount
     handleResize();
 
-    // Listen for window resize events
     window.addEventListener("resize", handleResize);
 
-    // Cleanup the event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -112,7 +109,7 @@ function Sidebar() {
                 eventKey="6"
                 className="item"
                 as={NavLink}
-                href="/donations"
+                href="/adminusers"
                 icon={
                   <PeoplesIcon style={{ fontSize: "25px", height: "25px" }} />
                 }

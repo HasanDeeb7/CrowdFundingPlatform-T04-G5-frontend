@@ -35,6 +35,7 @@ function FirstSection() {
 
   return (
     <div>
+      <h1 style={{ margin: " 30px 30px 0" }}>Dashboard</h1>
       {/* {role === "admin" ? (
         <div className="firstSection">
           <Card title="Number of donated campaigns" value={count} />
