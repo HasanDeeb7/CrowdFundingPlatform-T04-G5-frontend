@@ -30,3 +30,8 @@
     column-gap: 20px;
     justify-content: space-around;
 }
+
+
+.rs-avatar-lg> .rs-avatar-image {
+    width: 500px !important ;
+}

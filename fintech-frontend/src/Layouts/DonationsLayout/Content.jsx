@@ -25,7 +25,7 @@ function Content() {
 
   return (
     <div>
-      <Table height={420} data={data}>
+      <Table height={420} data={data} className="tableContainer">
         <Column width={134} align="center" fixed>
           <HeaderCell>Id</HeaderCell>
           <Cell dataKey="id" />
@@ -55,7 +55,7 @@ function Content() {
         <HeaderCell>Date</HeaderCell>
         <Cell dataKey="date" />
       </Column>
-        <Column width={80} fixed="right">
+        <Column width={'100%'} fixed="right">
         <HeaderCell>...</HeaderCell>
         <Cell style={{ padding: '6px' }}>
           {rowData => (
