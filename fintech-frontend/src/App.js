@@ -14,43 +14,56 @@ import SingleCampaign from "./Pages/SingleCampaign/SingleCampaign.jsx";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute.jsx";
 import CampaignsRequests from "./Pages/CampaignsRequests/CampaignsRequestsPage.jsx";
 import axios from "axios";
+import UserContext from "./useContext/userContext.js";
+import { useEffect, useState } from "react";
 
 function App() {
-  const user = { username: "BabaYaga", role: "admin" };
+  const [user, setUser] = useState(null);
   axios.defaults.withCredentials = true;
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (userData) {
+      setUser(userData);
+    }
+  }, []);
   return (
     <CustomProvider theme="dark">
-      <div className="App">
-        <main className="mainContent">
-          <section className="sideNavContainer">
-            <Sidebar />
-          </section>
-          <div className="containerRoutes">
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route element={<ProtectedRoute isAllowed={user} />}>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/campaigns" element={<Campaigns />} />
-                <Route path="/donations" element={<Donations />} />
-                <Route path="/singlecampaign" element={<SingleCampaign />} />
-              </Route>
-              <Route
-                element={
-                  <ProtectedRoute
-                    isAllowed={user && user.role === "admin"}
-                    redirectPath="/"
+      <UserContext.Provider value={{ user, setUser }}>
+        <div className="App">
+          <main className="mainContent">
+            <section className="sideNavContainer">
+              <Sidebar />
+            </section>
+            <div className="containerRoutes">
+              <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route element={<ProtectedRoute isAllowed={user} />}>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/campaigns" element={<Campaigns />} />
+                  <Route path="/donations" element={<Donations />} />
+                  <Route path="/singlecampaign" element={<SingleCampaign />} />
+                </Route>
+                <Route
+                  element={
+                    <ProtectedRoute
+                      isAllowed={user && user.role === "admin"}
+                      redirectPath="/"
+                    />
+                  }
+                >
+                  <Route
+                    path="/adminrequests"
+                    element={<CampaignsRequests />}
                   />
-                }
-              >
-                <Route path="/adminrequests" element={<CampaignsRequests />} />
-                <Route path="/adminusers" element={<AdminUsers />} />
-              </Route>
-            </Routes>
-          </div>
-        </main>
-      </div>
+                  <Route path="/adminusers" element={<AdminUsers />} />
+                </Route>
+              </Routes>
+            </div>
+          </main>
+        </div>
+      </UserContext.Provider>
     </CustomProvider>
   );
 }

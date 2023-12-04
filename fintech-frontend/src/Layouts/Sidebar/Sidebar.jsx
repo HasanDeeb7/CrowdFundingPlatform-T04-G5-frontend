@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useContext } from "react";
 import { useEffect } from "react";
 import { Sidenav, Nav } from "rsuite";
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
@@ -11,15 +11,23 @@ import CheckOutlineIcon from "@rsuite/icons/CheckOutline";
 import PeoplesCostomizeIcon from "@rsuite/icons/PeoplesCostomize";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
+import UserContext from "../../useContext/userContext";
 function Sidebar() {
   const [expanded, setExpanded] = React.useState(true);
-  const [activeKey, setActiveKey] = React.useState("1");
+
+  const [activeKey, setActiveKey] = React.useState("2");
+  const {setUser} = useContext(UserContext)
+
 
   const NavLink = forwardRef(({ href, children, ...rest }, ref) => (
     <Link ref={ref} to={href} {...rest}>
       {children}
     </Link>
   ));
+  function logOut(){
+    setUser(null)
+    localStorage.removeItem('userData')
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -124,6 +132,7 @@ function Sidebar() {
               as={NavLink}
               href="#"
               icon={<ExitIcon style={{ fontSize: "25px", height: "25px" }} />}
+              onClick={logOut}
             >
               Log out
             </Nav.Item>
