@@ -6,16 +6,18 @@ import Campaigns from "./Pages/Campaigns/Campaigns.jsx";
 import Login from "./Pages/LoginPage/Login.jsx";
 import SignUp from "./Pages/SignUp.jsx";
 import Donations from "./Pages/DonationsPage/Donations.jsx";
-import AdminCampaignRequests from "./Pages/AdminCampaignRequests.jsx";
 import Sidebar from "./Layouts/Sidebar/Sidebar.jsx";
 import AdminUsers from "./Pages/AdminUsers.jsx";
 import "rsuite/dist/rsuite.min.css";
 import { CustomProvider } from "rsuite";
 import SingleCampaign from "./Pages/SingleCampaign/SingleCampaign.jsx";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute.jsx";
+import CampaignsRequests from "./Pages/CampaignsRequests/CampaignsRequestsPage.jsx";
+import axios from "axios";
 
 function App() {
   const user = { username: "BabaYaga", role: "admin" };
+  axios.defaults.withCredentials = true;
   return (
     <CustomProvider theme="dark">
       <div className="App">
@@ -34,11 +36,15 @@ function App() {
                 <Route path="/donations" element={<Donations />} />
                 <Route path="/singlecampaign" element={<SingleCampaign />} />
               </Route>
-              <Route element={<ProtectedRoute isAllowed={user && user.role === 'admin'} redirectPath="/" />}>
-                <Route
-                  path="/adminrequests"
-                  element={<AdminCampaignRequests />}
-                />
+              <Route
+                element={
+                  <ProtectedRoute
+                    isAllowed={user && user.role === "admin"}
+                    redirectPath="/"
+                  />
+                }
+              >
+                <Route path="/requests" element={<CampaignsRequests />} />
                 <Route path="/adminusers" element={<AdminUsers />} />
               </Route>
             </Routes>
