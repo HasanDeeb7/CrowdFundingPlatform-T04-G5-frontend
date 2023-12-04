@@ -44,7 +44,7 @@ function App() {
                   />
                 }
               >
-                <Route path="/requests" element={<CampaignsRequests />} />
+                <Route path="/adminrequests" element={<CampaignsRequests />} />
                 <Route path="/adminusers" element={<AdminUsers />} />
               </Route>
             </Routes>

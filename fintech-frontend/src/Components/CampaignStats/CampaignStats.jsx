@@ -5,6 +5,7 @@ import "./CampaignsStats.css";
 import { animate, useMotionValue, useTransform, motion } from "framer-motion";
 import Button from "../Button/Button";
 import { FaHandHoldingHeart } from "react-icons/fa6";
+import DonationModal from "../DonationModal/DonationModal";
 
 function CampaignStats({ data }) {
   const progressData = getPercentage(data.amountContributed, data.target);
@@ -12,7 +13,7 @@ function CampaignStats({ data }) {
   const firstDonation = useMotionValue(0);
   const rounded = useTransform(firstDonation, (latest) => Math.round(latest));
   const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
-  
+
   useEffect(() => {
     const controls = animate(firstDonation, 2500);
 

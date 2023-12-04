@@ -4,7 +4,10 @@ import CampaignsRequests from "../../Components/CampaignsRequests/CampaignsReque
 function CampaignsRequestsLayout() {
   return (
     <div>
-      <CampaignsRequests />
+      <>
+        <h1 style={{ marginBottom: " 30px" }}>All Requests</h1>
+        <CampaignsRequests />
+      </>
     </div>
   );
 }
