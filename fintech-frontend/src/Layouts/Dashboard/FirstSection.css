@@ -1,6 +1,7 @@
 .firstSection {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 @media (max-width: 920px) {
   .firstSection {
