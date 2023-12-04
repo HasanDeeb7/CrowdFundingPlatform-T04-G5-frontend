@@ -42,11 +42,11 @@ function Slide() {
         {pending.slice(0, 5).map((data) => (
           <SubSlide data={data} />
         ))}
-        {/* {role==="admin"?
-      <Link to="all request page"> */}
-        <Button action="more" />
-        {/* </Link>
-      :null} */}
+        {/* {role==="admin"? */}
+        <Link to="adminrequests">
+          <Button action="more" />
+        </Link>
+        {/* :null} */}
       </div>
     </div>
   );
