@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import Progress from "rsuite/Progress";
 import { getPercentage } from "../../utils/getPercentage";
 import "./CampaignsStats.css";
-import { FaHandHoldingHeart } from "react-icons/fa6";
 import { animate, useMotionValue, useTransform, motion } from "framer-motion";
 import Button from "../Button/Button";
-import DonationModal from "../DonationModal/DonationModal";
+import { FaHandHoldingHeart } from "react-icons/fa6";
 
 function CampaignStats({ data }) {
   const progressData = getPercentage(data.amountContributed, data.target);

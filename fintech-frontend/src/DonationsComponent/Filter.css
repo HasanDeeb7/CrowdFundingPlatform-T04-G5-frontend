@@ -4,13 +4,27 @@
   background-color: rgba(32,32,33,57%);
   color: var(--white-text-clr);
 }
-.filterButton:hover{
+/* .filterButton:hover{
     color: black;
-}
+} */
 .stackContainer{
     width: 100%; 
 }
 
-.buttonContainer{
-  
+/* .filterButton.active {
+  background-color: var(--primary-gold-clr);
+} */
+
+/* Increase specificity if needed */
+.stackContainer .buttonContainer .filterButton.active {
+  background-color: var(--primary-gold-clr);
 }
+
+/* Remove transitions for testing purposes */
+/* .filterButton {
+  transition: none;
+} */
+
+
+
+
