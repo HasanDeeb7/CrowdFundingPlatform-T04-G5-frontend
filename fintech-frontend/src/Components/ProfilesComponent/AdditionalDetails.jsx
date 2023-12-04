@@ -21,7 +21,7 @@ function AdditionalDetails() {
         <article
           style={{ display: "flex", alignItems: "center", columnGap: "10px" }}
         >
-          <img alt="idIcon" src={IdIcon} />
+          <IdIcon style={{width:"50px"}}/>
           <div>
             <p>ID</p>
             <p>100</p>
@@ -31,7 +31,8 @@ function AdditionalDetails() {
         <article
           style={{ display: "flex", alignItems: "center", columnGap: "10px" }}
         >
-          <img alt="email" src={Email} />
+          
+          <Email style={{width:"50px"}}/>
           <div>
             <p>Email</p>
             <p>example@example.com</p>
@@ -41,7 +42,7 @@ function AdditionalDetails() {
         <article
           style={{ display: "flex", alignItems: "center", columnGap: "10px" }}
         >
-          <img alt="birth" src={Date} />
+          <Date style={{width:"50px"}}/>
           <div>
             <p>Date of birth</p>
             <p>29 september 1998</p>

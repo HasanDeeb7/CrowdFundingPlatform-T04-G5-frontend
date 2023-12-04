@@ -5,6 +5,7 @@ import "./CampaignsStats.css";
 import { animate, useMotionValue, useTransform, motion } from "framer-motion";
 import Button from "../Button/Button";
 import { FaHandHoldingHeart } from "react-icons/fa6";
+import DonationModal from '../DonationModal/DonationModal'
 
 function CampaignStats({ data }) {
   const progressData = getPercentage(data.amountContributed, data.target);
