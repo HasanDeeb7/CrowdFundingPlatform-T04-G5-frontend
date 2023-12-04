@@ -29,7 +29,7 @@ function LoginForm() {
         console.log(data);
         setUser(data.data);
         setIsDisabled(false);
-        localStorage.setItem("userData", JSON.stringify(data.data));
+        localStorage.setItem("userData", JSON.stringify(true));
         return navigate("/", { replace: true });
       }
     } catch (error) {
