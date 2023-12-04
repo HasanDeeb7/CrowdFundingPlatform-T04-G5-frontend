@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { useState } from "react";
+import React, { useState, useContext } from "react";
+
 import Card from "../../Components/Dashboard/Card";
 import fakeDonations from "../../FakeData/fakeDonations";
 import fakeCampaigns from "../../FakeData/fakeCampaigns";
