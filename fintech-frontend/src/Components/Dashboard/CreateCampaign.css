@@ -40,6 +40,11 @@
   width: 100%;
   align-items: center;
 }
+
+.createCampaignForm button{
+  align-self: center;
+}
+
 .hidden {
   display: none;
 }

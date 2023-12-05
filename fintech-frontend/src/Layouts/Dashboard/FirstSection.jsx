@@ -14,7 +14,6 @@ function FirstSection() {
   let completedCampaign = 0;
   let counterCreator = 0;
   let counterDonors = 0;
-  const [isModalOpen, setIsModalOpen] = useState(false)
   //   fakeDonations.map((data) => {
   //     if (data.donorName == this.donorName) {
   //       count++;
@@ -63,8 +62,6 @@ function FirstSection() {
          ) :null}*/}
       <div className="firstSection">
 
-        {isModalOpen && <CreateCampaign action="Create Campaign" closeHandler={()=> setIsModalOpen(false)} />}
-         <Button action='New Campaign' onClick={()=> setIsModalOpen(true)} />
         <Card title="Number of ongoing campaigns" value={activeCampaign} />
         <Card title="Number of completed campaigns" value={completedCampaign} />
         <Card title="Number of Creators" value={counterCreator} />
