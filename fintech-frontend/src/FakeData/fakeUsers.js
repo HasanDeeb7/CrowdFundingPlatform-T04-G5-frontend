@@ -5,7 +5,7 @@ function generateRandomRole() {
   return roles[Math.floor(Math.random() * roles.length)];
 }
 
-const fakeUsers = Array.from({ length: 5 }, (_, index) => {
+const fakeUsers = Array.from({ length: 30 }, (_, index) => {
   return {
     id: index + 1,
     firstName: faker.person.firstName(),
@@ -13,8 +13,7 @@ const fakeUsers = Array.from({ length: 5 }, (_, index) => {
     userName: faker.internet.userName(),
     password: faker.internet.password(),
     role: generateRandomRole(),
-    
   };
 });
 
-export default fakeUsers
+export default fakeUsers;
