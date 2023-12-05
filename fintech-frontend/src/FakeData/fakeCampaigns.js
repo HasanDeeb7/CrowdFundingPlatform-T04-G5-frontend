@@ -1,4 +1,3 @@
-
 export const fakeCampaigns = [
   {
     id: 1,
@@ -146,7 +145,7 @@ export const fakeCampaigns = [
   },
   {
     id: 17,
-    title: "dignissimos tres",
+    title: "vita ut",
     target: 344,
     description:
       "Audeo strenuus valens defessus. Accusator laudantium custodia crastinus comptus pauper stella. Triduana vilicus amaritudo sustineo ars concido. Accendo vilicus corroboro dicta. In cogito aestivus ulciscor decens basium despecto libero. Tribuo tenax triduana apud. Totidem comis tibi. Sollicito somnus curtus natus deleniti sollers celo tristis vereor speculum. Pectus odio temporibus sufficio distinctio. Utique cupio paulatim ocer tonsor magnam. Vero tamen accusantium quasi sub. Dedecor ultio venia derideo peccatus eligendi vesper. Curatio depono provident vero talis cogo aqua. Verecundia cedo ascit thermae incidunt adsuesco voluptate temperantia vicinus sed. Absque arcus velut voluptatibus. Curatio doloremque terror exercitationem verus trepide calco aranea. Valeo combibo substantia curto tondeo vero testimonium tantillus. Calamitas vinculum corporis. Vicinus tutis adnuo arma spargo varius sub conor autus. Neque arcus conor ocer. Corporis corpus universe acer turbo decipio acidus ocer. Defendo aeger denuncio talis territo texo concedo celo appositus armarium. Agnitio vorax commodo aperiam enim cilicium. Cenaculum vicissitudo cibus adficio amicitia harum. Demens turba suffragium atrocitas adiuvo acies commodi amissio quo vergo. Sunt autem confero tendo conduco adsuesco. Auctus ancilla creta urbanus depereo aeternus tertius umerus. Bardus deinde crustulum. Cubitum curis accusator curis caterva. Degero vetus constans confido. Venia curis turpis caecus alter theologus sperno optio. Strues sublime crepusculum iure commodi sollicito alii ter. Carbo summisse recusandae arcus arceo absum usus consuasor thalassinus.",
@@ -155,7 +154,7 @@ export const fakeCampaigns = [
   },
   {
     id: 18,
-    title: "dignissimos tres",
+    title: "terror abscido",
     target: 344,
     description:
       "Audeo strenuus valens defessus. Accusator laudantium custodia crastinus comptus pauper stella. Triduana vilicus amaritudo sustineo ars concido. Accendo vilicus corroboro dicta. In cogito aestivus ulciscor decens basium despecto libero. Tribuo tenax triduana apud. Totidem comis tibi. Sollicito somnus curtus natus deleniti sollers celo tristis vereor speculum. Pectus odio temporibus sufficio distinctio. Utique cupio paulatim ocer tonsor magnam. Vero tamen accusantium quasi sub. Dedecor ultio venia derideo peccatus eligendi vesper. Curatio depono provident vero talis cogo aqua. Verecundia cedo ascit thermae incidunt adsuesco voluptate temperantia vicinus sed. Absque arcus velut voluptatibus. Curatio doloremque terror exercitationem verus trepide calco aranea. Valeo combibo substantia curto tondeo vero testimonium tantillus. Calamitas vinculum corporis. Vicinus tutis adnuo arma spargo varius sub conor autus. Neque arcus conor ocer. Corporis corpus universe acer turbo decipio acidus ocer. Defendo aeger denuncio talis territo texo concedo celo appositus armarium. Agnitio vorax commodo aperiam enim cilicium. Cenaculum vicissitudo cibus adficio amicitia harum. Demens turba suffragium atrocitas adiuvo acies commodi amissio quo vergo. Sunt autem confero tendo conduco adsuesco. Auctus ancilla creta urbanus depereo aeternus tertius umerus. Bardus deinde crustulum. Cubitum curis accusator curis caterva. Degero vetus constans confido. Venia curis turpis caecus alter theologus sperno optio. Strues sublime crepusculum iure commodi sollicito alii ter. Carbo summisse recusandae arcus arceo absum usus consuasor thalassinus.",
@@ -172,4 +171,4 @@ export const fakeCampaigns = [
     status: "pending",
   },
 ];
-export default fakeCampaigns
+export default fakeCampaigns;

@@ -32,7 +32,9 @@ function App() {
         <div className="App">
           <main className="mainContent">
             <section className="sideNavContainer">
-              <Sidebar />
+              <ProtectedRoute isAllowed={user}>
+                <Sidebar />
+              </ProtectedRoute>
             </section>
             <div className="containerRoutes">
               <Routes>
