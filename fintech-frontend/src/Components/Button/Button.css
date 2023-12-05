@@ -31,3 +31,6 @@
   background-color: var(--primary-gold-clr);
   color: white;
 }
+.disabledBtn, .disabledBtn:hover{
+  background-color: rgb(104, 96, 30);
+}

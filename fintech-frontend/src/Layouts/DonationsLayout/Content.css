@@ -1,0 +1,21 @@
+/* Default styling for the table container */
+.tableContainer {
+    width: 100%;
+    overflow-y:scroll;
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .rs-table-row {
+      display: block;
+      white-space: nowrap;
+    }
+  
+    .rs-table-cell {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+    }
+  }
+  
+  

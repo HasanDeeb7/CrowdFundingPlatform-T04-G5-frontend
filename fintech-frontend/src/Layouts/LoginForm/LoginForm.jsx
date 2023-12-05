@@ -1,27 +1,43 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./LoginForm.css";
 import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import { redirect, useNavigate } from "react-router-dom";
+import UserContext from "../../useContext/userContext";
 function LoginForm() {
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
+  const [isDisabled, setIsDisabled] = useState(false);
+  useEffect(() => {
+    if (user) {
+      return navigate("/", { replace: true });
+    }
+  }, []);
+
   async function signIn() {
+    setIsDisabled(true);
     try {
-      const data = await axios.get("http://localhost:4000/login", {params: credentials});
+      const data = await axios.get("http://localhost:4000/login", {
+        params: credentials,
+      });
       if (data) {
         console.log(data);
-        return console.log(Cookies.get("access_token"));
-        return <Navigate to="/" replace />;
+        setUser(data.data);
+        setIsDisabled(false);
+        localStorage.setItem("userData", JSON.stringify(true));
+        return navigate("/", { replace: true });
       }
     } catch (error) {
       console.log(error);
+      setIsDisabled(false);
     }
   }
+
   return (
     <div className="loginFormContainer">
       <h3>SignIn</h3>
@@ -30,14 +46,16 @@ function LoginForm() {
         setValue={setCredentials}
         label="Username"
         control="username"
+        isDisabled={isDisabled}
       />
       <Input
         value={credentials}
         setValue={setCredentials}
         label="Password"
         control="password"
+        isDisabled={isDisabled}
       />
-      <Button action="Login" onClick={signIn} />
+      <Button action="Login" onClick={signIn} isDisabled={isDisabled} />
     </div>
   );
 }
