@@ -7,19 +7,20 @@ import Login from "./Pages/LoginPage/Login.jsx";
 import SignUp from "./Pages/SignUp.jsx";
 import Donations from "./Pages/DonationsPage/Donations.jsx";
 import Sidebar from "./Layouts/Sidebar/Sidebar.jsx";
-import AdminUsers from "./Pages/AdminUsers.jsx";
 import "rsuite/dist/rsuite.min.css";
 import { CustomProvider } from "rsuite";
 import SingleCampaign from "./Pages/SingleCampaign/SingleCampaign.jsx";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute.jsx";
 import CampaignsRequests from "./Pages/CampaignsRequests/CampaignsRequestsPage.jsx";
 import axios from "axios";
+import AllUsersPage from "./Pages/AllUsers/AllUsersPage.jsx";
 import UserContext from "./useContext/userContext.js";
 import { useEffect, useState } from "react";
 
 function App() {
   const [user, setUser] = useState(null);
   axios.defaults.withCredentials = true;
+
   async function fetchUser() {
     try {
       if (!user) {
@@ -53,6 +54,7 @@ function App() {
   useEffect(() => {
     fetchUser();
     getUserData();
+
   }, []);
 
   return (
@@ -87,7 +89,7 @@ function App() {
                     element={<CampaignsRequests />}
                   />
 
-                  <Route path="/adminusers" element={<AdminUsers />} />
+                  <Route path="/adminusers" element={<AllUsersPage />} />
                 </Route>
               </Routes>
             </div>

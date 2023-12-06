@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Panel, Grid, Row, Col, Avatar, Icon } from "rsuite";
+import { Panel, Grid, Row, Col } from "rsuite";
 import profile from "../../louai.jpg";
 import Button from "../../Components/Button/Button";
 import ProfileModal from "../../Pages/ProfilesPage/ProfileModal";
@@ -9,7 +9,8 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { IoLocation } from "react-icons/io5";
 
 const userData = {
-  name: "Louai Baghdadi",
+  firstName: "Louai",
+  lastName:"Baghdadi",
   email: "user@example.com",
   bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.",
 
@@ -38,14 +39,9 @@ const HeaderProfile = () => {
           }}
         >
           <Col xs={24} md={8}>
-            {isProfileModalOpen ? (
-              <ProfileModal
-                closeHandler={() => setIsProfileModalOpen(false)}
-                userData={userData}
-              />
-            ) : (
-              ""
-            )}
+            {isProfileModalOpen && 
+              <ProfileModal closeHandler={()=> setIsProfileModalOpen(false)} userData={userData}/>
+             }
             <img alt="profileImage" src={profile} style={{ width: "100%" }} />
           </Col>
 
