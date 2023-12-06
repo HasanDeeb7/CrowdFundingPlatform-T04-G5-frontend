@@ -28,7 +28,7 @@ function App() {
           `${process.env.REACT_APP_BACKEND_ENDPOINT}auth`
         );
         if (userData) {
-          console.log(userData.data);
+          // console.log(userData.data);
         } else {
           console.log("no data");
         }
@@ -43,7 +43,7 @@ function App() {
         `${process.env.REACT_APP_BACKEND_ENDPOINT}users/readOne`
       );
       if (data) {
-        console.log(data.data);
+        // console.log(data.data);
         setUser(data.data);
       }
     } catch (error) {

@@ -12,7 +12,7 @@ function Content() {
 
   const { user, setUser } = useContext(UserContext);
 
-  // console.log(user.data)
+  console.log(user)
 
   const [limit, setLimit] = React.useState(5);
   const [page, setPage] = React.useState(1);
