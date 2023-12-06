@@ -12,21 +12,25 @@ import PeoplesCostomizeIcon from "@rsuite/icons/PeoplesCostomize";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
 import UserContext from "../../useContext/userContext";
+import axios from "axios";
 function Sidebar() {
   const [expanded, setExpanded] = React.useState(true);
 
   const [activeKey, setActiveKey] = React.useState("2");
-  const {setUser} = useContext(UserContext)
-
+  const { setUser } = useContext(UserContext);
 
   const NavLink = forwardRef(({ href, children, ...rest }, ref) => (
     <Link ref={ref} to={href} {...rest}>
       {children}
     </Link>
   ));
-  function logOut(){
-    setUser(null)
-    localStorage.removeItem('userData')
+  async function logOut() {
+    setUser(null);
+    try {
+      await axios.get(`${process.env.REACT_APP_BACKEND_ENDPOINT}logout`);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
