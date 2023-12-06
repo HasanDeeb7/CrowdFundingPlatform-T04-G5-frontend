@@ -1,6 +1,6 @@
-import React from "react";
+import React ,{useContext} from "react";
 import { Table, Pagination , Button} from "rsuite";
-import { useDataContext } from "../../useContext/context.ts";
+import UserContext from "../../useContext/userContext";
 import "./Content.css";
 import "../../App.css";
 // import Test from '../../Components/CampaignsTableComponent/CampaignsTableComponent.jsx'
@@ -8,7 +8,11 @@ import "../../App.css";
 const { Column, HeaderCell, Cell } = Table;
 
 function Content() {
-  const dataContext = useDataContext();
+  // const userContext = userContext();
+
+  const { user, setUser } = useContext(UserContext);
+
+  // console.log(user.data)
 
   const [limit, setLimit] = React.useState(5);
   const [page, setPage] = React.useState(1);
@@ -21,11 +25,11 @@ function Content() {
   const start = limit * (page - 1);
   const end = start + limit;
 
-  const data = dataContext.slice(start, end);
+  // const data = dataContext.slice(start, end);
 
   return (
     <div>
-      <Table height={420} data={data} className="tableContainer">
+      <Table height={420}  className="tableContainer">
         <Column width={134} align="center" fixed>
           <HeaderCell>Id</HeaderCell>
           <Cell dataKey="id" />
@@ -77,7 +81,7 @@ function Content() {
           maxButtons={5}
           size="xs"
           layout={["total", "-", "limit", "|", "pager", "skip"]}
-          total={useDataContext.length}
+          // total={useDataContext.length}
           limitOptions={[5,10,15]}
           limit={limit}
           activePage={page}

@@ -25,6 +25,7 @@ function App() {
     if (userData) {
       setUser(userData);
     }
+    console.log(user)
   }, []);
   return (
     <CustomProvider theme="dark">
