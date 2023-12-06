@@ -1,26 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../images/Ellipse 9.png";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Button from "../Button/Button";
+import UserContext from "../../useContext/userContext";
 
 export default function SubSlide({ data }) {
-  const description = data.description.split(" ").slice(0, 30).join(" ");
-
-  console.log(description);
+  const { user } = useContext(UserContext);
+  console.log("Subslide");
   return (
     <div className="sub">
       <div className="first">
         <img src={logo} alt="campaigns" />
       </div>
       <div className="second">
-        <Link to="/${data.id}">
-          <h4>{data.title}</h4>
-          <p>{description}</p>
-        </Link>
-        {/* {role=== "admin"?
-        <Button action="Accept" />
-        <Button btnType="secondary" action="deny" />
-        :null} */}
+        {user.role === "admin" || user.role === "donor" ? (
+          <NavLink to="/singlecampaign" state={data}>
+            <h4>{data.title}</h4>
+            <p>{data.description}</p>
+          </NavLink>
+        ) : null}
+
+        {user.role === "admin" ? (
+          <>
+            <Button action="Accept" />
+            <Button btnType="secondary" action="deny" />
+          </>
+        ) : null}
       </div>
     </div>
   );

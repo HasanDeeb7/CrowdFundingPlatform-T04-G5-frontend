@@ -2,7 +2,6 @@ import React, { forwardRef, useContext } from "react";
 import { useEffect } from "react";
 import { Sidenav, Nav } from "rsuite";
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
-import GroupIcon from "@rsuite/icons/legacy/Group";
 import ExitIcon from "@rsuite/icons/Exit";
 import PublicOpinionIcon from "@rsuite/icons/PublicOpinion";
 import UserInfoIcon from "@rsuite/icons/UserInfo";
@@ -13,7 +12,11 @@ import "./Sidebar.css";
 import { Link } from "react-router-dom";
 import UserContext from "../../useContext/userContext";
 import axios from "axios";
+import NavItem from "rsuite/esm/Nav/NavItem";
+
 function Sidebar() {
+  const { user } = useContext(UserContext);
+
   const [expanded, setExpanded] = React.useState(true);
 
   const [activeKey, setActiveKey] = React.useState("2");
@@ -24,6 +27,7 @@ function Sidebar() {
       {children}
     </Link>
   ));
+
   async function logOut() {
     setUser(null);
     try {
@@ -91,34 +95,40 @@ function Sidebar() {
             >
               Donation
             </Nav.Item>
-            {/* {role === "admin" ? ( */}
-            <>
-              <Nav.Item
-                eventKey="4"
-                className="item"
-                as={NavLink}
-                href="/adminrequests"
-                icon={
-                  <CheckOutlineIcon
-                    style={{ fontSize: "25px", height: "25px" }}
-                  />
-                }
-              >
-                All Requests
-              </Nav.Item>
-              <Nav.Item
-                eventKey="5"
-                className="item"
-                as={NavLink}
-                href="/adminusers"
-                icon={
-                  <PeoplesIcon style={{ fontSize: "25px", height: "25px" }} />
-                }
-              >
-                All Users
-              </Nav.Item>
-            </>
-            {/*  ) : null} */}
+            {user.role === "admin" ? (
+              <>
+                <Nav.Item
+                  eventKey="4"
+                  className="item"
+                  as={NavLink}
+                  href="/adminrequests"
+                  icon={
+                    <CheckOutlineIcon
+                      style={{ fontSize: "25px", height: "25px" }}
+                    />
+                  }
+                >
+                  All Requests
+                </Nav.Item>
+                <Nav.Item
+                  eventKey="5"
+                  className="item"
+                  as={NavLink}
+                  href="/adminusers"
+                  icon={
+                    <PeoplesIcon style={{ fontSize: "25px", height: "25px" }} />
+                  }
+                >
+                  All Users
+                </Nav.Item>
+              </>
+            ) : (
+              <>
+                <NavItem
+                  style={{ height: 100, visibility: "hidden" }}
+                ></NavItem>
+              </>
+            )}
             <Nav.Item
               as={NavLink}
               href="/profile"
