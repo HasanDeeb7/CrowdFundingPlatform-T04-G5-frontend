@@ -20,7 +20,6 @@ import { useEffect, useState } from "react";
 function App() {
   const [user, setUser] = useState(null);
   axios.defaults.withCredentials = true;
-
   async function fetchUser() {
     try {
       if (!user) {

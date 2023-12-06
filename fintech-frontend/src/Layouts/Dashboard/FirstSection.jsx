@@ -14,6 +14,13 @@ function FirstSection() {
   let completedCampaign = 0;
   let counterCreator = 0;
   let counterDonors = 0;
+  fakeDonations.map((data) => {
+    if (data.donorName == user.userName) {
+      count++;
+    }
+  });
+  console.log(user)
+  const [isModalOpen, setIsModalOpen] = useState(false);
   //   fakeDonations.map((data) => {
   //     if (data.donorName == this.donorName) {
   //       count++;

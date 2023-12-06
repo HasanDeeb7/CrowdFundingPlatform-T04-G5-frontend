@@ -80,6 +80,7 @@ function SignUpFrom({ setLogin }) {
           control="password"
           label="Password"
         />
+        
       </div>
       <div className="signUpBtn">
         <Button
