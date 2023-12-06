@@ -1,12 +1,22 @@
-import React from "react";
-import SearchFilter from "../../Layouts/SearchFilter/SearchFilter.jsx";
+import React, { useState } from "react";
 import CampaignsTable from "../../Layouts/CampaignsTable/CampaignsTable.jsx";
-import './Campaigns.css'
+import "./Campaigns.css";
+import CreateCampaign from "../../Components/Dashboard/CreateCampaign.jsx";
+import Button from "../../Components/Button/Button.jsx";
 function Campaigns() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   return (
     <div className="CampaignsPageWrapper">
       <h1>Campaigns</h1>
-      <SearchFilter />
+      <Button action='New Campaign' onClick={()=> setIsModalOpen(true)} />
+
+      {isModalOpen && (
+        <CreateCampaign
+          action="Create Campaign"
+          closeHandler={() => setIsModalOpen(false)}
+        />
+      )}
+
       <CampaignsTable />
     </div>
   );

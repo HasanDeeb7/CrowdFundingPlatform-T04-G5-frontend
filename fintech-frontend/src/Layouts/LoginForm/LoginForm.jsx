@@ -3,8 +3,9 @@ import "./LoginForm.css";
 import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
 import axios from "axios";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UserContext from "../../useContext/userContext";
+import { toast } from "react-toastify";
 function LoginForm() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
@@ -21,6 +22,10 @@ function LoginForm() {
 
   async function signIn() {
     setIsDisabled(true);
+    const toastId = toast("Loging In", {
+      autoClose: false,
+      closeOnClick: false,
+    });
     try {
       const data = await axios.get("http://localhost:4000/login", {
         params: credentials,
@@ -30,6 +35,12 @@ function LoginForm() {
         setUser(data.data);
         setIsDisabled(false);
         localStorage.setItem("userData", JSON.stringify(true));
+        toast.update(toastId, {
+          render: "Welcome! 😸",
+          type: toast.TYPE.SUCCESS,
+          autoClose: 3000,
+          progressStyle: { background: "#ffc42e" },
+        });
         return navigate("/", { replace: true });
       }
     } catch (error) {

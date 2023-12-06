@@ -4,7 +4,6 @@ import Profile from "./Pages/ProfilesPage/Profile.jsx";
 import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
 import Campaigns from "./Pages/Campaigns/Campaigns.jsx";
 import Login from "./Pages/LoginPage/Login.jsx";
-import SignUp from "./Pages/SignUp.jsx";
 import Donations from "./Pages/DonationsPage/Donations.jsx";
 import Sidebar from "./Layouts/Sidebar/Sidebar.jsx";
 import "rsuite/dist/rsuite.min.css";
@@ -20,12 +19,41 @@ import { useEffect, useState } from "react";
 function App() {
   const [user, setUser] = useState(null);
   axios.defaults.withCredentials = true;
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    if (userData) {
-      setUser(userData);
+  async function fetchUser() {
+    try {
+      if (!user) {
+        const userData = await axios.get(
+          `${process.env.REACT_APP_BACKEND_ENDPOINT}auth`
+        );
+        if (userData) {
+          console.log(userData.data);
+        } else {
+          console.log("no data");
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
+  }
+  async function getUserData() {
+    try {
+      const data = await axios.get(
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}users/readOne`
+      );
+      if (data) {
+        console.log(data.data);
+        setUser(data.data.user);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchUser();
+    getUserData();
   }, []);
+
   return (
     <CustomProvider theme="dark">
       <UserContext.Provider value={{ user, setUser }}>
@@ -39,7 +67,6 @@ function App() {
             <div className="containerRoutes">
               <Routes>
                 <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
                 <Route element={<ProtectedRoute isAllowed={user} />}>
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/profile" element={<Profile />} />
@@ -59,6 +86,7 @@ function App() {
                     path="/adminrequests"
                     element={<CampaignsRequests />}
                   />
+
                   <Route path="/adminusers" element={<AllUsersPage />} />
                 </Route>
               </Routes>

@@ -15,14 +15,14 @@
   align-items: center;
   justify-content: center;
 }
-.loginLink{
-    text-decoration: underline;
-    color: #34c3ff;
-    cursor: pointer;
+.loginLink {
+  text-decoration: underline;
+  color: var(--primary-gold-clr);
+  cursor: pointer;
 }
-.loginLink:hover{
-  color: #59d0ff;
+.loginLink:hover {
+  color: var(--light-gold-clr);
 }
-.loginLink:active{
-  color: #80ddff;
+.loginLink:active {
+  color: var(--light-gold-clr);
 }

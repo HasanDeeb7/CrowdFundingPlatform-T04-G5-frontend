@@ -2,14 +2,54 @@ import { useState } from "react";
 import Input from "../../Components/Input/Input";
 import "./SignUpFrom.css";
 import Button from "../../Components/Button/Button";
+import { CreateUser } from "../../axios/user";
+import { toast } from "react-toastify";
 
-function SignUpFrom() {
+function SignUpFrom({ setLogin }) {
   const [newUser, setNewUser] = useState({
     firstName: "",
     lastName: "",
     userName: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  async function signUp() {
+    const toastId = toast("Creating account", {
+      autoClose: false,
+      closeButton: false,
+    });
+    try {
+      setIsLoading(true);
+      const data = await CreateUser(newUser);
+      if (data) {
+        console.log(data);
+        setLogin(true);
+        setIsLoading(false);
+        toast.update(toastId, {
+          render: "Welcome, You Can Log In Now",
+          type: toast.TYPE.SUCCESS,
+          autoClose: 3000,
+          progressStyle: { background: "#ffc42e" },
+        });
+      } else {
+        setIsLoading(false);
+        toast.update(toastId, {
+          render: "Failed to Create User",
+          type: toast.TYPE.ERROR,
+          autoClose: 3000,
+          progressStyle: {background: 'red'}
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+      toast.update(toastId, {
+        render: "Failed to Create User",
+        type: toast.TYPE.ERROR,
+        autoClose: 3000,
+      });
+    }
+  }
   return (
     <div className="signupContainer">
       <h3>Create an Account</h3>
@@ -40,9 +80,14 @@ function SignUpFrom() {
           control="password"
           label="Password"
         />
+        
       </div>
       <div className="signUpBtn">
-        <Button action="SignUp" />
+        <Button
+          action="SignUp"
+          onClick={() => signUp()}
+          isDisabled={isLoading}
+        />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useState } from "react";
 import Card from "../../Components/Dashboard/Card";
 import fakeDonations from "../../FakeData/fakeDonations";
 import fakeCampaigns from "../../FakeData/fakeCampaigns";
@@ -6,6 +7,7 @@ import "./FirstSection.css";
 import CreateCampaign from "../../Components/Dashboard/CreateCampaign";
 import fakeUsers from "../../FakeData/fakeUsers";
 import UserContext from "../../useContext/userContext";
+import Button from "../../Components/Button/Button";
 
 function FirstSection() {
   const { user } = useContext(UserContext);

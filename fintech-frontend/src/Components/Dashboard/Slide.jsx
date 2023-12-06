@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SubSlide from "./SubSlide";
 import "./Slide.css";
 import fakeCampaigns from "../../FakeData/fakeCampaigns";
@@ -7,12 +7,26 @@ import fakeDonations from "../../FakeData/fakeDonations";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import UserContext from "../../useContext/userContext";
+import fetchDonations from "../../utils/donations";
+import fetchCampaigns from "../../utils/campaignAxios";
 
 function Slide() {
+  let [campaignApi, setCampaignApi] = useState([]);
+  let [donationApi, setDonationApi] = useState([]);
+  async function fetchDashboard() {
+    let donations = await fetchDonations();
+    setDonationApi(donations);
+    let campaign = await fetchCampaigns();
+    setCampaignApi(campaign);
+  }
+  useEffect(() => {
+    fetchDashboard();
+  }, []);
+
   const { user } = useContext(UserContext);
   let pending = [];
   // request pending for admin
-  fakeCampaigns.map((data) => {
+  campaignApi.map((data) => {
     {
       return data.status === "pending" ? pending.push(data) : null;
     }
@@ -22,7 +36,7 @@ function Slide() {
       <h3>compaigns interacted with</h3>
       <div className="child">
         {user.role == "donor"
-          ? fakeDonations.map((data) => {
+          ? donationApi.map((data) => {
               {
                 console.log(user.userName);
                 return user.userName === data.donorName

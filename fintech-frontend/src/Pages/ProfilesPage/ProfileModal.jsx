@@ -1,81 +1,86 @@
-import React , {useEffect, useState} from "react";
-import { Form, ButtonToolbar, Button } from "rsuite";
+import "./ProfileModal.css";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Input from "../../Components/Input/Input";
+import Button from "../../Components/Button/Button";
 
-function ProfileModal({ closeHandler , userData , onInputChange }) {
-
-  const handleFormClick = (e) => {
-    if (e.target.tagName.toLowerCase() === "input") {
-      e.stopPropagation();
-    }
-  };
-
-  const [formData, setFormData] = useState({
-    name: '',
-    bio: '',
-    password: '',
-    phone : '',
-    address:''
+function ProfileModal({ closeHandler }) {
+  const [profile, setProfile] = useState({
+    firstName: "Louai",
+    lastName: "Baghdadi",
+    bio: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, whe",
+    password: "",
+    phone: "701780560",
+    address: "Tripoli , Lebanon",
   });
-
-  useEffect(() =>{
-    setFormData({
-      name : userData.name || '' ,
-      bio : userData.bio || '' ,
-      password : userData.password || '' ,
-      phone : userData.phone || '',
-      address : userData.address || ''
-    })
-  }, [userData])
-
-  const handleInputChange = (name, value) => {
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const modalVariants = {
+    closed: { opacity: 0, scale: 0, width: 0, height: 0 },
+    opened: {
+      opacity: 1,
+      scale: 1,
+      width: "500px",
+      height: "700px",
+      transform: "translate(-50%, -50%)",
+    },
   };
 
- 
   return (
-    <div className="modalContainer" onClick={closeHandler}>
-      <Form
-        fluid
-        style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", padding: "20px" }}
-        onClick={handleFormClick}
+    <>
+      <div className="modalContainer" onClick={closeHandler}></div>
+      <motion.div
+        variants={modalVariants}
+        initial="closed"
+        animate="opened"
+        transition={{
+          duration: 0.4,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+        exit="closed"
+        className="modalItemsWrapper"
       >
-        <Form.Group controlId="name-1">
-          <Form.ControlLabel className="custom-label">UserName</Form.ControlLabel>
-          <Form.Control name="userName" type="text" value={formData.name} onChange={(value) => handleInputChange('name', value)}/>
-        </Form.Group>
+        <div style={{display:"flex", flexDirection:"column" , rowGap:"20px" , alignContent:"center" , justifyContent:"center" , margin:"0 auto"}}>
+          <Input
+            label="First Name"
+            value={profile}
+            setValue={setProfile}
+            control="firstName"
+          />
+          <Input
+            label="Last Name"
+            value={profile}
+            setValue={setProfile}
+            control="lastName"
+          />
+          <Input
+            label="Biography"
+            value={profile}
+            setValue={setProfile}
+            control="bio"
+          />
+          <Input
+            label="Password"
+            value={profile}
+            setValue={setProfile}
+            control="password"
+          />
+          <Input
+            label="Phone"
+            value={profile}
+            setValue={setProfile}
+            control="phone"
+          />
+          <Input
+            label="Address"
+            value={profile}
+            setValue={setProfile}
+            control="address"
+          />
+        </div>
 
-        <Form.Group controlId="bio-1">
-          <Form.ControlLabel>Bio</Form.ControlLabel>
-          <Form.Control name="bio" type="text" value={formData.bio} onChange={(value) => handleInputChange('bio', value)} />
-        </Form.Group>
-
-        <Form.Group controlId="password-1">
-          <Form.ControlLabel>Password</Form.ControlLabel>
-          <Form.Control name="password" type="password" autoComplete="off" value={formData.password}
-            onChange={(value) => handleInputChange('password', value)} />
-        </Form.Group>
-
-        <Form.Group controlId="phone-1">
-          <Form.ControlLabel>Contact</Form.ControlLabel>
-          <Form.Control name="phone" type="text" value={formData.phone} onChange={(value) => handleInputChange('phone', value)} />
-        </Form.Group>
-
-        <Form.Group controlId="address-1">
-          <Form.ControlLabel>Address</Form.ControlLabel>
-          <Form.Control name="address" type="text" value={formData.address} onChange={(value) => handleInputChange('address', value)} />
-        </Form.Group>
-
-        <Form.Group>
-          <ButtonToolbar>
-            <Button appearance="primary">Save</Button>
-            <Button appearance="default">Cancel</Button>
-          </ButtonToolbar>
-        </Form.Group>
-      </Form>
-    </div>
+        <Button action="Save" />
+        <Button action="Cancel" onClick={closeHandler} />
+      </motion.div>
+    </>
   );
 }
 
