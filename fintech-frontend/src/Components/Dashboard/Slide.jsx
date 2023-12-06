@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SubSlide from "./SubSlide";
 import "./Slide.css";
 import fakeCampaigns from "../../FakeData/fakeCampaigns";
@@ -6,11 +6,27 @@ import fakeDonors from "../../FakeData/fakeDonors";
 import fakeDonations from "../../FakeData/fakeDonations";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
+import UserContext from "../../useContext/userContext";
+import fetchDonations from "../../utils/donations";
+import fetchCampaigns from "../../utils/campaignAxios";
 
 function Slide() {
+  let [campaignApi, setCampaignApi] = useState([]);
+  let [donationApi, setDonationApi] = useState([]);
+  async function fetchDashboard() {
+    let donations = await fetchDonations();
+    setDonationApi(donations);
+    let campaign = await fetchCampaigns();
+    setCampaignApi(campaign);
+  }
+  useEffect(() => {
+    fetchDashboard();
+  }, []);
+
+  const { user } = useContext(UserContext);
   let pending = [];
   // request pending for admin
-  fakeCampaigns.map((data) => {
+  campaignApi.map((data) => {
     {
       return data.status === "pending" ? pending.push(data) : null;
     }
@@ -18,35 +34,30 @@ function Slide() {
   return (
     <div className="container1">
       <h3>compaigns interacted with</h3>
-      {/* <div className="child"> */}
-      {/* {
-        role=="donor"?
-        fakeDonations.map((data)=>{
-          {return this.name===data.donorName?
-          <SubSlide data={data}/>
-          :null
-          }
-        
-        }):
-        role==="creator"?
-        fakeDonors.slice(0,10).map((data)=>(<SubSlide data={data}/>)): */}
-      {/* role==="admin"?
-        
-        {pending.slice(0, 5).map((data) => (
-          <SubSlide data={data} />
-        ))}
-        */}
-      {/*  } */}
-      {/* </div> */}
       <div className="child">
-        {pending.slice(0, 5).map((data) => (
-          <SubSlide data={data} />
-        ))}
-        {/* {role==="admin"? */}
-        <Link to="adminrequests">
-          <Button action="more" />
-        </Link>
-        {/* :null} */}
+        {user.role == "donor"
+          ? donationApi.map((data) => {
+              {
+                console.log(user.userName);
+                return user.userName === data.donorName
+                  ? fakeCampaigns.map((campaign) => {
+                      return campaign.title === data.campaignTitle ? (
+                        <SubSlide data={campaign} />
+                      ) : null;
+                    })
+                  : null;
+              }
+            })
+          : // : user.role === "creator"
+          // ? fakeDonors.slice(0, 10).map((data) => <SubSlide data={data} />)
+          user.role === "admin"
+          ? pending.slice(0, 5).map((data) => <SubSlide data={data} />)
+          : null}
+        {user.role === "admin" ? (
+          <Link to="adminrequests">
+            <Button action="more" />
+          </Link>
+        ) : null}
       </div>
     </div>
   );

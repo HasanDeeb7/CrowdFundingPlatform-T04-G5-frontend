@@ -13,3 +13,4 @@ export const fakeDonors = [
   { id: 10, balance: 888, amountOfContributions: 4 },
 ];
 // console.log(fakeDonors);
+export default fakeDonors;

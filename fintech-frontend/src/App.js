@@ -4,7 +4,6 @@ import Profile from "./Pages/ProfilesPage/Profile.jsx";
 import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
 import Campaigns from "./Pages/Campaigns/Campaigns.jsx";
 import Login from "./Pages/LoginPage/Login.jsx";
-import SignUp from "./Pages/SignUp.jsx";
 import Donations from "./Pages/DonationsPage/Donations.jsx";
 import Sidebar from "./Layouts/Sidebar/Sidebar.jsx";
 import "rsuite/dist/rsuite.min.css";
@@ -20,7 +19,6 @@ import { useEffect, useState } from "react";
 function App() {
   const [user, setUser] = useState(null);
   axios.defaults.withCredentials = true;
-
   async function fetchUser() {
     try {
       if (!user) {
@@ -50,11 +48,10 @@ function App() {
       console.log(error);
     }
   }
-  
+
   useEffect(() => {
     fetchUser();
     getUserData();
-
   }, []);
 
   return (
@@ -63,12 +60,13 @@ function App() {
         <div className="App">
           <main className="mainContent">
             <section className="sideNavContainer">
-              <Sidebar />
+              <ProtectedRoute isAllowed={user}>
+                <Sidebar />
+              </ProtectedRoute>
             </section>
             <div className="containerRoutes">
               <Routes>
                 <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
                 <Route element={<ProtectedRoute isAllowed={user} />}>
                   <Route path="/" element={<Dashboard />} />
                   <Route path="/profile" element={<Profile />} />
