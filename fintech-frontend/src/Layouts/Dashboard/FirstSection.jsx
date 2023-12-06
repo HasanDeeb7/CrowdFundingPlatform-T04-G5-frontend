@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../../Components/Dashboard/Card";
 import fakeDonations from "../../FakeData/fakeDonations";
 import fakeCampaigns from "../../FakeData/fakeCampaigns";
 import "./FirstSection.css";
 import CreateCampaign from "../../Components/Dashboard/CreateCampaign";
 import fakeUsers from "../../FakeData/fakeUsers";
+import Button from "../../Components/Button/Button";
 
 function FirstSection() {
   let count = 0;
@@ -60,8 +61,6 @@ function FirstSection() {
       </div> 
          ) :null}*/}
       <div className="firstSection">
-
-        {/* <CreateCampaign action="Create Campaign" /> */}
 
         <Card title="Number of ongoing campaigns" value={activeCampaign} />
         <Card title="Number of completed campaigns" value={completedCampaign} />

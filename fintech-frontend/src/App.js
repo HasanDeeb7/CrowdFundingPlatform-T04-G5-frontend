@@ -20,13 +20,43 @@ import { useEffect, useState } from "react";
 function App() {
   const [user, setUser] = useState(null);
   axios.defaults.withCredentials = true;
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    if (userData) {
-      setUser(userData);
+
+  async function fetchUser() {
+    try {
+      if (!user) {
+        const userData = await axios.get(
+          `${process.env.REACT_APP_BACKEND_ENDPOINT}auth`
+        );
+        if (userData) {
+          console.log(userData.data);
+        } else {
+          console.log("no data");
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
-    console.log(user)
+  }
+  async function getUserData() {
+    try {
+      const data = await axios.get(
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}users/readOne`
+      );
+      if (data) {
+        console.log(data.data);
+        setUser(data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+  useEffect(() => {
+    fetchUser();
+    getUserData();
+
   }, []);
+
   return (
     <CustomProvider theme="dark">
       <UserContext.Provider value={{ user, setUser }}>
@@ -58,6 +88,7 @@ function App() {
                     path="/adminrequests"
                     element={<CampaignsRequests />}
                   />
+
                   <Route path="/adminusers" element={<AllUsersPage />} />
                 </Route>
               </Routes>
