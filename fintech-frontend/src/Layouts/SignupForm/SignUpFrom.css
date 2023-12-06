@@ -1,14 +1,55 @@
-.signupContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 2rem;
-    width: 80%;
-    padding: 2rem;
-    align-items: center;
+.signupContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 80%;
+  padding: 1rem;
+  align-items: center;
 }
-.inputRow{
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+.inputRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.signUpRadioContainer {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.signUpRadioWrapper {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+}
+.signUpRadioWrapper > input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.customRadio {
+  position: absolute;
+  top: 5px;
+  left: 55px;
+  height: 10px;
+  width: 10px;
+  border-radius: 30px;
+  background-color: #eee;
+}
+.signUpRadioWrapper:hover input ~ .customRadio {
+  background-color: var(--light-gold-clr);
+}
+.signUpRadioContainer input:checked ~ .customRadio {
+  background-color: var(--primary-gold-clr);
+}
+.customRadio:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.signUpRadioContainer input:checked ~ .customRadio:after {
+  display: block;
 }

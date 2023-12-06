@@ -48,7 +48,6 @@ function App() {
       console.log(error);
     }
   }
-
   useEffect(() => {
     fetchUser();
     getUserData();
