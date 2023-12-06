@@ -13,11 +13,13 @@ import fetchCampaigns from "../../utils/campaignAxios";
 function Slide() {
   let [campaignApi, setCampaignApi] = useState([]);
   let [donationApi, setDonationApi] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   async function fetchDashboard() {
     let donations = await fetchDonations();
     setDonationApi(donations);
     let campaign = await fetchCampaigns();
     setCampaignApi(campaign);
+    setIsLoading(false);
   }
   useEffect(() => {
     fetchDashboard();
@@ -32,34 +34,30 @@ function Slide() {
     }
   });
   return (
-    <div className="container1">
-      <h3>compaigns interacted with</h3>
-      <div className="child">
-        {user.role == "donor"
-          ? donationApi.map((data) => {
-              {
-                console.log(user.userName);
-                return user.userName === data.donorName
-                  ? fakeCampaigns.map((campaign) => {
-                      return campaign.title === data.campaignTitle ? (
-                        <SubSlide data={campaign} />
-                      ) : null;
-                    })
-                  : null;
-              }
-            })
-          : // : user.role === "creator"
-          // ? fakeDonors.slice(0, 10).map((data) => <SubSlide data={data} />)
-          user.role === "admin"
-          ? pending.slice(0, 5).map((data) => <SubSlide data={data} />)
-          : null}
-        {user.role === "admin" ? (
-          <Link to="adminrequests">
-            <Button action="more" />
-          </Link>
-        ) : null}
+    !isLoading && (
+      <div className="container1">
+        <h3>compaigns interacted with</h3>
+        <div className="child">
+          {user.role == "donor"
+            ? // <SubSlide data={campaign} />
+              donationApi.data.map((data) => {
+                if (data.Donor.User.userName === user.userName) {
+                  return <SubSlide data={data.Campaign} />;
+                }
+              })
+            : // : user.role === "creator"
+            // ? fakeDonors.slice(0, 10).map((data) => <SubSlide data={data} />)
+            user.role === "admin"
+            ? pending.slice(0, 5).map((data) => <SubSlide data={data} />)
+            : null}
+          {user.role === "admin" ? (
+            <Link to="adminrequests">
+              <Button action="more" />
+            </Link>
+          ) : null}
+        </div>
       </div>
-    </div>
+    )
   );
 }
 
