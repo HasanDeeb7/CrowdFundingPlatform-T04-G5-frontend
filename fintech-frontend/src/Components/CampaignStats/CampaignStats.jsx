@@ -5,23 +5,38 @@ import "./CampaignsStats.css";
 import { animate, useMotionValue, useTransform, motion } from "framer-motion";
 import Button from "../Button/Button";
 import { FaHandHoldingHeart } from "react-icons/fa6";
-import DonationModal from '../DonationModal/DonationModal'
-
+import DonationModal from "../DonationModal/DonationModal";
+import RecentDonations from "./RecentDonations";
 function CampaignStats({ data }) {
   const progressData = getPercentage(data.amountContributed, data.target);
   const status = progressData === 100 ? "success" : "active";
-  const firstDonation = useMotionValue(0);
-  const rounded = useTransform(firstDonation, (latest) => Math.round(latest));
+  const recentItem = useMotionValue(0);
+  const recentDonationsList = data.Donations?.slice(-3);
+
+  console.log(recentDonationsList);
+  const rounded = useTransform(recentItem, (latest) =>
+    Math.round(latest).toLocaleString("en-US")
+  );
+
   const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
 
   useEffect(() => {
-    const controls = animate(firstDonation, 2500);
+    console.log(data);
+    const controls = animate(
+      recentItem,
+      data.Donation?.transferredAmount || 2000
+    );
 
     return controls.stop;
   }, []);
 
   return (
-    <div className="campaignStats">
+    <motion.div
+      initial={{ x: 70 }}
+      animate={{ x: 0 }}
+      transition={{ duration: 1, ease: [0, 0.7, 0.2, 2] }}
+      className="campaignStats"
+    >
       {isDonationModalOpen ? (
         <DonationModal closeHandler={() => setIsDonationModalOpen(false)} />
       ) : (
@@ -42,31 +57,19 @@ function CampaignStats({ data }) {
           </div>
         </div>
         <div className="topDonors">
-          <h4> Top Donors</h4>
+          <h4> Recent Donations</h4>
           <ul className="topDonorsList">
-            <li>
-              <span className="topDonorsItem">
-                <FaHandHoldingHeart />
-                <span className="donorItemName">Bill Gates</span>{" "}
-                <motion.span className="donorItemAmount">{rounded}</motion.span>
-              </span>
-            </li>
-            <li>
-              <span className="topDonorsItem">
-                <FaHandHoldingHeart />
-                <span className="donorItemName">Bill Gates</span>{" "}
-                <span className="donorItemAmount">$2,500</span>
-              </span>
-            </li>
-            <li>
-              <span className="topDonorsItem">
-                <FaHandHoldingHeart />
-                <span className="donorItemName">Bill Gates</span>{" "}
-                <span className="donorItemAmount">$2,500</span>
-              </span>
-            </li>
+            {recentDonationsList.map((item) => {
+              return (
+                <RecentDonations
+                  name={`${item.Donor?.User.firstName}`}
+                  transferredAmount={item.transferredAmount}
+                />
+              );
+            })}
           </ul>
         </div>
+        
         <div className="topDonorContainer">
           <span className="firstDonation">First Donation</span>
           <span className="topDonorsItem firstDonor">
@@ -80,7 +83,7 @@ function CampaignStats({ data }) {
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

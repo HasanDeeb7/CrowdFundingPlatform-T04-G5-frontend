@@ -9,7 +9,11 @@ function SingleCampaign() {
   console.log(data);
   return (
     <div className="singleCampaignContainer">
-      <CampgainsDetails data={data} img={img} />
+      
+      <CampgainsDetails
+        data={data}
+        img={`${process.env.REACT_APP_BACKEND_ENDPOINT}public/images/${data.image}`}
+      />
       <CampaignStats data={data} />
     </div>
   );

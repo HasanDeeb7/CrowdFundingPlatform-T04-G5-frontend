@@ -41,7 +41,7 @@ function Slide() {
           {user.role == "donor"
             ? // <SubSlide data={campaign} />
               donationApi.data.map((data) => {
-                if (data.Donor.User.userName === user.userName) {
+                if (data.Donor?.User.userName === user.userName) {
                   return <SubSlide data={data.Campaign} />;
                 }
               })
