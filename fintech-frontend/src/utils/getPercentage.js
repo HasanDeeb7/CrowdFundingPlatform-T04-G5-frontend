@@ -1,3 +1,4 @@
 export function getPercentage(currentValue, goalValue) {
-  return Math.floor((currentValue / goalValue) * 100);
+  const result = Math.floor((currentValue / goalValue) * 100);
+  return result >= 100 ? 100 : result;
 }
