@@ -51,7 +51,7 @@ function Login() {
 
             >
               {" "}
-              <SignUpFrom /> Already have an Account?{" "}
+              <SignUpFrom setLogin={setLogin} /> Already have an Account?{" "}
               <span className="loginLink" onClick={() => setLogin(true)}>
                 Sign In
               </span>{" "}

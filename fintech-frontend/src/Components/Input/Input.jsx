@@ -1,6 +1,6 @@
 import "./Input.css";
 
-function Input({ value, setValue, label, control }) {
+function Input({ value, setValue, label, control, isDisabled= false, type='text' }) {
   function handleChange(e) {
     setValue({ ...value, [e.target.name]: e.target.value });
   }
@@ -8,11 +8,12 @@ function Input({ value, setValue, label, control }) {
     <div className="inputWrapper">
       <input
         className="loginInput"
-        type="text"
+        type={type}
         name={control}
         id={control}
         value={value[control]}
         onChange={handleChange}
+        disabled={isDisabled}
       />
       <label className={`loginInputLable ${value[control] && "inputActive"}`}>
         {label}

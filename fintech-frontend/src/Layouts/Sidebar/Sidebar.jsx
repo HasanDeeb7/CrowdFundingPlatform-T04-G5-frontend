@@ -1,20 +1,42 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useContext } from "react";
 import { useEffect } from "react";
 import { Sidenav, Nav } from "rsuite";
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
-import GroupIcon from "@rsuite/icons/legacy/Group";
-import DonationIcon from "@rsuite/icons/legacy/Search";
+import ExitIcon from "@rsuite/icons/Exit";
+import PublicOpinionIcon from "@rsuite/icons/PublicOpinion";
+import UserInfoIcon from "@rsuite/icons/UserInfo";
+import PeoplesIcon from "@rsuite/icons/Peoples";
+import CheckOutlineIcon from "@rsuite/icons/CheckOutline";
+import PeoplesCostomizeIcon from "@rsuite/icons/PeoplesCostomize";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
+import UserContext from "../../useContext/userContext";
+import axios from "axios";
+import NavItem from "rsuite/esm/Nav/NavItem";
+
+
+
 function Sidebar() {
+  const { user } = useContext(UserContext);
+
   const [expanded, setExpanded] = React.useState(true);
-  const [activeKey, setActiveKey] = React.useState("1");
+
+  const [activeKey, setActiveKey] = React.useState("2");
+  const { setUser } = useContext(UserContext);
 
   const NavLink = forwardRef(({ href, children, ...rest }, ref) => (
     <Link ref={ref} to={href} {...rest}>
       {children}
     </Link>
   ));
+  async function logOut() {
+    setUser(null);
+    try {
+      await axios.get(`${process.env.REACT_APP_BACKEND_ENDPOINT}logout`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -23,13 +45,10 @@ function Sidebar() {
       }
     };
 
-    // Initial check on component mount
     handleResize();
 
-    // Listen for window resize events
     window.addEventListener("resize", handleResize);
 
-    // Cleanup the event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -42,19 +61,8 @@ function Sidebar() {
           <Nav activeKey={activeKey} onSelect={setActiveKey}>
             <Nav.Item
               as={NavLink}
-              href="/profile"
-              eventKey="1"
-              className="item"
-              icon={
-                <DashboardIcon style={{ fontSize: "25px", height: "25px" }} />
-              }
-            >
-              Profile
-            </Nav.Item>
-            <Nav.Item
-              as={NavLink}
               href="/"
-              eventKey="2"
+              eventKey="1"
               className="item"
               icon={
                 <DashboardIcon style={{ fontSize: "25px", height: "25px" }} />
@@ -63,22 +71,85 @@ function Sidebar() {
               Dashboard
             </Nav.Item>
             <Nav.Item
-              eventKey="3"
+              eventKey="2"
               className="item"
               as={NavLink}
               href="/Campaigns"
-              icon={<GroupIcon style={{ fontSize: "25px", height: "25px" }} />}
+              icon={
+                <PeoplesCostomizeIcon
+                  style={{ fontSize: "25px", height: "25px" }}
+                />
+              }
             >
               Campaign
             </Nav.Item>
             <Nav.Item
-              eventKey="4"
+              eventKey="3"
               className="item"
               as={NavLink}
               href="/donations"
-              icon={<GroupIcon style={{ fontSize: "25px", height: "25px" }} />}
+              icon={
+                <PublicOpinionIcon
+                  style={{ fontSize: "25px", height: "25px" }}
+                />
+              }
             >
               Donation
+            </Nav.Item>
+            {user.role === "admin" ? (
+              <>
+                <Nav.Item
+                  eventKey="4"
+                  className="item"
+                  as={NavLink}
+                  href="/adminrequests"
+                  icon={
+                    <CheckOutlineIcon
+                      style={{ fontSize: "25px", height: "25px" }}
+                    />
+                  }
+                >
+                  All Requests
+                </Nav.Item>
+                <Nav.Item
+                  eventKey="5"
+                  className="item"
+                  as={NavLink}
+                  href="/adminusers"
+                  icon={
+                    <PeoplesIcon style={{ fontSize: "25px", height: "25px" }} />
+                  }
+                >
+                  All Users
+                </Nav.Item>
+              </>
+            ) : (
+              <>
+                <NavItem
+                  style={{ height: 100, visibility: "hidden" }}
+                ></NavItem>
+              </>
+            )}
+            <Nav.Item
+              as={NavLink}
+              href="/profile"
+              eventKey="6"
+              className="item lastItem"
+              icon={
+                <UserInfoIcon style={{ fontSize: "25px", height: "25px" }} />
+              }
+            >
+              Profile
+            </Nav.Item>
+            <Nav.Item
+              eventKey="7"
+              className="item"
+              as={NavLink}
+              href="#"
+              icon={<ExitIcon style={{ fontSize: "25px", height: "25px" }} />}
+              onClick={logOut}
+            >
+              Log out
             </Nav.Item>
           </Nav>
         </Sidenav.Body>

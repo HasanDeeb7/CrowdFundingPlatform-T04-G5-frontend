@@ -10,6 +10,9 @@ a.item.item {
 a.item.item:hover {
   color: var(--primary-gold-clr);
 }
+a.item.lastItem {
+  margin-top: 220px !important;
+}
 a.item.rs-sidenav-item.rs-sidenav-item-active {
   background-color: var(--primary-bg-clr);
   color: var(--primary-gold-clr);
