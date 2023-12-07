@@ -69,6 +69,7 @@ function CampaignStats({ data }) {
             })}
           </ul>
         </div>
+        
         <div className="topDonorContainer">
           <span className="firstDonation">First Donation</span>
           <span className="topDonorsItem firstDonor">
