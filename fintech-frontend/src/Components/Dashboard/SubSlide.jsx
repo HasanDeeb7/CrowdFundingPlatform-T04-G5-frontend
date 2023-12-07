@@ -6,7 +6,7 @@ import UserContext from "../../useContext/userContext";
 
 export default function SubSlide({ data }) {
   const { user } = useContext(UserContext);
-  console.log("Subslide");
+  // console.log("Subslide");
   return (
     <div className="sub">
       <div className="first">

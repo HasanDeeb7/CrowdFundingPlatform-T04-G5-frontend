@@ -22,22 +22,22 @@ function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   axios.defaults.withCredentials = true;
-  // async function fetchUser() {
-  //   try {
-  //     if (!user) {
-  //       const userData = await axios.get(
-  //         `${process.env.REACT_APP_BACKEND_ENDPOINT}auth`
-  //       );
-  //       if (userData) {
-  //         console.log(userData.data);
-  //       } else {
-  //         console.log("no data");
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  async function fetchUser() {
+    try {
+      if (!user) {
+        const userData = await axios.get(
+          `${process.env.REACT_APP_BACKEND_ENDPOINT}auth`
+        );
+        if (userData) {
+          // console.log(userData.data);
+        } else {
+          console.log("no data");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   async function getUserData() {
     try {
       const data = await axios.get(
