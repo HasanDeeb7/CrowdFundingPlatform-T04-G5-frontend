@@ -3,17 +3,19 @@ import Stack from "react-bootstrap/Stack";
 import { Button, ButtonToolbar } from "rsuite";
 import "./Filter.css";
 import { flushSync } from 'react-dom';
+import { useFilterContext } from "../useContext/filterContext";
 
 function Filter() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const {handleFilterClick} = useFilterContext()
 
-  const handleFilterClick = (filter) => {
-    flushSync(() => {
-      setActiveFilter(filter);
-    });
+  // const handleFilterClick = (filter) => {
+  //   flushSync(() => {
+  //     setActiveFilter(filter);
+  //   });
     
     // Add logic to handle the filter click, e.g., fetching data based on the selected filter
-  };
+  
 
   return (
     <div>

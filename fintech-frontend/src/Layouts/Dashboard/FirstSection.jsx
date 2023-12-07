@@ -21,7 +21,7 @@ function FirstSection() {
 
   async function fetchNumbersSections() {
     setIsLoading(true);
-    console.log("function");
+    // console.log("function");
     try {
       let donations = await fetchDonations();
       setDonationApi(donations);
@@ -30,7 +30,7 @@ function FirstSection() {
       let users = await fetchUsers();
       setUsers(users);
       if (donations && campaign && users) {
-        console.log(donations);
+        // console.log(donations);
         setIsLoading(false);
       }
     } catch (error) {
@@ -39,7 +39,7 @@ function FirstSection() {
   }
   useEffect(() => {
     fetchNumbersSections();
-    console.log("effect");
+    // console.log("effect");
   }, []);
 
   let count = 0;
@@ -48,7 +48,7 @@ function FirstSection() {
   let completedCampaign = 0;
   let counterCreator = 0;
   let counterDonors = 0;
-  console.log(donationApi);
+  // console.log(donationApi);
   // donationApi.data.map((data) => {
   //   if (data.Donor.User.userName === user.userName) {
   //     count++;

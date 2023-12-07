@@ -5,6 +5,7 @@ import Content from "../../Layouts/DonationsLayout/Content";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Stack from "react-bootstrap/Stack";
 import "./Donations.css";
+import { FilterProvider } from "../../useContext/filterContext";
 // import { DonationContext } from "../../useContext/context.ts";
 // import fakeDonations from "../../FakeData/fakeDonations.js";
 
@@ -13,13 +14,13 @@ function Donations() {
     <div className="container">
       <h1>Donations</h1>
 
-      {/* <DonationContext.Provider value={fakeDonations}> */}
+      <FilterProvider>
         <Stack gap={5} className="try">
           <Header className="p-2" />
-          <Content className="p-2"/>
+          <Content className="p-2" />
           {/* <Footer className="p-2" /> */}
         </Stack>
-      {/* </DonationContext.Provider> */}
+      </FilterProvider>
     </div>
   );
 }
