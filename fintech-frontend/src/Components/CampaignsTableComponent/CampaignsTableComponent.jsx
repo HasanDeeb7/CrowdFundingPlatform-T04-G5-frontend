@@ -98,7 +98,7 @@ function ComponentsTableComponent() {
           onSortColumn={handleSortColumn}
           loading={loading}
           className="campaignsTable"
-        >
+          >
           <Column width={250} align="left" color="red" fixed sortable>
             <HeaderCell color="red">Title</HeaderCell>
             <Cell dataKey="title" className="tableCell" />
