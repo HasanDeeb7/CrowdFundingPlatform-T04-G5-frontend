@@ -1,10 +1,11 @@
 import React from "react";
 import CampaignsTableComponent from "../../Components/CampaignsTableComponent/CampaignsTableComponent.jsx";
-function CampaignsTable() {
+import "./CampaignsTable.css";
+function CampaignsTable({ setIsLoading }) {
   return (
     <>
       <div className="campaignsTableComponentWrapper">
-        <CampaignsTableComponent />
+        <CampaignsTableComponent setIsLoading={setIsLoading} />
       </div>
     </>
   );

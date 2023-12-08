@@ -16,20 +16,22 @@ function Input({
     <div className="inputWrapper">
       {tag === "input" ? (
         <>
-          <input
-            className="loginInput"
-            type={type}
-            name={control}
-            id={control}
-            value={value[control]}
-            onChange={handleChange}
-            disabled={isDisabled}
-          />
-          <label
-            className={`loginInputLable ${value[control] && "inputActive"}`}
-          >
-            {label}
-          </label>
+          <form className="inputForm" autoComplete="off">
+            <input
+              className="loginInput"
+              type={type}
+              name={control}
+              id={control}
+              value={value[control]}
+              onChange={handleChange}
+              disabled={isDisabled}
+            />
+            <label
+              className={`loginInputLable ${value[control] && "inputActive"}`}
+            >
+              {label}
+            </label>
+          </form>
         </>
       ) : (
         <>
@@ -41,9 +43,7 @@ function Input({
             value={value[control]}
             onChange={handleChange}
             disabled={isDisabled}
-            style={{ resize: 'none', width: '300px', height: '100px'}}
-            
-            
+            style={{ resize: "none", width: "300px", height: "100px" }}
           />
           <label
             className={`textareaLabel ${value[control] && "textareActive"}`}

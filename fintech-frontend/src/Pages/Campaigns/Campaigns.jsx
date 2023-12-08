@@ -4,24 +4,14 @@ import "./Campaigns.css";
 import CreateCampaign from "../../Components/Dashboard/CreateCampaign.jsx";
 import Button from "../../Components/Button/Button.jsx";
 import UserContext from "../../useContext/userContext.js";
+import Loading from "../../Components/Loading/Loading.jsx";
 function Campaigns() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { user } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(true);
+  console.log(isLoading);
   return (
     <div className="CampaignsPageWrapper">
-      
-      {user.role === "creator" && (
-        <Button action="New Campaign" onClick={() => setIsModalOpen(true)} />
-      )}
-
-      {isModalOpen && (
-        <CreateCampaign
-          action="Create Campaign"
-          closeHandler={() => setIsModalOpen(false)}
-        />
-      )}
-
-      <CampaignsTable />
+      {isLoading && <Loading />}
+      <CampaignsTable setIsLoading={setIsLoading} />
     </div>
   );
 }

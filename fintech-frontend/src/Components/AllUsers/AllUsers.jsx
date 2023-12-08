@@ -71,31 +71,31 @@ const AllUsers = () => {
   return (
     <div>
       <h1 style={{ marginBottom: 10 }}>All Users</h1>
-      <Table height={500} data={data} rowHeight={() => 60}>
+      <Table height={500} data={data} rowHeight={() => 60} className="campaignsTable">
         <Column width={50} align="center" fixed>
           <HeaderCell>Id</HeaderCell>
           <Cell dataKey="id" />
         </Column>
 
-        <Column width={100} fixed>
+        <Column width={300} fixed>
           <HeaderCell>First Name</HeaderCell>
           <Cell dataKey="firstName" />
         </Column>
 
-        <Column width={100}>
+        <Column width={300}>
           <HeaderCell>Last Name</HeaderCell>
           <Cell dataKey="lastName" />
         </Column>
 
-        <Column width={200}>
+        <Column width={300}>
           <HeaderCell>Username</HeaderCell>
           <Cell dataKey="userName" />
         </Column>
-        <Column width={200}>
+        <Column width={300}>
           <HeaderCell>Role</HeaderCell>
           <Cell dataKey="role" />
         </Column>
-        <Column width={800}>
+        <Column width={300}>
           <HeaderCell>Role</HeaderCell>
           <Cell dataKey="role" editable>
             {(rowData, rowIndex) => {
