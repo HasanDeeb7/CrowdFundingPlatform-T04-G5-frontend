@@ -1,20 +1,25 @@
 import { Pagination, Progress, Table } from "rsuite";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getPercentage } from "../../utils/getPercentage";
 import "./CampaignsTableComponents.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { getCampaigns } from "../../axios/campaings";
 import Loading from "../Loading/Loading";
+import UserContext from "../../useContext/userContext";
+import Button from "../Button/Button";
+import CreateCampaign from "../Dashboard/CreateCampaign";
 const { Column, HeaderCell, Cell } = Table;
 
-function ComponentsTableComponent() {
+function ComponentsTableComponent({ setIsLoading }) {
+  const navigate = useNavigate();
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();
   const [loading, setLoading] = useState(true);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const [campaigns, setCampaigns] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { user } = useContext(UserContext);
   const handleChangeLimit = (dataKey) => {
     setPage(1);
     setLimit(dataKey);
@@ -84,12 +89,18 @@ function ComponentsTableComponent() {
 
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-
+      <>
         <h1>Campaigns</h1>
+        {user.role === "creator" && (
+          <Button action="New Campaign" onClick={() => setIsModalOpen(true)} />
+        )}
+
+        {isModalOpen && (
+          <CreateCampaign
+            action="Create Campaign"
+            closeHandler={() => setIsModalOpen(false)}
+          />
+        )}
         <Table
           height={420}
           data={data}
@@ -98,7 +109,7 @@ function ComponentsTableComponent() {
           onSortColumn={handleSortColumn}
           loading={loading}
           className="campaignsTable"
-          >
+        >
           <Column width={250} align="left" color="red" fixed sortable>
             <HeaderCell color="red">Title</HeaderCell>
             <Cell dataKey="title" className="tableCell" />
@@ -141,18 +152,17 @@ function ComponentsTableComponent() {
             </Cell>
           </Column>
 
-          <Column width={400} style={{ marginLeft: "100px" }} sortable>
+          <Column width={200} style={{ marginLeft: "100px" }} sortable>
             <HeaderCell>status</HeaderCell>
             <Cell dataKey="status" />
           </Column>
 
-          <Column flexGrow={1}>
+          <Column width={150}>
             <HeaderCell>...</HeaderCell>
             <ActionCell dataKey="id" />
           </Column>
         </Table>
-        </>
-      )}
+      </>
 
       <div style={{ padding: 20 }}>
         <Pagination
