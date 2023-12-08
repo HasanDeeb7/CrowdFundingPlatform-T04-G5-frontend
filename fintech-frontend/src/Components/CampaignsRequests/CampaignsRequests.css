@@ -9,3 +9,8 @@
   align-self: flex-end;
   min-width: 100%;
 }
+.requestsContainer {
+  display: flex;
+  gap: 7rem;
+  flex-direction: column;
+}

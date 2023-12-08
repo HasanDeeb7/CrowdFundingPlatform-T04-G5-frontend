@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { SelectPicker } from "rsuite";
 import fetchUsers, { changeRole } from "../../utils/userAxios";
 import { toast } from "react-toastify";
+import './AllUsers.css'
 
 const roleOptions = [
   { label: "Admin", value: "admin" },
@@ -69,9 +70,9 @@ const AllUsers = () => {
   });
 
   return (
-    <div>
+    <div className="allUsersContainer">
       <h1 style={{ marginBottom: 10 }}>All Users</h1>
-      <Table height={500} data={data} rowHeight={() => 60} className="campaignsTable">
+      <Table height={420} data={data} rowHeight={() => 60} className="campaignsTable">
         <Column width={50} align="center" fixed>
           <HeaderCell>Id</HeaderCell>
           <Cell dataKey="id" />

@@ -5,7 +5,6 @@ function CampaignsRequestsLayout() {
   return (
     <div>
       <>
-        <h1 style={{ marginBottom: 10 }}>All Requests</h1>
         <CampaignsRequests />
       </>
     </div>
