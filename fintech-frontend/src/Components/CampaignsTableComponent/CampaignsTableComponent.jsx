@@ -1,26 +1,39 @@
 import { Pagination, Progress, Table } from "rsuite";
-import { useState } from "react";
-import fakeCampaigns from "../../FakeData/fakeCampaigns";
+import { useEffect, useState } from "react";
 import { getPercentage } from "../../utils/getPercentage";
 import "./CampaignsTableComponents.css";
 import { NavLink } from "react-router-dom";
+import { getCampaigns } from "../../axios/campaings";
 const { Column, HeaderCell, Cell } = Table;
 
 function ComponentsTableComponent() {
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
-
+  const [campaigns, setCampaigns] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const handleChangeLimit = (dataKey) => {
     setPage(1);
     setLimit(dataKey);
   };
-
+  async function fetchCampaigns() {
+    const data = await getCampaigns();
+    if (data) {
+      setCampaigns(data.data.filter((item) => item.status === "active"));
+      setIsLoading(false);
+      setLoading(false);
+      console.log(data);
+      return;
+    }
+  }
+  useEffect(() => {
+    fetchCampaigns();
+  }, []);
   const getData = () => {
     if (sortColumn && sortType) {
-      return fakeCampaigns.sort((a, b) => {
+      return campaigns.sort((a, b) => {
         let x = a[sortColumn];
         let y = b[sortColumn];
         if (typeof x === "string") {
@@ -36,7 +49,7 @@ function ComponentsTableComponent() {
         }
       });
     }
-    return fakeCampaigns;
+    return campaigns;
   };
   const data = getData().filter((v, i) => {
     const start = limit * (page - 1);
@@ -62,7 +75,7 @@ function ComponentsTableComponent() {
           state={rowData}
           onClick={() => console.log(rowData)}
         >
-          View More
+          View Details
         </NavLink>
       </Cell>
     );
@@ -79,19 +92,18 @@ function ComponentsTableComponent() {
         loading={loading}
         className="campaignsTable"
       >
-        <Column align="center" color="red" fixed sortable>
-          <HeaderCell color="red">Id</HeaderCell>
-          <Cell
-            dataKey="id"
-            color="red"
-            onClick={(rowData) => console.log(rowData)}
-            className="tableCell"
-          />
+        <Column width={250} align="left" color="red" fixed sortable>
+          <HeaderCell color="red">Title</HeaderCell>
+          <Cell dataKey="title" className="tableCell" />
         </Column>
 
-        <Column width={200} fixed sortable>
-          <HeaderCell>title</HeaderCell>
-          <Cell dataKey="title" />
+        <Column width={200} sortable>
+          <HeaderCell>Category</HeaderCell>
+          <Cell dataKey="category">
+            {(rowData) => {
+              return rowData.Category?.name;
+            }}
+          </Cell>
         </Column>
 
         <Column width={200} sortable>
@@ -100,14 +112,14 @@ function ComponentsTableComponent() {
         </Column>
 
         <Column width={300} sortable>
-          <HeaderCell>Amount Contributed</HeaderCell>
+          <HeaderCell>Progress</HeaderCell>
           <Cell dataKey="amountContributed">
             {(rowData) => {
               const progressData = getPercentage(
                 rowData.amountContributed,
                 rowData.target
               );
-              const status = progressData === 100 ? "success" : "active";
+              const status = progressData >= 100 ? "success" : "active";
               return (
                 <div>
                   <Progress
@@ -144,7 +156,7 @@ function ComponentsTableComponent() {
           maxButtons={5}
           size="xs"
           layout={["total", "-", "limit", "|", "pager", "skip"]}
-          total={fakeCampaigns.length}
+          total={campaigns.length}
           limitOptions={[10, 30, 50]}
           limit={limit}
           activePage={page}

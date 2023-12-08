@@ -14,6 +14,8 @@ import UserContext from "../../useContext/userContext";
 import axios from "axios";
 import NavItem from "rsuite/esm/Nav/NavItem";
 
+
+
 function Sidebar() {
   const { user } = useContext(UserContext);
 
@@ -27,7 +29,6 @@ function Sidebar() {
       {children}
     </Link>
   ));
-
   async function logOut() {
     setUser(null);
     try {

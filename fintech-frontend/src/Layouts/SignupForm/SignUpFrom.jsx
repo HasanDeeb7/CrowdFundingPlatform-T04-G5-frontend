@@ -11,6 +11,7 @@ function SignUpFrom({ setLogin }) {
     lastName: "",
     userName: "",
     password: "",
+    role: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   async function signUp() {
@@ -20,6 +21,7 @@ function SignUpFrom({ setLogin }) {
     });
     try {
       setIsLoading(true);
+      console.log(newUser)
       const data = await CreateUser(newUser);
       if (data) {
         console.log(data);
@@ -37,7 +39,7 @@ function SignUpFrom({ setLogin }) {
           render: "Failed to Create User",
           type: toast.TYPE.ERROR,
           autoClose: 3000,
-          progressStyle: {background: 'red'}
+          progressStyle: { background: "red" },
         });
       }
     } catch (error) {
@@ -81,6 +83,32 @@ function SignUpFrom({ setLogin }) {
           label="Password"
         />
         
+      </div>
+      <div className="signUpRadioContainer">
+        <span className="signUpRadioWrapper">
+          <label htmlFor="roleRadio">Donor</label>
+          <input
+            type="radio"
+            name="roleRadio"
+            id="roleRadio"
+            value="creator"
+            checked={newUser.role === "creator"}
+            onChange={() => setNewUser({ ...newUser, role: "creator" })}
+          />
+          <span className="customRadio"></span>
+        </span>
+        <span className="signUpRadioWrapper">
+          <label htmlFor="creatorRadio">Creator</label>
+          <input
+            type="radio"
+            name="roleRadio"
+            id="creatorRadio"
+            value="donor"
+            checked={newUser.role === "donor"}
+            onChange={() => setNewUser({ ...newUser, role: "donor" })}
+          />
+          <span className="customRadio"></span>
+        </span>
       </div>
       <div className="signUpBtn">
         <Button

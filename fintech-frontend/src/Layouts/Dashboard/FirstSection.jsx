@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+
 import Card from "../../Components/Dashboard/Card";
 import fakeDonations from "../../FakeData/fakeDonations";
 import fakeCampaigns from "../../FakeData/fakeCampaigns";
@@ -11,6 +11,7 @@ import Button from "../../Components/Button/Button";
 import fetchDonations from "../../utils/donations";
 import fetchCampaigns from "../../utils/campaignAxios";
 import fetchUsers from "../../utils/userAxios";
+import Loading from "../../Components/Loading/Loading";
 
 function FirstSection() {
   const { user } = useContext(UserContext);
@@ -21,7 +22,7 @@ function FirstSection() {
 
   async function fetchNumbersSections() {
     setIsLoading(true);
-    console.log("function");
+    // console.log("function");
     try {
       let donations = await fetchDonations();
       setDonationApi(donations);
@@ -116,7 +117,7 @@ function FirstSection() {
           null}
         </div>
       ) : (
-        "Loading..."
+        <Loading />
       )}
     </div>
   );
