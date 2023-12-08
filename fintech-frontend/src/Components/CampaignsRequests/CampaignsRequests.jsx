@@ -3,8 +3,13 @@ import Button from "../../Components/Button/Button";
 import "./CampaignsRequests.css";
 import { Pagination, Table } from "rsuite";
 import { NavLink } from "react-router-dom";
-import { getCampaigns } from "../../axios/campaings";
+import {
+  approveCampaign,
+  deleteCampaign,
+  getCampaigns,
+} from "../../axios/campaings";
 import Loading from "../Loading/Loading";
+import { toast } from "react-toastify";
 
 function CampaignsRequests() {
   const { Column, HeaderCell, Cell } = Table;
@@ -28,10 +33,32 @@ function CampaignsRequests() {
       console.log(error);
     }
   }
+  async function handleDelete(data) {
+    try {
+      const response = await deleteCampaign(data.id);
+      if (response) {
+        toast.success("Campaign Deleted");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function handleApprove(campaignId) {
+    try {
+      const response = await approveCampaign(campaignId);
+      if (response) {
+        console.log(response);
+        return toast.success("Campaign is now active");
+      }
+    } catch (error) {
+      toast.error("Error Approving campaign");
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     fetchCampaigns();
-  });
+  }, []);
 
   const handleChangeLimit = (dataKey) => {
     setPage(1);
@@ -42,8 +69,12 @@ function CampaignsRequests() {
     return (
       <Cell {...props} style={{ padding: "6px" }}>
         <div>
-          <Button action="Approve" />
-          <Button action="Deny" btnType="secondary" />
+          <Button action="Approve" onClick={() => handleApprove(rowData.id)} />
+          <Button
+            action="Deny"
+            btnType="danger"
+            onClick={() => handleDelete(rowData)}
+          />
         </div>
       </Cell>
     );
