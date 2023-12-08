@@ -95,9 +95,10 @@ function CampaignsRequests() {
   };
 
   return (
-    <div>
+    <div className="requestsContainer">
       {!loading ? (
         <>
+        <h1 style={{ marginBottom: 10 }}>All Requests</h1>
           <Table
             height={420}
             data={campaigns.filter((item) => item.status === "pending")}
