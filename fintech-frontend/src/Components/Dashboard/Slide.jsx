@@ -28,26 +28,36 @@ function Slide() {
   const { user } = useContext(UserContext);
   let pending = [];
   // request pending for admin
-  campaignApi.map((data) => {
-    {
-      return data.status === "pending" ? pending.push(data) : null;
-    }
-  });
+  if (campaignApi) {
+    campaignApi.map((data) => {
+      {
+        return data.status === "pending" ? pending.push(data) : null;
+      }
+    });
+  }
   return (
     !isLoading && (
       <div className="container1">
-        <h3>compaigns interacted with</h3>
+        {user.role === "donor" ? (
+          <h3>Campaigns Interacted With</h3>
+        ) : user.role === "admin" ? (
+          <h3>Some Campaigns Requests</h3>
+        ) : null}
+
         <div className="child">
           {user.role == "donor"
-            ? // <SubSlide data={campaign} />
-              donationApi.data.map((data) => {
-                if (data.Donor.User.userName === user.userName) {
+            ? donationApi.data.map((data) => {
+                if (data.Donor?.User.userName === user.userName) {
                   return <SubSlide data={data.Campaign} />;
                 }
               })
-            : // : user.role === "creator"
-            // ? fakeDonors.slice(0, 10).map((data) => <SubSlide data={data} />)
-            user.role === "admin"
+            : user.role === "creator"
+            ? campaignApi.map((data) =>
+                data.Creator.User.userName === user.userName ? (
+                  <SubSlide data={data} />
+                ) : null
+              )
+            : user.role === "admin"
             ? pending.slice(0, 5).map((data) => <SubSlide data={data} />)
             : null}
           {user.role === "admin" ? (

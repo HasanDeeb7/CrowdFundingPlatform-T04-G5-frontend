@@ -30,7 +30,6 @@ function FirstSection() {
       let users = await fetchUsers();
       setUsers(users);
       if (donations && campaign && users) {
-        console.log(donations);
         setIsLoading(false);
       }
     } catch (error) {
@@ -39,7 +38,6 @@ function FirstSection() {
   }
   useEffect(() => {
     fetchNumbersSections();
-    console.log("effect");
   }, []);
 
   let count = 0;
@@ -48,36 +46,39 @@ function FirstSection() {
   let completedCampaign = 0;
   let counterCreator = 0;
   let counterDonors = 0;
+
   console.log(donationApi);
-  // donationApi.data.map((data) => {
-  //   if (data.Donor.User.userName === user.userName) {
-  //     count++;
-  //   }
-  // });
+  if (donationApi && campaignApi && users && !isLoading) {
+    donationApi.data.map((data) => {
+      if (data.Donor?.User.userName === user.userName) {
+        count++;
+      }
+    });
 
-  // donationApi.data.map((data) => {
-  //   if (data.Donor.User.userName === user.userName) {
-  //     totalDonation += data.transferredAmount;
-  //   }
-  // });
+    donationApi.data.map((data) => {
+      if (data.Donor?.User.userName === user.userName) {
+        totalDonation += data.transferredAmount;
+      }
+    });
 
-  // campaignApi.map((data) => {
-  //   if (data.status == "active") {
-  //     activeCampaign++;
-  //   }
-  // });
-  // campaignApi.map((data) => {
-  //   if (data.status == "completed") {
-  //     completedCampaign++;
-  //   }
-  // });
-  // users.map((data) => {
-  //   if (data.role === "creator") {
-  //     counterCreator++;
-  //   } else if (data.role === "donor") {
-  //     counterDonors++;
-  //   }
-  // });
+    campaignApi.map((data) => {
+      if (data.status == "active") {
+        activeCampaign++;
+      }
+    });
+    campaignApi.map((data) => {
+      if (data.status == "completed") {
+        completedCampaign++;
+      }
+    });
+    users.map((data) => {
+      if (data.role === "creator") {
+        counterCreator++;
+      } else if (data.role === "donor") {
+        counterDonors++;
+      }
+    });
+  }
 
   return (
     <div>

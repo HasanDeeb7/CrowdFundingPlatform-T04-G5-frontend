@@ -6,11 +6,13 @@ import UserContext from "../../useContext/userContext";
 
 export default function SubSlide({ data }) {
   const { user } = useContext(UserContext);
-  console.log("Subslide");
   return (
     <div className="sub">
       <div className="first">
-        <img src={logo} alt="campaigns" />
+        <img
+          src={`${process.env.REACT_APP_BACKEND_ENDPOINT}public/images/${data.image}`}
+          alt="campaigns"
+        />
       </div>
       <div className="second">
         {user.role === "admin" || user.role === "donor" ? (
