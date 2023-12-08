@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Progress from "rsuite/Progress";
 import { getPercentage } from "../../utils/getPercentage";
 import "./CampaignsStats.css";
@@ -7,12 +7,19 @@ import Button from "../Button/Button";
 import { FaHandHoldingHeart } from "react-icons/fa6";
 import DonationModal from "../DonationModal/DonationModal";
 import RecentDonations from "./RecentDonations";
+import UserContext from "../../useContext/userContext.js";
+import { deleteCampaign } from "../../axios/campaings.js";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 function CampaignStats({ data }) {
+  const { user } = useContext(UserContext);
   const progressData = getPercentage(data.amountContributed, data.target);
   const status = progressData === 100 ? "success" : "active";
   const recentItem = useMotionValue(0);
   const recentDonationsList = data.Donations?.slice(-3);
-
+  const firstDonation = data.Donations[0];
+  const navigate = useNavigate();
   console.log(recentDonationsList);
   const rounded = useTransform(recentItem, (latest) =>
     Math.round(latest).toLocaleString("en-US")
@@ -21,7 +28,7 @@ function CampaignStats({ data }) {
   const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
 
   useEffect(() => {
-    console.log(data);
+    console.log(data.title);
     const controls = animate(
       recentItem,
       data.Donation?.transferredAmount || 2000
@@ -29,7 +36,17 @@ function CampaignStats({ data }) {
 
     return controls.stop;
   }, []);
-
+  async function handleDelete() {
+    try {
+      const response = await deleteCampaign(data.id);
+      if (response) {
+        toast.success("Campaign Deleted");
+        return navigate("/campaigns", { replace: true });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <motion.div
       initial={{ x: 70 }}
@@ -38,7 +55,11 @@ function CampaignStats({ data }) {
       className="campaignStats"
     >
       {isDonationModalOpen ? (
-        <DonationModal closeHandler={() => setIsDonationModalOpen(false)} />
+        <DonationModal
+          closeHandler={() => setIsDonationModalOpen(false)}
+          campaignId={data.id}
+          campaignName={data.title}
+        />
       ) : (
         ""
       )}
@@ -69,18 +90,32 @@ function CampaignStats({ data }) {
             })}
           </ul>
         </div>
-        
+
         <div className="topDonorContainer">
-          <span className="firstDonation">First Donation</span>
-          <span className="topDonorsItem firstDonor">
-            <FaHandHoldingHeart />
-            <span className="donorItemName">Bill Gates</span>{" "}
-            <span className="donorItemAmount">$2,500</span>
-          </span>
-          <Button
-            action="Donate"
-            onClick={() => setIsDonationModalOpen(true)}
-          />
+          {firstDonation && (
+            <>
+              <span className="firstDonation">First Donation</span>
+              <span className="topDonorsItem firstDonor">
+                <FaHandHoldingHeart />
+                <span className="donorItemName">
+                  {firstDonation?.Donor?.User.firstName}
+                </span>{" "}
+                <span className="donorItemAmount">
+                  ${firstDonation?.transferredAmount?.toLocaleString()}
+                </span>
+              </span>
+            </>
+          )}
+          {user.role === "donor" ? (
+            <Button
+              action="Donate"
+              onClick={() => setIsDonationModalOpen(true)}
+            />
+          ) : user.role === "admin" ? (
+            <Button action="Delete" onClick={handleDelete} btnType="danger" />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </motion.div>

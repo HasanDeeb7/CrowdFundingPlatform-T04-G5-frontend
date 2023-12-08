@@ -62,3 +62,12 @@
   border: 1px solid var(--light-gold-clr);
   color: var(--light-gold-clr);
 }
+.option{
+  background: var(--secondary-bg-clr);
+}
+.select{
+  background: var(--secondary-bg-clr);
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-align: center;
+}

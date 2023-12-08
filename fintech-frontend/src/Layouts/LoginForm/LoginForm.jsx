@@ -21,6 +21,9 @@ function LoginForm() {
   }, []);
 
   async function signIn() {
+    if (credentials.username === "" || credentials.password === "") {
+      return toast.error("All fields are required");
+    }
     setIsDisabled(true);
     const toastId = toast("Loging In", {
       autoClose: false,
@@ -30,6 +33,7 @@ function LoginForm() {
       const data = await axios.get("http://localhost:4000/login", {
         params: credentials,
       });
+      console.log(data);
       if (data) {
         console.log(data);
         setUser(data.data);
@@ -46,6 +50,8 @@ function LoginForm() {
     } catch (error) {
       console.log(error);
       setIsDisabled(false);
+      toast.dismiss(toastId);
+      toast.error(error.response.data.message);
     }
   }
 
