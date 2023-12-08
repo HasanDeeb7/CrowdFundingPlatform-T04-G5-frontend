@@ -134,8 +134,8 @@ function Content({ activeFilter , searchText}) {
   const data = filteredData.slice(start, end);
 
   return (
-    <div style={{width:"100%" , overflowX:"scroll"}}>
-      <div style={{width:"100%" , overflowX:"scroll"}}>
+    <div >
+      <div >
       <Table height={420} className="tableContainer" data={data}>
         <Column width={134} align="center" fixed>
           <HeaderCell>Id</HeaderCell>

@@ -19,8 +19,8 @@ function Donations() {
       <h1>Donations</h1>
 
       <Stack gap={5} className="try">
-        <Header className="p-2" />
-        <Content className="p-2" />
+        <Header className="p-2" activeFilter={activeFilter} setActiveFilter={setActiveFilter} searchText={searchText} setSearchText={setSearchText}/>
+        <Content className="p-2" activeFilter={activeFilter} searchText={searchText.searchText}/>
         {/* <Footer className="p-2" /> */}
       </Stack>
     </div>

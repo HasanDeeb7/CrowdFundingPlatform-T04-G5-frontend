@@ -1,9 +1,9 @@
 /* Default styling for the table container */
-.tableContainer {
+/* .tableContainer {
     width: 100%;
     overflow-x: scroll;
     overflow-y: scroll;
-  }
+  } */
   
   /* Media query for smaller screens */
   @media (max-width: 768px) {
