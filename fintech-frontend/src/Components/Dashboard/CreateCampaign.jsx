@@ -3,13 +3,16 @@ import "./CreateCampaign.css";
 import { AnimatePresence, motion } from "framer-motion";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
+import { createCampaign } from "../../utils/campaigns";
+import { toast } from "react-toastify";
 function CreateCampaign({ closeHandler }) {
   const [newCampaign, setNewCampaign] = useState({
     title: "",
     target: "",
     description: "",
-    amountContributed: null,
     status: "pending",
+    image: null,
+    categoryName: "Health",
   });
 
   const [isDisabled, setIsDisabled] = useState(false);
@@ -21,9 +24,31 @@ function CreateCampaign({ closeHandler }) {
     }
   }
 
-  function handleCreateCampaign() {
-    console.log("Create Campaign");
+  async function handleCreateCampaign() {
+    console.log(newCampaign);
+    if (
+      Object.values(newCampaign).some((item) => item === null || item === "")
+    ) {
+      return toast.error("All fields are required");
+    } else if (newCampaign.description.length < 30) {
+      return toast.error(
+        "Description field must be at least 30 characters long"
+      );
+    }
+    try {
+      const data = await createCampaign(newCampaign);
+      if (data) {
+        toast.success(
+          "Your campaign is added to the pending list, waiting admins approvement"
+        );
+        closeHandler();
+        return console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
+
   const modalVariants = {
     closed: { opacity: 0, scale: 0, width: 0, height: 0 },
     opened: {
@@ -33,7 +58,7 @@ function CreateCampaign({ closeHandler }) {
       height: "700px",
       transform: "translate(-50%, -50%)",
     },
-    exit: {opacity: 0}
+    exit: { opacity: 0 },
   };
   const formVariants = {
     closed: { x: -400 },
@@ -51,7 +76,7 @@ function CreateCampaign({ closeHandler }) {
             duration: 0.3,
             ease: [0, 0.71, 0.2, 1.01],
           }}
-          exit='exit'
+          exit="exit"
           className="createModalItemsWrapper"
         >
           <h3>New Campaign</h3>
@@ -88,7 +113,29 @@ function CreateCampaign({ closeHandler }) {
               setValue={setNewCampaign}
               label="Description"
               isDisabled={isDisabled}
+              tag="textarea"
             />
+            <select
+              className="select"
+              name="category"
+              id="category"
+              onChange={(e) =>
+                setNewCampaign({ ...newCampaign, categoryName: e.target.value })
+              }
+            >
+              <option className="option" value="Health">
+                Health & Medical
+              </option>
+              <option className="option" value="Technology">
+                Technology
+              </option>
+              <option className="option" value="Education">
+                Education
+              </option>
+              <option className="option" value="Arts">
+                Arts
+              </option>
+            </select>
             <label
               className="uploadBtn"
               htmlFor="fileInput"
@@ -96,7 +143,14 @@ function CreateCampaign({ closeHandler }) {
             >
               Upload Image
             </label>
-            <input type="file" className="hidden" ref={fileInputRef} />
+            <input
+              type="file"
+              className="hidden"
+              ref={fileInputRef}
+              onChange={(e) =>
+                setNewCampaign({ ...newCampaign, image: e.target.files[0] })
+              }
+            />
             <Button action="Create" onClick={handleCreateCampaign} />
           </motion.div>
         </motion.div>

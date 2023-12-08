@@ -12,3 +12,16 @@ export async function getCampaigns() {
     console.log(error);
   }
 }
+export async function deleteCampaign(id) {
+  console.log(process.env.REACT_APP_BACKEND_ENDPOINT);
+  try {
+    const response = await axios.delete(
+      `${process.env.REACT_APP_BACKEND_ENDPOINT}campaigns/delete/${id}`,
+    );
+    if (response) {
+      return response;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}

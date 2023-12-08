@@ -15,6 +15,25 @@
   border: 1px solid var(--primary-gold-clr);
   color: var(--primary-gold-clr);
 }
+
+.danger {
+  background-color: darkred;
+  width: 150px;
+  padding: 7px;
+  border-radius: var(--card-border-radius);
+  transition: all 0.2s ease;
+  align-self: center;
+  border: 1px solid transparent;
+  outline: none;
+  border: 1px solid red;
+}
+
+.danger:hover {
+  background-color: transparent;
+  border: 1px solid red;
+  color: red;
+}
+
 .donateBtnSecondary {
   width: 150px;
   padding: 7px;
