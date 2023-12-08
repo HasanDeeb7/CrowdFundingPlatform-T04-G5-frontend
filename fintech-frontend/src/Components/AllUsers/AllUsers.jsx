@@ -34,6 +34,7 @@ const AllUsers = () => {
 
   return (
     <div>
+      <h1 style={{ marginBottom: 10 }}>All Users</h1>
       <Table height={500} data={data} rowHeight={() => 60}>
         <Column width={50} align="center" fixed>
           <HeaderCell>Id</HeaderCell>
