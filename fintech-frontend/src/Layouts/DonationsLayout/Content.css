@@ -1,7 +1,8 @@
 /* Default styling for the table container */
 .tableContainer {
     width: 100%;
-    overflow:scroll;
+    overflow-x: scroll;
+    overflow-y: scroll;
   }
   
   /* Media query for smaller screens */
