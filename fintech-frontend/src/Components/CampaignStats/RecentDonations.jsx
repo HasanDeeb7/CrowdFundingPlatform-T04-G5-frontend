@@ -3,7 +3,7 @@ import { FaHandHoldingHeart } from "react-icons/fa6";
 
 function RecentDonations(props) {
   const { transferredAmount, name } = props;
-  const amount = transferredAmount.toLocaleString("en-US");
+  const amount = transferredAmount?.toLocaleString("en-US");
   return (
     <li>
       <span className="topDonorsItem">

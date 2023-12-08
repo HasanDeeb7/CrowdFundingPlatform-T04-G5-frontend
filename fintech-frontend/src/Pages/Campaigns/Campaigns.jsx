@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CampaignsTable from "../../Layouts/CampaignsTable/CampaignsTable.jsx";
 import "./Campaigns.css";
 import CreateCampaign from "../../Components/Dashboard/CreateCampaign.jsx";
 import Button from "../../Components/Button/Button.jsx";
+import UserContext from "../../useContext/userContext.js";
 function Campaigns() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { user } = useContext(UserContext);
   return (
     <div className="CampaignsPageWrapper">
-      <h1>Campaigns</h1>
-      <Button action='New Campaign' onClick={()=> setIsModalOpen(true)} />
+      
+      {user.role === "creator" && (
+        <Button action="New Campaign" onClick={() => setIsModalOpen(true)} />
+      )}
 
       {isModalOpen && (
         <CreateCampaign

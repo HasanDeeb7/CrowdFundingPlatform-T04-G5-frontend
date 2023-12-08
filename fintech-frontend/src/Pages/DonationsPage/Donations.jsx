@@ -14,13 +14,11 @@ function Donations() {
     <div className="container">
       <h1>Donations</h1>
 
-      <FilterProvider>
-        <Stack gap={5} className="try">
-          <Header className="p-2" />
-          <Content className="p-2" />
-          {/* <Footer className="p-2" /> */}
-        </Stack>
-      </FilterProvider>
+      <Stack gap={5} className="try">
+        <Header className="p-2" />
+        <Content className="p-2" />
+        {/* <Footer className="p-2" /> */}
+      </Stack>
     </div>
   );
 }

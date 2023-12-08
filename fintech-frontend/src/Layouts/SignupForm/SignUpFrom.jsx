@@ -19,9 +19,15 @@ function SignUpFrom({ setLogin }) {
       autoClose: false,
       closeButton: false,
     });
+
     try {
       setIsLoading(true);
-      console.log(newUser)
+      console.log(newUser);
+      if (Object.values(newUser).some((item) => item === "")) {
+        toast.dismiss(toastId);
+        setIsLoading(false)
+        return toast.error("All fields are required");
+      }
       const data = await CreateUser(newUser);
       if (data) {
         console.log(data);
@@ -82,7 +88,6 @@ function SignUpFrom({ setLogin }) {
           control="password"
           label="Password"
         />
-        
       </div>
       <div className="signUpRadioContainer">
         <span className="signUpRadioWrapper">

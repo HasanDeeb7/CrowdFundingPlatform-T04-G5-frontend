@@ -4,6 +4,7 @@ import { getPercentage } from "../../utils/getPercentage";
 import "./CampaignsTableComponents.css";
 import { NavLink } from "react-router-dom";
 import { getCampaigns } from "../../axios/campaings";
+import Loading from "../Loading/Loading";
 const { Column, HeaderCell, Cell } = Table;
 
 function ComponentsTableComponent() {
@@ -83,67 +84,75 @@ function ComponentsTableComponent() {
 
   return (
     <>
-      <Table
-        height={420}
-        data={data}
-        sortColumn={sortColumn}
-        sortType={sortType}
-        onSortColumn={handleSortColumn}
-        loading={loading}
-        className="campaignsTable"
-      >
-        <Column width={250} align="left" color="red" fixed sortable>
-          <HeaderCell color="red">Title</HeaderCell>
-          <Cell dataKey="title" className="tableCell" />
-        </Column>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
 
-        <Column width={200} sortable>
-          <HeaderCell>Category</HeaderCell>
-          <Cell dataKey="category">
-            {(rowData) => {
-              return rowData.Category?.name;
-            }}
-          </Cell>
-        </Column>
+        <h1>Campaigns</h1>
+        <Table
+          height={420}
+          data={data}
+          sortColumn={sortColumn}
+          sortType={sortType}
+          onSortColumn={handleSortColumn}
+          loading={loading}
+          className="campaignsTable"
+        >
+          <Column width={250} align="left" color="red" fixed sortable>
+            <HeaderCell color="red">Title</HeaderCell>
+            <Cell dataKey="title" className="tableCell" />
+          </Column>
 
-        <Column width={200} sortable>
-          <HeaderCell>target</HeaderCell>
-          <Cell dataKey="target" />
-        </Column>
+          <Column width={200} sortable>
+            <HeaderCell>Category</HeaderCell>
+            <Cell dataKey="category">
+              {(rowData) => {
+                return rowData.Category?.name;
+              }}
+            </Cell>
+          </Column>
 
-        <Column width={300} sortable>
-          <HeaderCell>Progress</HeaderCell>
-          <Cell dataKey="amountContributed">
-            {(rowData) => {
-              const progressData = getPercentage(
-                rowData.amountContributed,
-                rowData.target
-              );
-              const status = progressData >= 100 ? "success" : "active";
-              return (
-                <div>
-                  <Progress
-                    percent={progressData}
-                    showInfo={true}
-                    strokeColor="var(--light-gold-clr)"
-                    status={status}
-                  />
-                </div>
-              );
-            }}
-          </Cell>
-        </Column>
+          <Column width={200} sortable>
+            <HeaderCell>target</HeaderCell>
+            <Cell dataKey="target" />
+          </Column>
 
-        <Column width={400} style={{ marginLeft: "100px" }} sortable>
-          <HeaderCell>status</HeaderCell>
-          <Cell dataKey="status" />
-        </Column>
+          <Column width={300} sortable>
+            <HeaderCell>Progress</HeaderCell>
+            <Cell dataKey="amountContributed">
+              {(rowData) => {
+                const progressData = getPercentage(
+                  rowData.amountContributed,
+                  rowData.target
+                );
+                const status = progressData >= 100 ? "success" : "active";
+                return (
+                  <div>
+                    <Progress
+                      percent={progressData}
+                      showInfo={true}
+                      strokeColor="var(--light-gold-clr)"
+                      status={status}
+                    />
+                  </div>
+                );
+              }}
+            </Cell>
+          </Column>
 
-        <Column flexGrow={1}>
-          <HeaderCell>...</HeaderCell>
-          <ActionCell dataKey="id" />
-        </Column>
-      </Table>
+          <Column width={400} style={{ marginLeft: "100px" }} sortable>
+            <HeaderCell>status</HeaderCell>
+            <Cell dataKey="status" />
+          </Column>
+
+          <Column flexGrow={1}>
+            <HeaderCell>...</HeaderCell>
+            <ActionCell dataKey="id" />
+          </Column>
+        </Table>
+        </>
+      )}
 
       <div style={{ padding: 20 }}>
         <Pagination

@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Input, InputGroup } from "rsuite";
 import "./DonationForm.css";
 import Button from "../Button/Button";
 import { AnimatePresence, motion } from "framer-motion";
+import UserContext from "../../useContext/userContext";
 
-function DonationForm({ donationAmount, setDonationAmount, setCurrentStep }) {
+function DonationForm({
+  donationAmount,
+  setDonationAmount,
+  setCurrentStep,
+  campaignName,
+}) {
+  const { user } = useContext(UserContext);
+
   const formVariant = {
     closed: { opacity: 0, scale: 0, transform: "translateX(-300px)" },
     opened: {
@@ -13,8 +21,8 @@ function DonationForm({ donationAmount, setDonationAmount, setCurrentStep }) {
       transform: "translateX(0)",
     },
   };
-  const campaignName = "BLAAA";
-  const mockBalance = 800;
+
+  const balance = user.Donor.balance;
   const inputStyles = { width: 200, margin: 0 };
   return (
     <AnimatePresence>
@@ -38,7 +46,6 @@ function DonationForm({ donationAmount, setDonationAmount, setCurrentStep }) {
             <Input
               type="number"
               value={donationAmount}
-              defaultValue={0}
               onChange={(value) => setDonationAmount(value)}
             />
             <InputGroup.Addon>.00</InputGroup.Addon>
@@ -46,7 +53,7 @@ function DonationForm({ donationAmount, setDonationAmount, setCurrentStep }) {
         </div>
         <div className="donationInputWrapper">
           <label htmlFor="">Current Balance</label>
-          <span>{mockBalance}$</span>
+          <span>{balance}$</span>
         </div>
         <div className="donationInputWrapper">
           <label htmlFor="">Your Donation</label>
@@ -54,7 +61,7 @@ function DonationForm({ donationAmount, setDonationAmount, setCurrentStep }) {
         </div>
         <div className="donationTotalBalance">
           <label htmlFor="">Your total balance</label>
-          <span>{mockBalance - donationAmount}$</span>
+          <span>{balance - donationAmount}$</span>
         </div>
         <Button action="Proceed" onClick={() => setCurrentStep(1)} />
       </motion.div>
