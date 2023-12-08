@@ -1,10 +1,8 @@
 import { Table, Pagination } from "rsuite";
-import fakeUsers from "../../FakeData/fakeUsers";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SelectPicker } from "rsuite";
-
-const { Column, HeaderCell, Cell } = Table;
-const defaultData = fakeUsers.filter((data) => data.role !== "admin");
+import fetchUsers, { changeRole } from "../../utils/userAxios";
+import { toast } from "react-toastify";
 
 const roleOptions = [
   { label: "Admin", value: "admin" },
@@ -12,14 +10,52 @@ const roleOptions = [
   { label: "Donor", value: "donor" },
 ];
 
-const handleRoleChange = (value, rowData) => {
-  // this should handle the changes from the backend
-  console.log("Role changed:", value, rowData);
-};
-
 const AllUsers = () => {
   const [limit, setLimit] = React.useState(10);
   const [page, setPage] = React.useState(1);
+  let [userApi, setUserApi] = useState([]);
+  const [updatedUser, setUpdatedUser] = useState({ id: null, role: "" });
+  async function fetchAllUsers() {
+    let donations = await fetchUsers();
+    setUserApi(donations);
+  }
+
+  const handleRoleChange = async (value, rowData) => {
+    // this should handle the changes from the backend
+    const toastId = toast("Changing role...", {
+      autoClose: false,
+      closeOnClick: false,
+    });
+
+    try {
+      const response = await changeRole({ id: rowData.id, role: value });
+      if (response) {
+        console.log(response.data);
+        toast.dismiss(toastId);
+        toast.success(`Role Changed to ${value}`);
+      } else {
+        toast.update(toastId, {
+          render: "Something Wrong!",
+          type: "error",
+          autoClose: 2000,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toast.update(toastId, {
+        render: "Something Wrong!",
+        type: "error",
+        autoClose: 2000,
+      });
+    }
+
+    console.log("Role changed:", value, rowData);
+  };
+  useEffect(() => {
+    fetchAllUsers();
+  }, [handleRoleChange]);
+  const { Column, HeaderCell, Cell } = Table;
+  const defaultData = userApi.filter((data) => data.role !== "admin");
 
   const handleChangeLimit = (dataKey) => {
     setPage(1);
@@ -55,13 +91,17 @@ const AllUsers = () => {
           <HeaderCell>Username</HeaderCell>
           <Cell dataKey="userName" />
         </Column>
-        <Column width={200} flexGrow={1}>
+        <Column width={200}>
+          <HeaderCell>Role</HeaderCell>
+          <Cell dataKey="role" />
+        </Column>
+        <Column width={800}>
           <HeaderCell>Role</HeaderCell>
           <Cell dataKey="role" editable>
             {(rowData, rowIndex) => {
               return (
                 <SelectPicker
-                  defaultValue={rowData.role}
+                  value=""
                   onChange={(value) => handleRoleChange(value, rowData)}
                   data={roleOptions}
                   style={{
