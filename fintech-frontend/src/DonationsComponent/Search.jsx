@@ -1,20 +1,29 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './Search.css'
+import Input from '../Components/Input/Input'
 // import SearchIcon from '@rsuite/icons/legacy/Search'
-import { Input } from 'rsuite';
 
-function Search() {
+function Search({searchText , setSearchText}) {
+
+  // const [searchText,setSearchText]=useState({searchText:''})
+
+  // const handleSearch=(e)=>{
+  //   e.preventDefault()
+  //   console.log(searchText)
+  // }
+
   return (
     <div>
       <form>
         <Input
         placeholder="Search..." className="custom-input"
-        // value={searchText}
-        // onChange={(value) => setSearchText(value)}
-        // onPressEnter={() => handleSearch(searchText)}
+        value={searchText}
+        setValue={setSearchText}
+        label='Search...'
+        control='searchText'
       />
 
-      {/* <button onClick={() => handleSearch(searchText)}>Search</button> */}
+      {/* <button onClick={handleSearch}>Search</button> */}
       </form>
     </div>
   )

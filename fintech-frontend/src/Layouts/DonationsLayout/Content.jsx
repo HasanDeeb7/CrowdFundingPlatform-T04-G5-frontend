@@ -8,7 +8,87 @@ import fetchDonations from "../../utils/donations";
 
 const { Column, HeaderCell, Cell } = Table;
 
-function Content() {
+function Content({ activeFilter , searchText}) {
+  console.log(activeFilter);
+
+
+  const filterDataByTimeAndSearch = (data) => {
+    const currentDate = new Date();
+
+    // Filter data based on the activeFilter
+    let filteredData = data;
+    switch (activeFilter) {
+      case 'Today':
+        filteredData = filteredData.filter(item => isToday(new Date(item.createdAt), currentDate));
+        break;
+      case 'This Week':
+        filteredData = filteredData.filter(item => isWeek(new Date(item.createdAt), currentDate));
+        break;
+      case 'This Month':
+        filteredData = filteredData.filter(item => isSameMonth(new Date(item.createdAt), currentDate));
+        break;
+      default:
+        break;
+    }
+
+    // Perform search based on campaign title
+    if (searchText) {
+      // console.log(searchText)
+      const lowerSearchText = searchText.toLowerCase().trim();
+      filteredData = filteredData.filter(item =>
+        item.Campaign.title.toLowerCase().includes(lowerSearchText)
+      );
+    }
+
+    return filteredData;
+  };
+  
+
+  
+
+  // Function to check if two dates are on the same day
+  const isToday = (date1, date2) => {
+    return (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
+    );
+  };
+
+  const isWeek = (date1, date2) => {
+    const firstDate = new Date(date1);
+    const secondDate = new Date(date2);
+
+    // Get ISO week numbers for the dates
+    const firstWeekNumber = getISOWeek(firstDate);
+    const secondWeekNumber = getISOWeek(secondDate);
+
+    // Check if the dates are in the same ISO week
+    return firstWeekNumber === secondWeekNumber;
+  };
+
+  // Function to get ISO week number for a given date
+  const getISOWeek = (date) => {
+    const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+    const daysInFirstWeek = 7 - firstDayOfYear.getDay();
+    const daysSinceFirstDay = Math.floor(
+      (date - firstDayOfYear) / (24 * 60 * 60 * 1000)
+    );
+
+    return Math.ceil((daysSinceFirstDay - daysInFirstWeek + 1) / 7);
+  };
+
+  const isSameMonth = (date1, date2) => {
+    const firstDate = new Date(date1);
+    const secondDate = new Date(date2);
+  
+    return (
+      firstDate.getFullYear() === secondDate.getFullYear() &&
+      firstDate.getMonth() === secondDate.getMonth()
+    );
+  };
+  
+
   const { user, setUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -27,15 +107,18 @@ function Content() {
       console.error("Error fetching donations:", error);
     } finally {
       setIsLoading(false);
-    } 
+    }
   }
   useEffect(() => {
     fetchDashboard();
   }, []);
 
   useEffect(() => {
-  console.log(donations)
+    console.log(donations);
   }, [donations]);
+
+  // Filter the data based on the activeFilter
+  const filteredData = filterDataByTimeAndSearch(donations, activeFilter);
 
   const [limit, setLimit] = React.useState(5);
   const [page, setPage] = React.useState(1);
@@ -48,10 +131,11 @@ function Content() {
   const start = limit * (page - 1);
   const end = start + limit;
 
-  const data = donations.slice(start, end);
+  const data = filteredData.slice(start, end);
 
   return (
-    <div>
+    <div style={{width:"100%" , overflowX:"scroll"}}>
+      <div style={{width:"100%" , overflowX:"scroll"}}>
       <Table height={420} className="tableContainer" data={data}>
         <Column width={134} align="center" fixed>
           <HeaderCell>Id</HeaderCell>
@@ -60,12 +144,12 @@ function Content() {
 
         <Column width={220}>
           <HeaderCell>Donor Name</HeaderCell>
-          <Cell />
-          {/* <Cell>
+          
+          <Cell>
             {(rowData) =>
-              `${rowData.Donor.User.firstName} ${rowData.Donor.User.lastName}`
+              {return `${rowData.Donor.User.firstName} ${rowData.Donor.User.lastName}`}
             }
-          </Cell> */}
+          </Cell>
         </Column>
 
         <Column width={220}>
@@ -75,7 +159,12 @@ function Content() {
 
         <Column width={220}>
           <HeaderCell>Creator Name</HeaderCell>
-          <Cell dataKey="Campaign.Creator.User?" />
+          {/* <Cell dataKey="Campaign.Creator.User?" /> */}
+          <Cell>
+            {(rowData)=>{
+              return `${rowData.Campaign?.Creator?.User?.firstName}`
+            }}
+          </Cell>
         </Column>
 
         <Column width={200}>
@@ -107,6 +196,7 @@ function Content() {
           </Cell>
         </Column>
       </Table>
+      </div>
       <div style={{ padding: 20 }}>
         <Pagination
           prev
