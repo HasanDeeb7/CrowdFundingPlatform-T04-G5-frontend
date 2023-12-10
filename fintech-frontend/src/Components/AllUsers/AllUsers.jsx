@@ -4,6 +4,7 @@ import { SelectPicker } from "rsuite";
 import fetchUsers, { changeRole } from "../../utils/userAxios";
 import { toast } from "react-toastify";
 import "./AllUsers.css";
+import Loading from "../Loading/Loading";
 
 const roleOptions = [
   { label: "Admin", value: "admin" },
@@ -15,9 +16,11 @@ const AllUsers = () => {
   const [limit, setLimit] = React.useState(10);
   const [page, setPage] = React.useState(1);
   let [userApi, setUserApi] = useState([]);
+  let [isLoading, setIsLoading] = useState(true);
   async function fetchAllUsers() {
     let donations = await fetchUsers();
     setUserApi(donations);
+    if (donations) setIsLoading(false);
   }
 
   const handleRoleChange = async (value, rowData) => {
@@ -68,7 +71,7 @@ const AllUsers = () => {
     return i >= start && i < end;
   });
 
-  return (
+  return !isLoading ? (
     <div className="allUsersContainer">
       <h1 style={{ marginBottom: 10 }}>All Users</h1>
       <Table
@@ -140,6 +143,8 @@ const AllUsers = () => {
         />
       </div>
     </div>
+  ) : (
+    <Loading />
   );
 };
 export default AllUsers;
