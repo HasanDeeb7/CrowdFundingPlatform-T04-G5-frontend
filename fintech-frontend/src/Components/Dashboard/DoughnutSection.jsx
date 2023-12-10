@@ -1,5 +1,4 @@
 import { Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS, defaults } from "chart.js/auto";
 import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../../useContext/userContext";
 import fetchCampaigns from "../../utils/campaignAxios";
@@ -43,7 +42,7 @@ function DoughnutSection() {
   return (
     !isLoading && (
       <div className="doughnut">
-        {user.role == "donor" ? (
+        {user.role === "donor" ? (
           filtered.length !== 0 ? (
             <Doughnut
               data={{
@@ -91,19 +90,19 @@ function DoughnutSection() {
             options={{
               plugins: {
                 title: {
-                  text: "Active Campaigns",
+                  text: "Active Campaign",
                   padding: { top: 10, bottom: 30 },
                 },
               },
             }}
           />
-        ) : user.role == "creator" ? (
-          activeCampaign.length == 0 ? (
+        ) : user.role === "creator" ? (
+          activeCampaign.length === 0 ? (
             <h2>no data found</h2>
           ) : (
             <Doughnut
               data={{
-                labels: ["active campaigns progress"],
+                labels: ["active campaign progress"],
                 datasets: [
                   {
                     data: [

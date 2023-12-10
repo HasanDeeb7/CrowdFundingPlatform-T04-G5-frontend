@@ -1,8 +1,6 @@
 import { Line } from "react-chartjs-2";
-import { Chart as ChartJS, defaults } from "chart.js/auto";
 import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../../useContext/userContext";
-import fakeCampaigns from "../../FakeData/fakeCampaigns";
 import fetchDonations from "../../utils/donations";
 import fetchCampaigns from "../../utils/campaignAxios";
 

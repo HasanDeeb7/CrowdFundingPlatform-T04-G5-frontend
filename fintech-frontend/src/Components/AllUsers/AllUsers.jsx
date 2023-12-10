@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { SelectPicker } from "rsuite";
 import fetchUsers, { changeRole } from "../../utils/userAxios";
 import { toast } from "react-toastify";
-import './AllUsers.css'
+import "./AllUsers.css";
 
 const roleOptions = [
   { label: "Admin", value: "admin" },
@@ -15,7 +15,6 @@ const AllUsers = () => {
   const [limit, setLimit] = React.useState(10);
   const [page, setPage] = React.useState(1);
   let [userApi, setUserApi] = useState([]);
-  const [updatedUser, setUpdatedUser] = useState({ id: null, role: "" });
   async function fetchAllUsers() {
     let donations = await fetchUsers();
     setUserApi(donations);
@@ -72,7 +71,12 @@ const AllUsers = () => {
   return (
     <div className="allUsersContainer">
       <h1 style={{ marginBottom: 10 }}>All Users</h1>
-      <Table height={420} data={data} rowHeight={() => 60} className="campaignsTable">
+      <Table
+        height={420}
+        data={data}
+        rowHeight={() => 60}
+        className="campaignsTable"
+      >
         <Column width={50} align="center" fixed>
           <HeaderCell>Id</HeaderCell>
           <Cell dataKey="id" />
