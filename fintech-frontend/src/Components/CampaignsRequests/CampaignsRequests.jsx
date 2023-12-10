@@ -68,7 +68,7 @@ function CampaignsRequests() {
   const ActionCell = ({ rowData, dataKey, onClick, ...props }) => {
     return (
       <Cell {...props} style={{ padding: "6px" }}>
-        <div>
+        <div style={{ display: "flex", gap: " 10px" }}>
           <Button action="Approve" onClick={() => handleApprove(rowData.id)} />
           <Button
             action="Deny"
@@ -95,9 +95,10 @@ function CampaignsRequests() {
   };
 
   return (
-    <div>
+    <div className="requestsContainer">
       {!loading ? (
         <>
+        <h1 style={{ marginBottom: 10 }}>All Requests</h1>
           <Table
             height={420}
             data={campaigns.filter((item) => item.status === "pending")}
@@ -105,7 +106,6 @@ function CampaignsRequests() {
             sortType={sortType}
             loading={loading}
             className="campaignsTable"
-            rowHeight={() => 60}
           >
             <Column align="center" color="red" fixed sortable>
               <HeaderCell color="red">Id</HeaderCell>
@@ -132,7 +132,7 @@ function CampaignsRequests() {
               <ViewMoreCell dataKey="id" />
             </Column>
 
-            <Column width={800}>
+            <Column width={400}>
               <HeaderCell>...</HeaderCell>
               <ActionCell dataKey="id" />
             </Column>

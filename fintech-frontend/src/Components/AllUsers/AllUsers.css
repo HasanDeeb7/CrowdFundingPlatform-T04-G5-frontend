@@ -5,3 +5,8 @@
   color: var(--light-gold-clr);
   border-color: var(--light-gold-clr);
 }
+.allUsersContainer{
+  display: flex;
+  gap: 7rem;
+  flex-direction: column;
+}

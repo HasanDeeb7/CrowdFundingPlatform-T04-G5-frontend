@@ -1,0 +1,6 @@
+.campaignsTableComponentWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 7rem;
+    align-items: flex-start;
+}

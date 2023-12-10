@@ -10,19 +10,30 @@ import "./Donations.css";
 // import fakeDonations from "../../FakeData/fakeDonations.js";
 
 function Donations() {
-
   const [activeFilter, setActiveFilter] = useState("All");
-  const [searchText,setSearchText]=useState({searchText:''})
+  const [searchText, setSearchText] = useState({ searchText: "" });
 
   return (
     <div className="container">
       <h1>Donations</h1>
 
+      {/* <FilterProvider> */}
       <Stack gap={5} className="try">
-        <Header className="p-2" />
-        <Content className="p-2" />
+        <Header
+          className="p-2"
+          activeFilter={activeFilter}
+          setActiveFilter={setActiveFilter}
+          searchText={searchText}
+          setSearchText={setSearchText}
+        />
+        <Content
+          className="p-2"
+          activeFilter={activeFilter}
+          searchText={searchText.searchText}
+        />
         {/* <Footer className="p-2" /> */}
       </Stack>
+      {/* </FilterProvider> */}
     </div>
   );
 }
