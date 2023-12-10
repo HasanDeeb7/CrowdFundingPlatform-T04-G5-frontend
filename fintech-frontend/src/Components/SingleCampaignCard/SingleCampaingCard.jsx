@@ -3,7 +3,14 @@ import "./SingleCampaignCard.css";
 import fetchDonations from "../../utils/donations";
 import { motion } from "framer-motion";
 
-function SingleCampaingCard({ data, isLoading, setIsLoading, donations }) {
+function SingleCampaingCard({
+  data,
+  isLoading,
+  setIsLoading,
+  donations,
+  donorsCount,
+  deadline,
+}) {
   return (
     !isLoading && (
       <div className="campaignCardsContainer">
@@ -23,7 +30,7 @@ function SingleCampaingCard({ data, isLoading, setIsLoading, donations }) {
           className="singleCampaignCard"
         >
           <h4>Number of Donors</h4>
-          <p>donations</p>
+          <p>{donorsCount}</p>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
@@ -32,7 +39,7 @@ function SingleCampaingCard({ data, isLoading, setIsLoading, donations }) {
           className="singleCampaignCard"
         >
           <h4>Close Date</h4>
-          <p>Date</p>
+          <p>{deadline}</p>
         </motion.div>
       </div>
     )

@@ -11,6 +11,8 @@ function SingleCampaign() {
   const data = useLocation().state;
   const [isLoading, setIsLoading] = useState(true);
   const [donations, setDonations] = useState();
+  const [donorsCount, setDonorsCount] = useState(0);
+  const [deadline, setDeadline] = useState();
   async function getDonations() {
     try {
       const response = await fetchDonations();
@@ -20,6 +22,42 @@ function SingleCampaign() {
         );
         setDonations(filteredDonations);
         console.log(response.data);
+        const donorsList = [];
+        filteredDonations.map((item) => {
+          if (!donorsList.includes(item.DonorId)) {
+            donorsList.push(item.DonorId);
+          }
+        });
+        setDonorsCount(donorsList.length);
+        console.log(data.createdAt);
+
+        const givenDate = new Date(data.createdAt);
+        const currentDate = new Date();
+
+        const differenceInMilliseconds =
+          givenDate.getTime() - currentDate.getTime();
+
+        const remainingDays = Math.floor(
+          differenceInMilliseconds / (1000 * 60 * 60 * 24)
+        );
+
+        const deadlineDate = new Date(
+          givenDate.getTime() + 30 * 24 * 60 * 60 * 1000
+        );
+
+        const deadlineDifferenceInMilliseconds =
+          deadlineDate.getTime() - currentDate.getTime();
+
+        const remainingDeadlineDays = Math.floor(
+          deadlineDifferenceInMilliseconds / (1000 * 60 * 60 * 24)
+        );
+
+        setDeadline(remainingDeadlineDays);
+
+        console.log("givenDate:", givenDate);
+        console.log("currentDate:", currentDate);
+        console.log("deadlineDate:", deadlineDate);
+
         setIsLoading(false);
       }
     } catch (error) {
@@ -41,6 +79,8 @@ function SingleCampaign() {
       <SingleCampaingCard
         data={data}
         donations={donations}
+        donorsCount={donorsCount}
+        deadline={deadline}
         isLoading={isLoading}
         setIsLoading={setIsLoading}
       />
