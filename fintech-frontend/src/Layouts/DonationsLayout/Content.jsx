@@ -4,12 +4,15 @@ import UserContext from "../../useContext/userContext";
 import "./Content.css";
 import "../../App.css";
 import fetchDonations from "../../utils/donations";
+import Loading from '../../Components/Loading/Loading'
 // import Test from '../../Components/CampaignsTableComponent/CampaignsTableComponent.jsx'
 
 const { Column, HeaderCell, Cell } = Table;
 
 function Content({ activeFilter , searchText}) {
-  console.log(activeFilter);
+  const { user, setUser } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(true);
+  const [donations, setDonations] = useState([]);
 
 
   const filterDataByTimeAndSearch = (data) => {
@@ -31,22 +34,16 @@ function Content({ activeFilter , searchText}) {
         break;
     }
 
-    // Perform search based on campaign title
+    
     if (searchText) {
-      // console.log(searchText)
       const lowerSearchText = searchText.toLowerCase().trim();
       filteredData = filteredData.filter(item =>
         item.Campaign.title.toLowerCase().includes(lowerSearchText)
       );
     }
-
     return filteredData;
   };
   
-
-  
-
-  // Function to check if two dates are on the same day
   const isToday = (date1, date2) => {
     return (
       date1.getFullYear() === date2.getFullYear() &&
@@ -59,15 +56,12 @@ function Content({ activeFilter , searchText}) {
     const firstDate = new Date(date1);
     const secondDate = new Date(date2);
 
-    // Get ISO week numbers for the dates
     const firstWeekNumber = getISOWeek(firstDate);
     const secondWeekNumber = getISOWeek(secondDate);
 
-    // Check if the dates are in the same ISO week
     return firstWeekNumber === secondWeekNumber;
   };
 
-  // Function to get ISO week number for a given date
   const getISOWeek = (date) => {
     const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
     const daysInFirstWeek = 7 - firstDayOfYear.getDay();
@@ -87,12 +81,6 @@ function Content({ activeFilter , searchText}) {
       firstDate.getMonth() === secondDate.getMonth()
     );
   };
-  
-
-  const { user, setUser } = useContext(UserContext);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [donations, setDonations] = useState([]);
 
   async function fetchDashboard() {
     setIsLoading(true);
@@ -101,9 +89,9 @@ function Content({ activeFilter , searchText}) {
       let fetchedDonations = await fetchDonations();
       setDonations(fetchedDonations.data);
       // console.log(user)
-      // console.log(user.user.role);
+      // console.log(user.role);
+      // console.log(user.Creator.id)
     } catch (error) {
-      // Handle errors if necessary
       console.error("Error fetching donations:", error);
     } finally {
       setIsLoading(false);
@@ -113,11 +101,10 @@ function Content({ activeFilter , searchText}) {
     fetchDashboard();
   }, []);
 
-  useEffect(() => {
-    console.log(donations);
-  }, [donations]);
+  // useEffect(() => {
+  //   console.log(donations);
+  // }, [donations]); 
 
-  // Filter the data based on the activeFilter
   const filteredData = filterDataByTimeAndSearch(donations, activeFilter);
 
   const [limit, setLimit] = React.useState(5);
@@ -134,7 +121,11 @@ function Content({ activeFilter , searchText}) {
   const data = filteredData.slice(start, end);
 
   return (
-    <div >
+    <div>
+      {isLoading ? (
+        <div><Loading/></div>
+      ) : (
+        <div >
       <div >
       <Table height={420} className="tableContainer" data={data}>
         <Column width={134} align="center" fixed>
@@ -147,7 +138,7 @@ function Content({ activeFilter , searchText}) {
           
           <Cell>
             {(rowData) =>
-              {return `${rowData.Donor.User.firstName} ${rowData.Donor.User.lastName}`}
+              {return `${rowData.Donor.User?.firstName} ${rowData.Donor.User?.lastName}`}
             }
           </Cell>
         </Column>
@@ -216,6 +207,8 @@ function Content({ activeFilter , searchText}) {
           onChangeLimit={handleChangeLimit}
         />
       </div>
+    </div>
+      )}
     </div>
   );
 }

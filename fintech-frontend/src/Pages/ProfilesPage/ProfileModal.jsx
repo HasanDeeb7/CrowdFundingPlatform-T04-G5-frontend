@@ -1,18 +1,41 @@
 import "./ProfileModal.css";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import { motion } from "framer-motion";
 import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
 
-function ProfileModal({ closeHandler }) {
+function ProfileModal({ closeHandler , userData}) {
+
+  // console.log(userData)
+  // console.log(userData.Admin)
+
   const [profile, setProfile] = useState({
-    firstName: "Louai",
-    lastName: "Baghdadi",
+    firstName: "",
+    lastName: "",
+    userName:"",
     bio: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, whe",
     password: "",
     phone: "701780560",
     address: "Tripoli , Lebanon",
   });
+
+  useEffect(() => {
+    // Check if userData is available and has the expected properties
+    if (userData) {
+      setProfile({
+        firstName: userData?.firstName || "",
+        lastName: userData?.lastName || "",
+        userName: userData?.userName || "",
+        // image:userData.image || '',
+        // bio: userData.bio || "",
+        // password: userData.password || "",
+        // phone: userData.phone || "",
+        // address: userData.address || "",
+      });
+    }
+  }, [userData]);
+
+
   const modalVariants = {
     closed: { opacity: 0, scale: 0, width: 0, height: 0 },
     opened: {
@@ -51,6 +74,18 @@ function ProfileModal({ closeHandler }) {
             setValue={setProfile}
             control="lastName"
           />
+          <Input
+            label="User Name"
+            value={profile}
+            setValue={setProfile}
+            control="userName"
+          />
+          {/* <Input
+            label="Image"
+            value={profile}
+            setValue={setProfile}
+            control="image"
+          /> */}
           <Input
             label="Biography"
             value={profile}

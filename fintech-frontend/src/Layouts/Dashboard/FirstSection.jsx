@@ -44,6 +44,7 @@ function FirstSection() {
   let completedCampaignForCreator = 0;
   let pendingCampaignForCreator = 0;
 
+  // console.log(donationApi);
   if (donationApi && campaignApi && users && !isLoading) {
     donationApi.data.map((data) => {
       if (data.Donor?.User?.userName === user.userName) {

@@ -1,5 +1,6 @@
 import { Doughnut } from "react-chartjs-2";
 import React, { useContext, useEffect, useState } from "react";
+import { Chart as ChartJS, defaults } from "chart.js/auto";
 import UserContext from "../../useContext/userContext";
 import fetchCampaigns from "../../utils/campaignAxios";
 import fetchDonations from "../../utils/donations";
@@ -21,6 +22,7 @@ function DoughnutSection() {
     console.log(donations);
     let campaign = await fetchCampaigns();
     setCampaignApi(campaign);
+    // console.log(campaign);
     setIsLoading(false);
   }
   useEffect(() => {
