@@ -18,6 +18,7 @@ function DoughnutSection() {
   async function fetchDoughnut() {
     let donations = await fetchDonations();
     setDonationApi(donations);
+    console.log(donations);
     let campaign = await fetchCampaigns();
     setCampaignApi(campaign);
     setIsLoading(false);
@@ -27,7 +28,7 @@ function DoughnutSection() {
   }, []);
   if (donationApi && campaignApi && !isLoading) {
     filtered = donationApi.data.filter(
-      (data) => data.Donor?.User.userName === user.userName
+      (data) => data.Donor?.User?.userName === user.userName
     );
     donationApi.data.map((data) => {
       sumTarget += data.Campaign.target;
@@ -40,7 +41,8 @@ function DoughnutSection() {
     });
   }
   return (
-    !isLoading && (
+    !isLoading &&
+    campaignApi.length > 0 && (
       <div className="doughnut">
         {user.role === "donor" ? (
           filtered.length !== 0 ? (

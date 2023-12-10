@@ -90,10 +90,15 @@ function ComponentsTableComponent({ setIsLoading }) {
   return (
     <>
       <>
-        <h1>Campaigns</h1>
-        {user.role === "creator" && (
-          <Button action="New Campaign" onClick={() => setIsModalOpen(true)} />
-        )}
+        <div className="campaignsHeader">
+          <h1>Campaigns</h1>
+          {user.role === "creator" && (
+            <Button
+              action="New Campaign"
+              onClick={() => setIsModalOpen(true)}
+            />
+          )}
+        </div>
 
         {isModalOpen && (
           <CreateCampaign
@@ -101,6 +106,7 @@ function ComponentsTableComponent({ setIsLoading }) {
             closeHandler={() => setIsModalOpen(false)}
           />
         )}
+        
         <Table
           height={420}
           data={data}

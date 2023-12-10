@@ -17,6 +17,8 @@ import AllUsersPage from "./Pages/AllUsers/AllUsersPage.jsx";
 import UserContext from "./useContext/userContext.js";
 import { useEffect, useState } from "react";
 import Loading from "./Components/Loading/Loading.jsx";
+import NotFound from "./Pages/404/NotFound.jsx";
+import Forbidden from "./Pages/403/Forbidden.jsx";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -70,6 +72,15 @@ function App() {
                 </ProtectedRoute>
               </section>
               <div className="containerRoutes">
+                <span className="balanceWrapper">
+                  {user?.role === "donor" ? (
+                    <div>
+                      Balance: <span> {user.Donor.balance}$ </span>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </span>
                 <Routes>
                   <Route path="/login" element={<Login />} />
                   <Route element={<ProtectedRoute isAllowed={user} />}>
@@ -86,7 +97,7 @@ function App() {
                     element={
                       <ProtectedRoute
                         isAllowed={user && user.role === "admin"}
-                        redirectPath="/"
+                        redirectPath="/403"
                       />
                     }
                   >
@@ -97,6 +108,8 @@ function App() {
 
                     <Route path="/adminusers" element={<AllUsersPage />} />
                   </Route>
+                  <Route path="/*" element={<NotFound />} />
+                  <Route path="/403" element={<Forbidden />} />
                 </Routes>
               </div>
             </main>

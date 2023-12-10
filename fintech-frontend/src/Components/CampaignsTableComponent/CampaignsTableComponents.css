@@ -1,3 +1,8 @@
 .campaignsTable {
   background-color: #1a1d24;
 }
+.campaignsHeader{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
