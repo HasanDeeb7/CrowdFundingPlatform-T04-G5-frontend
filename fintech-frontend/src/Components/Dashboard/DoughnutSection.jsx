@@ -21,7 +21,7 @@ function DoughnutSection() {
     setDonationApi(donations);
     let campaign = await fetchCampaigns();
     setCampaignApi(campaign);
-    console.log(campaign);
+    // console.log(campaign);
     setIsLoading(false);
   }
   useEffect(() => {
@@ -50,9 +50,9 @@ function DoughnutSection() {
               datasets: [
                 {
                   data: [
-                    filtered[filtered.length - 1].transferredAmount,
-                    filtered[filtered.length - 1].Campaign.target -
-                      filtered[filtered.length - 1].transferredAmount,
+                    filtered[filtered.length - 1]?.transferredAmount,
+                    filtered[filtered.length - 1]?.Campaign.target -
+                      filtered[filtered.length - 1]?.transferredAmount,
                   ],
                   backgroundColor: ["#c27613", "#1c1f21"],
                   borderColor: ["#0a0b0c"],

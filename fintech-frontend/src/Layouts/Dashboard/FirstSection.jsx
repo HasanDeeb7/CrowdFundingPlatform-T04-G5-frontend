@@ -48,7 +48,7 @@ function FirstSection() {
   let counterCreator = 0;
   let counterDonors = 0;
 
-  console.log(donationApi);
+  // console.log(donationApi);
   if (donationApi && campaignApi && users && !isLoading) {
     donationApi.data.map((data) => {
       if (data.Donor?.User.userName === user.userName) {

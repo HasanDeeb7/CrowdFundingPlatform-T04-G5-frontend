@@ -16,10 +16,10 @@ function ChartsSeaction() {
   async function fetchCharts() {
     let donations = await fetchDonations();
     setDonationApi(donations);
-    console.log(donations);
+    // console.log(donations);
     let campaign = await fetchCampaigns();
     setCampaignApi(campaign);
-    console.log(campaign);
+    // console.log(campaign);
     setIsLoading(false);
   }
   useEffect(() => {
@@ -31,7 +31,7 @@ function ChartsSeaction() {
   if (campaignApi && donationApi) {
     activeCampaign.push(campaignApi.filter((data) => data.status === "active"));
     donorsCampaign = donationApi.data.filter((data) =>
-      data.Donor.User.userName === user.userName
+      data.Donor.User?.userName === user.userName
         ? data.Campaign.status === "active"
         : null
     );

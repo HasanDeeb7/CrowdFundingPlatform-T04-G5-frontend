@@ -3,7 +3,6 @@ import Stack from "react-bootstrap/Stack";
 import { Button, ButtonToolbar } from "rsuite";
 import "./Filter.css";
 import { flushSync } from 'react-dom';
-import { useFilterContext } from "../useContext/filterContext";
 
 function Filter({activeFilter,setActiveFilter}) {
   // const [activeFilter, setActiveFilter] = useState("All");
