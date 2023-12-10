@@ -17,7 +17,7 @@ function CampaignStats({ data }) {
   const progressData = getPercentage(data.amountContributed, data.target);
   const status = progressData === 100 ? "success" : "active";
   const recentItem = useMotionValue(0);
-  const recentDonationsList = data.Donations?.slice(-3);
+  const recentDonationsList = data.Donations?.slice(-3).reverse();
   const firstDonation = data.Donations[0];
   const navigate = useNavigate();
   console.log(recentDonationsList);
@@ -49,9 +49,9 @@ function CampaignStats({ data }) {
   }
   return (
     <motion.div
-      initial={{ x: 70 }}
-      animate={{ x: 0 }}
-      transition={{ duration: 1, ease: [0, 0.7, 0.2, 2] }}
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 0.7, duration: 0.7, ease: [0, 0.2, 0.2, 1.1] }}
       className="campaignStats"
     >
       {isDonationModalOpen ? (
@@ -83,7 +83,11 @@ function CampaignStats({ data }) {
             {recentDonationsList.map((item) => {
               return (
                 <RecentDonations
-                  name={`${item.Donor?.User.firstName}`}
+                  name={`${
+                    firstDonation?.Donor?.User?.firstName
+                      ? firstDonation.Donor.User.firstName
+                      : "Anonymous"
+                  }`}
                   transferredAmount={item.transferredAmount}
                 />
               );
@@ -98,7 +102,9 @@ function CampaignStats({ data }) {
               <span className="topDonorsItem firstDonor">
                 <FaHandHoldingHeart />
                 <span className="donorItemName">
-                  {firstDonation?.Donor?.User.firstName}
+                  {firstDonation?.Donor?.User?.firstName
+                    ? firstDonation.Donor.User.firstName
+                    : "Anonymous"}
                 </span>{" "}
                 <span className="donorItemAmount">
                   ${firstDonation?.transferredAmount?.toLocaleString()}

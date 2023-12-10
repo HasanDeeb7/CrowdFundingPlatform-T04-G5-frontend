@@ -4,6 +4,7 @@ import "./DonationForm.css";
 import Button from "../Button/Button";
 import { AnimatePresence, motion } from "framer-motion";
 import UserContext from "../../useContext/userContext";
+import { toast } from "react-toastify";
 
 function DonationForm({
   donationAmount,
@@ -12,6 +13,12 @@ function DonationForm({
   campaignName,
 }) {
   const { user } = useContext(UserContext);
+  function handleProceed() {
+    if (!donationAmount) {
+      return toast.error("Field is required");
+    }
+    setCurrentStep(1);
+  }
 
   const formVariant = {
     closed: { opacity: 0, scale: 0, transform: "translateX(-300px)" },
@@ -31,7 +38,7 @@ function DonationForm({
         initial="closed"
         animate="opened"
         transition={{
-          delay: 0.3,
+          delay: 0.2,
           duration: 0.4,
           ease: [0, 0.71, 0.2, 1.01],
         }}
@@ -61,9 +68,9 @@ function DonationForm({
         </div>
         <div className="donationTotalBalance">
           <label htmlFor="">Your total balance</label>
-          <span>{balance - donationAmount}$</span>
+          <span>{balance - donationAmount || balance}$</span>
         </div>
-        <Button action="Proceed" onClick={() => setCurrentStep(1)} />
+        <Button action="Proceed" onClick={() => handleProceed()} />
       </motion.div>
     </AnimatePresence>
   );

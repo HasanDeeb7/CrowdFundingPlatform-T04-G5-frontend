@@ -46,13 +46,13 @@ function FirstSection() {
 
   if (donationApi && campaignApi && users && !isLoading) {
     donationApi.data.map((data) => {
-      if (data.Donor?.User.userName === user.userName) {
+      if (data.Donor?.User?.userName === user.userName) {
         count++;
       }
     });
 
     donationApi.data.map((data) => {
-      if (data.Donor?.User.userName === user.userName) {
+      if (data.Donor?.User?.userName === user.userName) {
         totalDonation += data.transferredAmount;
       }
     });

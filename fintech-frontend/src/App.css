@@ -15,6 +15,7 @@
   --secondary-button-clr: transparent; /*bg color for secandary buttons*/
 }
 h1 {
+  width: fit-content;
   font-size: 40px;
 }
 h2 {
@@ -33,6 +34,8 @@ h3 {
   width: 100%;
   height: 98vh;
   margin: 1rem 3rem 0;
+  display: flex;
+  flex-direction: column;
 }
 .containerRoutes::-webkit-scrollbar {
   display: none;
@@ -44,6 +47,21 @@ h3 {
 }
 .rs-sidenav-collapse-in {
   width: 350px !important;
+}
+.balanceWrapper {
+  display: block;
+  position: absolute;
+  text-align: right;
+  align-self: end;
+  width: fit-content;
+}
+.balanceWrapper > div {
+  border: 1px solid var(--light-gold-clr);
+  padding: 10px;
+  border-radius: 30px;
+}
+.balanceWrapper > span {
+  font-weight: 600;
 }
 @media (max-width: 1200px) {
   .rs-sidenav-collapse-in {

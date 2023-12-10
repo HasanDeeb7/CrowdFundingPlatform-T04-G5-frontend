@@ -6,6 +6,7 @@ import fetchCampaigns from "../../utils/campaignAxios";
 
 function ChartsSection() {
   const { user } = useContext(UserContext);
+  console.log(user);
   let [campaignApi, setCampaignApi] = useState([]);
   let [donationApi, setDonationApi] = useState();
 
@@ -27,7 +28,7 @@ function ChartsSection() {
   if (campaignApi && donationApi) {
     activeCampaign.push(campaignApi.filter((data) => data.status === "active"));
     donorsCampaign = donationApi.data.filter((data) =>
-      data.Donor.User.userName === user.userName
+      data.Donor?.User?.userName === user.userName
         ? data.Campaign.status === "active"
         : null
     );
@@ -38,7 +39,8 @@ function ChartsSection() {
     );
   }
   return (
-    !isLoading && (
+    !isLoading &&
+    campaignApi.length > 0 && (
       <div className="chart">
         {user.role === "admin" ? (
           <Line
