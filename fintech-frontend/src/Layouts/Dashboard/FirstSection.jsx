@@ -1,13 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 
 import Card from "../../Components/Dashboard/Card";
-import fakeDonations from "../../FakeData/fakeDonations";
-import fakeCampaigns from "../../FakeData/fakeCampaigns";
 import "./FirstSection.css";
-import CreateCampaign from "../../Components/Dashboard/CreateCampaign";
-import fakeUsers from "../../FakeData/fakeUsers";
 import UserContext from "../../useContext/userContext";
-import Button from "../../Components/Button/Button";
 import fetchDonations from "../../utils/donations";
 import fetchCampaigns from "../../utils/campaignAxios";
 import fetchUsers from "../../utils/userAxios";
@@ -22,7 +17,6 @@ function FirstSection() {
 
   async function fetchNumbersSections() {
     setIsLoading(true);
-    // console.log("function");
     try {
       let donations = await fetchDonations();
       setDonationApi(donations);
@@ -47,8 +41,9 @@ function FirstSection() {
   let completedCampaign = 0;
   let counterCreator = 0;
   let counterDonors = 0;
+  let completedCampaignForCreator = 0;
+  let pendingCampaignForCreator = 0;
 
-  console.log(donationApi);
   if (donationApi && campaignApi && users && !isLoading) {
     donationApi.data.map((data) => {
       if (data.Donor?.User.userName === user.userName) {
@@ -70,6 +65,18 @@ function FirstSection() {
     campaignApi.map((data) => {
       if (data.status == "completed") {
         completedCampaign++;
+      }
+    });
+    campaignApi.map((data) => {
+      if (data.status == "completed") {
+        if (user.userName === data.Creator.User.userName)
+          completedCampaignForCreator++;
+      }
+    });
+    campaignApi.map((data) => {
+      if (data.status == "pending") {
+        if (user.userName === data.Creator.User.userName)
+          pendingCampaignForCreator++;
       }
     });
     users.map((data) => {
@@ -105,16 +112,18 @@ function FirstSection() {
               <Card title="Number of Creators" value={counterCreator} />
               <Card title="Number of Donors" value={counterDonors} />
             </div>
-          ) : // for creator
-          // <div className="firstSection">
-          //   <Card title="Number of closed campaigns" value={} />
-          //   <Card
-          //     title="Number of completed campaigns"
-          //     value={}
-          //   />
-          //   <Card title="Number of pending campaigns" value={} />
-          // </div>
-          null}
+          ) : user.role === "creator" ? (
+            <div className="firstSection">
+              <Card
+                title="Number of completed campaigns"
+                value={completedCampaignForCreator}
+              />
+              <Card
+                title="Number of pending campaigns"
+                value={pendingCampaignForCreator}
+              />
+            </div>
+          ) : null}
         </div>
       ) : (
         <Loading />

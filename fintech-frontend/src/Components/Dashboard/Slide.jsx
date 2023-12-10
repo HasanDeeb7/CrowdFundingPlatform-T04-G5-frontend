@@ -1,9 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import SubSlide from "./SubSlide";
 import "./Slide.css";
-import fakeCampaigns from "../../FakeData/fakeCampaigns";
-import fakeDonors from "../../FakeData/fakeDonors";
-import fakeDonations from "../../FakeData/fakeDonations";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import UserContext from "../../useContext/userContext";
@@ -42,20 +39,26 @@ function Slide() {
           <h3>Campaigns Interacted With</h3>
         ) : user.role === "admin" ? (
           <h3>Some Campaigns Requests</h3>
+        ) : user.role === "creator" ? (
+          <h3>Your Campaigns</h3>
         ) : null}
 
         <div className="child">
-          {user.role == "donor"
+          {user.role === "donor"
             ? donationApi.data.map((data) => {
                 if (data.Donor?.User.userName === user.userName) {
                   return <SubSlide data={data.Campaign} />;
+                } else {
+                  return "";
                 }
               })
             : user.role === "creator"
             ? campaignApi.map((data) =>
                 data.Creator.User.userName === user.userName ? (
                   <SubSlide data={data} />
-                ) : null
+                ) : (
+                  ""
+                )
               )
             : user.role === "admin"
             ? pending.slice(0, 5).map((data) => <SubSlide data={data} />)

@@ -6,7 +6,7 @@ import fakeCampaigns from "../../FakeData/fakeCampaigns";
 import fetchDonations from "../../utils/donations";
 import fetchCampaigns from "../../utils/campaignAxios";
 
-function ChartsSeaction() {
+function ChartsSection() {
   const { user } = useContext(UserContext);
   let [campaignApi, setCampaignApi] = useState([]);
   let [donationApi, setDonationApi] = useState();
@@ -16,10 +16,8 @@ function ChartsSeaction() {
   async function fetchCharts() {
     let donations = await fetchDonations();
     setDonationApi(donations);
-    console.log(donations);
     let campaign = await fetchCampaigns();
     setCampaignApi(campaign);
-    console.log(campaign);
     setIsLoading(false);
   }
   useEffect(() => {
@@ -81,81 +79,89 @@ function ChartsSeaction() {
             }}
           />
         ) : user.role === "donor" ? (
-          <Line
-            data={{
-              labels: donorsCampaign.map((data) => data.Campaign.title),
-              datasets: [
-                {
-                  label: "Target",
-                  data: donorsCampaign.map((data) =>
-                    data.Campaign.status === "active"
-                      ? data.Campaign.target
-                      : null
-                  ),
-                  backgroundColor: ["#c27613"],
-                  borderColor: "#c27613",
+          donorsCampaign.length === 0 ? (
+            <h2>no data found</h2>
+          ) : (
+            <Line
+              data={{
+                labels: donorsCampaign.map((data) => data.Campaign.title),
+                datasets: [
+                  {
+                    label: "Target",
+                    data: donorsCampaign.map((data) =>
+                      data.Campaign.status === "active"
+                        ? data.Campaign.target
+                        : null
+                    ),
+                    backgroundColor: ["#c27613"],
+                    borderColor: "#c27613",
+                  },
+                  {
+                    label: "Progress",
+                    data: donorsCampaign.map((data) =>
+                      data.Campaign.status === "active"
+                        ? data.Campaign.amountContributed
+                        : null
+                    ),
+                    backgroundColor: ["#ffc42e"],
+                    borderColor: "#ffc42e",
+                  },
+                ],
+              }}
+              options={{
+                elements: {
+                  line: {
+                    tension: 0.5,
+                  },
                 },
-                {
-                  label: "Progress",
-                  data: donorsCampaign.map((data) =>
-                    data.Campaign.status === "active"
-                      ? data.Campaign.amountContributed
-                      : null
-                  ),
-                  backgroundColor: ["#ffc42e"],
-                  borderColor: "#ffc42e",
+                plugins: {
+                  title: {
+                    text: "Campaigns",
+                  },
                 },
-              ],
-            }}
-            options={{
-              elements: {
-                line: {
-                  tension: 0.5,
-                },
-              },
-              plugins: {
-                title: {
-                  text: "Campaigns",
-                },
-              },
-            }}
-          />
+              }}
+            />
+          )
         ) : user.role === "creator" ? (
-          <Line
-            data={{
-              labels: activeForCreator[
-                activeForCreator.length - 1
-              ].Donations.map(
-                (data) => data.updatedAt.split(":")[0].split("T")[0]
-              ),
-              datasets: [
-                {
-                  label: "Donations",
-                  data: activeForCreator[
-                    activeForCreator.length - 1
-                  ].Donations.map((data) => data.transferredAmount),
-                  backgroundColor: ["#c27613"],
-                  borderColor: "#c27613",
+          activeForCreator.length === 0 ? (
+            <h2>no data found</h2>
+          ) : (
+            <Line
+              data={{
+                labels: activeForCreator[
+                  activeForCreator.length - 1
+                ].Donations.map(
+                  (data) => data.updatedAt.split(":")[0].split("T")[0]
+                ),
+                datasets: [
+                  {
+                    label: "Donations",
+                    data: activeForCreator[
+                      activeForCreator.length - 1
+                    ].Donations.map((data) => data.transferredAmount),
+                    backgroundColor: ["#c27613"],
+                    borderColor: "#c27613",
+                  },
+                ],
+              }}
+              options={{
+                elements: {
+                  line: {
+                    tension: 0.5,
+                  },
                 },
-              ],
-            }}
-            options={{
-              elements: {
-                line: {
-                  tension: 0.5,
+                plugins: {
+                  title: {
+                    text: "Active Campaign",
+                  },
                 },
-              },
-              plugins: {
-                title: {
-                  text: "Active Campaign",
-                },
-              },
-            }}
-          />
+              }}
+            />
+          )
         ) : null}
       </div>
     )
   );
 }
 
-export default ChartsSeaction;
+export default ChartsSection;
