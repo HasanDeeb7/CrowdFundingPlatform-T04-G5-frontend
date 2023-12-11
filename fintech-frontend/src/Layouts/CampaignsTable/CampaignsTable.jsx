@@ -1,6 +1,7 @@
 import React from "react";
 import CampaignsTableComponent from "../../Components/CampaignsTableComponent/CampaignsTableComponent.jsx";
 import "./CampaignsTable.css";
+import Input from "../../Components/Input/Input.jsx";
 function CampaignsTable({ setIsLoading }) {
   return (
     <>

@@ -216,42 +216,44 @@ function Content({ activeFilter, searchText }) {
                 </Cell>
               </Column>
 
-              <Column width={"100%"} fixed="right">
-                <HeaderCell>...</HeaderCell>
-                <Cell style={{ padding: "6px" }}>
-                  {(rowData) => (
-                    <Button
-                      appearance="link"
-                      onClick={() => alert(`id:${rowData.id}`)}
-                      style={{ color: "var(--primary-gold-clr)" }}
-                    >
-                      Edit
-                    </Button>
-                  )}
-                </Cell>
-              </Column>
-            </Table>
-          </div>
-          <div style={{ padding: 20 }}>
-            <Pagination
-              prev
-              next
-              first
-              last
-              ellipsis
-              boundaryLinks
-              maxButtons={5}
-              size="xs"
-              layout={["total", "-", "limit", "|", "pager", "skip"]}
-              total={data.length}
-              limitOptions={[10, 20, 30]}
-              limit={limit}
-              activePage={page}
-              onChangePage={setPage}
-              onChangeLimit={handleChangeLimit}
-            />
-          </div>
-        </div>
+
+        <Column width={200} fixed="right">
+          <HeaderCell>...</HeaderCell>
+          <Cell style={{ padding: "6px" }}>
+            {(rowData) => (
+              <Button
+                appearance="link"
+                onClick={() => alert(`id:${rowData.id}`)}
+                style={{ color: "var(--primary-gold-clr)" }}
+              >
+                Edit
+              </Button>
+            )}
+          </Cell>
+        </Column>
+      </Table>
+      </div>
+      <div style={{ padding: 20 }}>
+        <Pagination
+          prev
+          next
+          first
+          last
+          ellipsis
+          boundaryLinks
+          maxButtons={5}
+          size="xs"
+          layout={["total", "-", "limit", "|", "pager", "skip"]}
+          total={data.length}
+          limitOptions={[10, 20, 30]}
+          limit={limit}
+          activePage={page}
+          onChangePage={setPage}
+          onChangeLimit={handleChangeLimit}
+        />
+      </div>
+    </div>
+
       )}
     </div>
   );
