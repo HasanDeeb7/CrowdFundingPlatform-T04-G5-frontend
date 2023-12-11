@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Profile from "./Pages/ProfilesPage/Profile.jsx";
 import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
 import Campaigns from "./Pages/Campaigns/Campaigns.jsx";
@@ -19,27 +19,15 @@ import { useEffect, useState } from "react";
 import Loading from "./Components/Loading/Loading.jsx";
 import NotFound from "./Pages/404/NotFound.jsx";
 import Forbidden from "./Pages/403/Forbidden.jsx";
+import NetworkError from "./Pages/NetworkError/NetworkError.jsx";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
   axios.defaults.withCredentials = true;
-  async function fetchUser() {
-    try {
-      if (!user) {
-        const userData = await axios.get(
-          `${process.env.REACT_APP_BACKEND_ENDPOINT}auth`
-        );
-        if (userData) {
-          // console.log(userData.data);
-        } else {
-          console.log("no data");
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
   async function getUserData() {
     try {
       const data = await axios.get(
@@ -51,7 +39,13 @@ function App() {
         setIsLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      if (error.message === "Network Error") {
+        console.log("network error");
+        setError(true);
+        setIsLoading(false);
+        return navigate("/network_error", { replace: true });
+      }
+      // console.log(error);
       setIsLoading(false);
     }
   }
@@ -67,7 +61,7 @@ function App() {
           <div className="App">
             <main className="mainContent">
               <section className="sideNavContainer">
-                <ProtectedRoute isAllowed={user}>
+                <ProtectedRoute isError={error} isAllowed={user}>
                   <Sidebar />
                 </ProtectedRoute>
               </section>
@@ -82,6 +76,7 @@ function App() {
                   )}
                 </span>
                 <Routes>
+                  <Route path="/network_error" element={<NetworkError />} />
                   <Route path="/login" element={<Login />} />
                   <Route element={<ProtectedRoute isAllowed={user} />}>
                     <Route path="/" element={<Dashboard />} />

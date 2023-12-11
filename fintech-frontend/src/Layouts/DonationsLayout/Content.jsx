@@ -172,7 +172,7 @@ function Content({ activeFilter , searchText}) {
           </Cell>
         </Column>
 
-        <Column width={"100%"} fixed="right">
+        <Column width={200} fixed="right">
           <HeaderCell>...</HeaderCell>
           <Cell style={{ padding: "6px" }}>
             {(rowData) => (

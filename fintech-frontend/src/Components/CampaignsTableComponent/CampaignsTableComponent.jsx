@@ -1,4 +1,4 @@
-import { Pagination, Progress, Table } from "rsuite";
+import { Pagination, Progress, Table, TagPicker } from "rsuite";
 import { useContext, useEffect, useState } from "react";
 import { getPercentage } from "../../utils/getPercentage";
 import "./CampaignsTableComponents.css";
@@ -8,6 +8,8 @@ import Loading from "../Loading/Loading";
 import UserContext from "../../useContext/userContext";
 import Button from "../Button/Button";
 import CreateCampaign from "../Dashboard/CreateCampaign";
+import Input from "../Input/Input";
+import { getCategories } from "../../utils/categoriesAxios";
 const { Column, HeaderCell, Cell } = Table;
 
 function ComponentsTableComponent({ setIsLoading }) {
@@ -19,6 +21,11 @@ function ComponentsTableComponent({ setIsLoading }) {
   const [page, setPage] = useState(1);
   const [campaigns, setCampaigns] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchCampaigns, setSearchCampaigns] = useState({ text: null });
+  const [filter, setFilter] = useState([]);
+  const [tagFilter, setTagFilter] = useState();
+  const tagStyles = { width: 300 };
+
   const { user } = useContext(UserContext);
   const handleChangeLimit = (dataKey) => {
     setPage(1);
@@ -27,15 +34,29 @@ function ComponentsTableComponent({ setIsLoading }) {
   async function fetchCampaigns() {
     const data = await getCampaigns();
     if (data) {
-      setCampaigns(data.data.filter((item) => item.status === "active"));
-      setIsLoading(false);
-      setLoading(false);
-      console.log(data);
-      return;
+      return setCampaigns(data.data.filter((item) => item.status === "active"));
+    }
+  }
+  async function fetchCategories() {
+    try {
+      const data = await getCategories();
+      if (data) {
+        const filters = data.data.map((item) => ({
+          label: item.name,
+          value: item.name,
+        }));
+        setFilter(filters.map((item) => item.label));
+        setIsLoading(false);
+        setLoading(false);
+        return setTagFilter(filters);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
   useEffect(() => {
     fetchCampaigns();
+    fetchCategories();
   }, []);
   const getData = () => {
     if (sortColumn && sortType) {
@@ -55,8 +76,20 @@ function ComponentsTableComponent({ setIsLoading }) {
         }
       });
     }
-    return campaigns;
+    if (searchCampaigns.text) {
+      const result = campaigns.filter((item) =>
+        item.title.toLowerCase().includes(searchCampaigns.text.toLowerCase())
+      );
+      return filter.length > 0
+        ? result.filter((item) => filter.includes(item.Category?.name))
+        : result;
+    } else {
+      return filter.length > 0
+        ? campaigns.filter((item) => filter.includes(item.Category?.name))
+        : campaigns;
+    }
   };
+
   const data = getData().filter((v, i) => {
     const start = limit * (page - 1);
     const end = start + limit;
@@ -79,7 +112,6 @@ function ComponentsTableComponent({ setIsLoading }) {
           to={"/singlecampaign"}
           style={{ color: "var(--light-gold-clr" }}
           state={rowData}
-          onClick={() => console.log(rowData)}
         >
           View Details
         </NavLink>
@@ -99,14 +131,27 @@ function ComponentsTableComponent({ setIsLoading }) {
             />
           )}
         </div>
-
         {isModalOpen && (
           <CreateCampaign
             action="Create Campaign"
             closeHandler={() => setIsModalOpen(false)}
           />
         )}
-        
+        <div className="searchFilterWrapper">
+          <Input
+            value={searchCampaigns}
+            setValue={setSearchCampaigns}
+            control="text"
+            label="Search..."
+          />
+          <TagPicker
+            size="lg"
+            placeholder="Category"
+            data={tagFilter}
+            style={tagStyles}
+            onChange={setFilter}
+          />
+        </div>
         <Table
           height={420}
           data={data}
@@ -159,7 +204,7 @@ function ComponentsTableComponent({ setIsLoading }) {
           </Column>
 
           <Column width={200} style={{ marginLeft: "100px" }} sortable>
-            <HeaderCell>status</HeaderCell>
+            <HeaderCell className="customHeaderCell">status</HeaderCell>
             <Cell dataKey="status" />
           </Column>
 
@@ -170,7 +215,7 @@ function ComponentsTableComponent({ setIsLoading }) {
         </Table>
       </>
 
-      <div style={{ padding: 20 }}>
+      <div style={{ padding: 20, width: "100%" }}>
         <Pagination
           prev
           next
@@ -180,7 +225,7 @@ function ComponentsTableComponent({ setIsLoading }) {
           boundaryLinks
           maxButtons={5}
           size="xs"
-          layout={["total", "-", "limit", "|", "pager", "skip"]}
+          layout={["total", "-", "limit", "|", "pager", "-", "skip"]}
           total={campaigns.length}
           limitOptions={[10, 30, 50]}
           limit={limit}

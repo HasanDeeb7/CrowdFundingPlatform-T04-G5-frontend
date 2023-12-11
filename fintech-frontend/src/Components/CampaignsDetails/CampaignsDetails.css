@@ -1,31 +1,30 @@
-
 .campaignDetails {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    overflow: scroll;
-  }
-  .campaignDetails::-webkit-scrollbar {
-    display: none;
-  }
-  .campaignDetails > img {
-    width: 100%;
-    height: 300px;
-    border-radius: 20px;
-    max-width: 500px;
-    
-  }
-  .campaignDetails span {
-    font-size: 25px;
-    border-bottom: 1px solid var(--light-gold-clr);
-    width: fit-content;
-  }
-  .campaignDetailsText {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-  .campaignDetailsText > p {
-    line-height: 2;
-    font-size: 16px;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  overflow: scroll;
+}
+.campaignDetails::-webkit-scrollbar {
+  display: none;
+}
+.campaignDetails > img {
+  width: 100%;
+  height: 300px;
+  border-radius: 20px;
+  max-width: 500px;
+  object-fit: cover;
+}
+.campaignDetails span {
+  font-size: 25px;
+  border-bottom: 1px solid var(--light-gold-clr);
+  width: fit-content;
+}
+.campaignDetailsText {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.campaignDetailsText > p {
+  line-height: 2;
+  font-size: 16px;
+}

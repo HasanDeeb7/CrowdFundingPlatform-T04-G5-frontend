@@ -48,10 +48,10 @@ function LoginForm() {
         return navigate("/", { replace: true });
       }
     } catch (error) {
-      console.log(error);
       setIsDisabled(false);
       toast.dismiss(toastId);
       toast.error(error.response.data.message);
+      console.log(error);
     }
   }
 
