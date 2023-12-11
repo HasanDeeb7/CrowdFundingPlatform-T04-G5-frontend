@@ -216,6 +216,7 @@ function Content({ activeFilter, searchText }) {
                 </Cell>
               </Column>
 
+
         <Column width={200} fixed="right">
           <HeaderCell>...</HeaderCell>
           <Cell style={{ padding: "6px" }}>
@@ -252,6 +253,7 @@ function Content({ activeFilter, searchText }) {
         />
       </div>
     </div>
+
       )}
     </div>
   );
