@@ -38,7 +38,7 @@ function SingleCampaingCard({
           transition={{ delay: 0.6, duration: 0.7, ease: [0, 0.2, 0.2, 1.1] }}
           className="singleCampaignCard"
         >
-          <h4>Close Date</h4>
+          <h4>Days left</h4>
           <p>{deadline}</p>
         </motion.div>
       </div>

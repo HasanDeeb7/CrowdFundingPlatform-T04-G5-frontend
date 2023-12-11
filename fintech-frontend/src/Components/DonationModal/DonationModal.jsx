@@ -7,7 +7,7 @@ import Button from "../Button/Button";
 import DonationConfirmation from "../DonationConfirmation/DonationConfirmation";
 import DonationDone from "../DonationDone/DonationDone";
 
-function DonationModal({ closeHandler, campaignId, campaignName }) {
+function DonationModal({ closeHandler, campaignId, campaignName, creatorId }) {
   const [donationAmount, setDonationAmount] = useState();
   const [currentStep, setCurrentStep] = useState(0);
   const modalVariants = {
@@ -56,6 +56,7 @@ function DonationModal({ closeHandler, campaignId, campaignName }) {
             setDonationAmount={setDonationAmount}
             campaignId={campaignId}
             campaignName={campaignName}
+            creatorId={creatorId}
           />
         )}
         {currentStep === 2 && <DonationDone closeHandler={closeHandler} />}

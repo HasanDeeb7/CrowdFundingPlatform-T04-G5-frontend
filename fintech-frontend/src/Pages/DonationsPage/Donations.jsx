@@ -14,7 +14,7 @@ function Donations() {
   const [searchText, setSearchText] = useState({ searchText: "" });
 
   return (
-    <div className="container">
+    <div className="DonationsPageContainer">
       <h1>Donations</h1>
 
       {/* <FilterProvider> */}

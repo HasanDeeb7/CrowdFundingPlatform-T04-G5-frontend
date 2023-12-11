@@ -5,13 +5,15 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { Donate } from "../../utils/donation";
 import UserContext from "../../useContext/userContext";
+
 function DonationConfirmation({
   donationAmount,
   setCurrentStep,
   campaignName,
   campaignId,
+  creatorId,
 }) {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, socket } = useContext(UserContext);
   const confirmationVariant = {
     closed: { opacity: 0, scale: 0, transform: "translateX(300px)" },
     opened: {
@@ -29,18 +31,24 @@ function DonationConfirmation({
         campaignId: campaignId,
       });
       if (data) {
-        console.log(data);
-        setUser({
-          ...user,
-          Donor: {
-            ...user.Donor,
-            balance: user.Donor.balance - donationAmount,
-          },
+        socket.emit("donation", {
+          senderId: user.id,
+          recipientId: creatorId,
+          message: `${user.firstName} just donated ${donationAmount}$ to your campaign '${campaignName}'`,
         });
+        console.log(data);
+        // setUser({
+        //   ...user,
+        //   Donor: {
+        //     ...user.Donor,
+        //     balance: user.Donor.balance - donationAmount,
+        //   },
+        // });
         setCurrentStep(2);
       }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   }
   return (
