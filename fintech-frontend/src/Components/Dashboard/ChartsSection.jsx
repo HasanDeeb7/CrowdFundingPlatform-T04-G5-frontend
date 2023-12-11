@@ -1,3 +1,4 @@
+// ChartsSection
 import { Line } from "react-chartjs-2";
 import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../../useContext/userContext";
@@ -15,10 +16,8 @@ function ChartsSection() {
   async function fetchCharts() {
     let donations = await fetchDonations();
     setDonationApi(donations);
-    // console.log(donations);
     let campaign = await fetchCampaigns();
     setCampaignApi(campaign);
-    // console.log(campaign);
     setIsLoading(false);
   }
   useEffect(() => {
