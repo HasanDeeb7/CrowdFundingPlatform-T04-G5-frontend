@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input from "../../Components/Input/Input";
 import "./SignUpFrom.css";
 import Button from "../../Components/Button/Button";
-import { CreateUser } from "../../axios/user";
+import { CreateUser } from "../../utils/user";
 import { toast } from "react-toastify";
 
 function SignUpFrom({ setLogin }) {
@@ -22,7 +22,6 @@ function SignUpFrom({ setLogin }) {
 
     try {
       setIsLoading(true);
-      console.log(newUser);
       if (Object.values(newUser).some((item) => item === "")) {
         toast.dismiss(toastId);
         setIsLoading(false);
@@ -30,7 +29,6 @@ function SignUpFrom({ setLogin }) {
       }
       const data = await CreateUser(newUser);
       if (data.status === 200) {
-        console.log(data);
         setLogin(true);
         setIsLoading(false);
         toast.update(toastId, {
@@ -41,12 +39,6 @@ function SignUpFrom({ setLogin }) {
         });
       } else {
         setIsLoading(false);
-        // toast.update(toastId, {
-        //   render: "Failed to Create User",
-        //   type: toast.TYPE.ERROR,
-        //   autoClose: 3000,
-        //   progressStyle: { background: "red" },
-        // });
       }
     } catch (error) {
       console.log(error);

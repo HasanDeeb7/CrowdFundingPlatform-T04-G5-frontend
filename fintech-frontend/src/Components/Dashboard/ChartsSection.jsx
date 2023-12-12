@@ -1,4 +1,3 @@
-// ChartsSection
 import { Line } from "react-chartjs-2";
 import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../../useContext/userContext";
@@ -7,7 +6,6 @@ import fetchCampaigns from "../../utils/campaignAxios";
 
 function ChartsSection() {
   const { user } = useContext(UserContext);
-  console.log(user);
   let [campaignApi, setCampaignApi] = useState([]);
   let [donationApi, setDonationApi] = useState();
 

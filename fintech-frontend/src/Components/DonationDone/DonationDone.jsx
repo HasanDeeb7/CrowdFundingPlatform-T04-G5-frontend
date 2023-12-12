@@ -1,6 +1,6 @@
 import "./DonationDone.css";
 import { FaCheck } from "react-icons/fa6";
-import { delay, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 function DonationDone({ closeHandler }) {
   const donationDoneVariant = {

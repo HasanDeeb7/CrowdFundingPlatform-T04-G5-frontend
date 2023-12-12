@@ -1,16 +1,7 @@
-import { useEffect, useState } from "react";
 import "./SingleCampaignCard.css";
-import fetchDonations from "../../utils/donations";
 import { motion } from "framer-motion";
 
-function SingleCampaingCard({
-  data,
-  isLoading,
-  setIsLoading,
-  donations,
-  donorsCount,
-  deadline,
-}) {
+function SingleCampaingCard({ isLoading, donations, donorsCount, deadline }) {
   return (
     !isLoading && (
       <div className="campaignCardsContainer">

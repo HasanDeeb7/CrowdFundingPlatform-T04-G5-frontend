@@ -2,9 +2,8 @@ import { Pagination, Progress, Table, TagPicker } from "rsuite";
 import { useContext, useEffect, useState } from "react";
 import { getPercentage } from "../../utils/getPercentage";
 import "./CampaignsTableComponents.css";
-import { NavLink, useNavigate } from "react-router-dom";
-import { getCampaigns } from "../../axios/campaings";
-import Loading from "../Loading/Loading";
+import { NavLink } from "react-router-dom";
+import { getCampaigns } from "../../utils/campaings";
 import UserContext from "../../useContext/userContext";
 import Button from "../Button/Button";
 import CreateCampaign from "../Dashboard/CreateCampaign";
@@ -235,7 +234,6 @@ function ComponentsTableComponent({ setIsLoading }) {
           onChangePage={setPage}
           onChangeLimit={handleChangeLimit}
           className="custom-pagination"
-          // style={}
         />
       </div>
     </>

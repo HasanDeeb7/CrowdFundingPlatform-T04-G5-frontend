@@ -55,6 +55,9 @@
   height: 60px;
   border-radius: 50%;
 }
+.sub .second button:last-of-type {
+  margin-left: 5px;
+}
 @media (max-width: 920px) {
   .container1 h3 {
     font-size: 25px;
@@ -62,6 +65,9 @@
   .container1 {
     margin-top: 30px;
     margin-left: 0;
+  }
+  .sub .second button:last-of-type {
+    margin-left: 5px;
   }
 }
 @media (max-width: 550px) {

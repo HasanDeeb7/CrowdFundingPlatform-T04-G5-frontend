@@ -33,9 +33,7 @@ function LoginForm() {
       const data = await axios.get("http://localhost:4000/login", {
         params: credentials,
       });
-      console.log(data);
       if (data) {
-        console.log(data);
         setUser(data.data);
         setIsDisabled(false);
         localStorage.setItem("userData", JSON.stringify(true));

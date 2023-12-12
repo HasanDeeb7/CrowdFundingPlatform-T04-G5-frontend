@@ -42,7 +42,6 @@ function CreateCampaign({ closeHandler }) {
           "Your campaign is added to the pending list, waiting admins approvement"
         );
         closeHandler();
-        return console.log(data);
       }
     } catch (error) {
       console.log(error);

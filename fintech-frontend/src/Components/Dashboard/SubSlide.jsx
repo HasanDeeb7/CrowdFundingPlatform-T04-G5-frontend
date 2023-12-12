@@ -2,14 +2,13 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import Button from "../Button/Button";
 import UserContext from "../../useContext/userContext";
-import { approveCampaign, deleteCampaign } from "../../axios/campaings";
+import { approveCampaign, deleteCampaign } from "../../utils/campaings";
 import { toast } from "react-toastify";
 
 async function handleApprove(campaignId) {
   try {
     const response = await approveCampaign(campaignId);
     if (response) {
-      console.log(response);
       return toast.success("Campaign is now active");
     }
   } catch (error) {
@@ -38,12 +37,10 @@ export default function SubSlide({ data }) {
         />
       </div>
       <div className="second">
-        {user.role === "admin" || user.role === "donor" ? (
-          <NavLink to="/singlecampaign" state={data}>
-            <h4>{data.title}</h4>
-            <p>{data.description}</p>
-          </NavLink>
-        ) : null}
+        <NavLink to="/singlecampaign" state={data}>
+          <h4>{data.title}</h4>
+          <p>{data.description}</p>
+        </NavLink>
 
         {user.role === "admin" ? (
           <>

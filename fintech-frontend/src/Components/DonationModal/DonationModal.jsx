@@ -3,7 +3,6 @@ import "./DonationModal.css";
 import { useState } from "react";
 import { motion, steps } from "framer-motion";
 import DonationFrom from "../DonationForm/DonationForm";
-import Button from "../Button/Button";
 import DonationConfirmation from "../DonationConfirmation/DonationConfirmation";
 import DonationDone from "../DonationDone/DonationDone";
 

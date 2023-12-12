@@ -1,12 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Panel, Grid, Row, Col } from "rsuite";
-import profile from "../../louai.jpg";
 import Button from "../../Components/Button/Button";
 import ProfileModal from "../../Pages/ProfilesPage/ProfileModal";
-import { CgMail } from "react-icons/cg";
-import { BiSolidInfoSquare } from "react-icons/bi";
-import { FaPhoneAlt } from "react-icons/fa";
-import { IoLocation } from "react-icons/io5";
 import { LuHelpingHand } from "react-icons/lu";
 import { LiaSortAmountUpSolid } from "react-icons/lia";
 import { TbBrandCampaignmonitor } from "react-icons/tb";
@@ -18,17 +13,10 @@ import UserContext from "../../useContext/userContext";
 import DepositModal from "../../Components/DepositModal/DepositModal";
 
 const HeaderProfile = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isDepositModal, setIsDepositModal] = useState(false);
-
-  // console.log(user)
-  // console.log(user.userName)
-  // console.log(user.role);
-  // console.log(user.image);
-  // console.log(user.firstName)
-  // console.log(user.lastName)
 
   const handleEditProfile = () => {
     setIsProfileModalOpen(true);

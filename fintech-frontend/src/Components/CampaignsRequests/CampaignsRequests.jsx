@@ -7,7 +7,7 @@ import {
   approveCampaign,
   deleteCampaign,
   getCampaigns,
-} from "../../axios/campaings";
+} from "../../utils/campaings";
 import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
 
@@ -20,7 +20,6 @@ function CampaignsRequests() {
   const [loading, setLoading] = useState(true);
   const [campaigns, setCampaigns] = useState();
 
-  let filteredData;
   async function fetchCampaigns() {
     try {
       const response = await getCampaigns();
@@ -98,7 +97,7 @@ function CampaignsRequests() {
     <div className="requestsContainer">
       {!loading ? (
         <>
-        <h1 style={{ marginBottom: 10 }}>All Requests</h1>
+          <h1 style={{ marginBottom: 10 }}>All Requests</h1>
           <Table
             height={420}
             data={campaigns.filter((item) => item.status === "pending")}

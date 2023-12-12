@@ -44,7 +44,6 @@ function FirstSection() {
   let completedCampaignForCreator = 0;
   let pendingCampaignForCreator = 0;
 
-  // console.log(donationApi);
   if (donationApi && campaignApi && users && !isLoading) {
     donationApi.data.map((data) => {
       if (data.Donor?.User?.userName === user.userName) {
@@ -59,23 +58,23 @@ function FirstSection() {
     });
 
     campaignApi.map((data) => {
-      if (data.status == "active") {
+      if (data.status === "active") {
         activeCampaign++;
       }
     });
     campaignApi.map((data) => {
-      if (data.status == "completed") {
+      if (data.status === "completed") {
         completedCampaign++;
       }
     });
     campaignApi.map((data) => {
-      if (data.status == "completed") {
+      if (data.status === "completed") {
         if (user.userName === data.Creator.User.userName)
           completedCampaignForCreator++;
       }
     });
     campaignApi.map((data) => {
-      if (data.status == "pending") {
+      if (data.status === "pending") {
         if (user.userName === data.Creator.User.userName)
           pendingCampaignForCreator++;
       }

@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import Progress from "rsuite/Progress";
 import { getPercentage } from "../../utils/getPercentage";
 import "./CampaignsStats.css";
-import { animate, useMotionValue, useTransform, motion } from "framer-motion";
+import { animate, useMotionValue, motion } from "framer-motion";
 import Button from "../Button/Button";
 import { FaHandHoldingHeart } from "react-icons/fa6";
 import DonationModal from "../DonationModal/DonationModal";
 import RecentDonations from "./RecentDonations";
 import UserContext from "../../useContext/userContext.js";
-import { deleteCampaign } from "../../axios/campaings.js";
+import { deleteCampaign } from "../../utils/campaings.js";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -20,10 +20,6 @@ function CampaignStats({ data }) {
   const recentDonationsList = data.Donations?.slice(-3).reverse();
   const firstDonation = data.Donations[0];
   const navigate = useNavigate();
-  console.log(recentDonationsList);
-  const rounded = useTransform(recentItem, (latest) =>
-    Math.round(latest).toLocaleString("en-US")
-  );
 
   const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
 

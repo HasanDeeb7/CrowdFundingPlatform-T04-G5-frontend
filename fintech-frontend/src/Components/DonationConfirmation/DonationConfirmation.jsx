@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import "./DonationConfirmation.css";
 import Button from "../Button/Button";
 import { motion } from "framer-motion";
-import axios from "axios";
 import { Donate } from "../../utils/donation";
 import UserContext from "../../useContext/userContext";
 
@@ -36,14 +35,6 @@ function DonationConfirmation({
           recipientId: creatorId,
           message: `${user.firstName} just donated ${donationAmount}$ to your campaign '${campaignName}'`,
         });
-        console.log(data);
-        // setUser({
-        //   ...user,
-        //   Donor: {
-        //     ...user.Donor,
-        //     balance: user.Donor.balance - donationAmount,
-        //   },
-        // });
         setCurrentStep(2);
       }
     } catch (error) {

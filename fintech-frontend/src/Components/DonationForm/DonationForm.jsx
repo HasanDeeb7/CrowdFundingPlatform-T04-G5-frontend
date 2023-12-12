@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Input, InputGroup } from "rsuite";
 import "./DonationForm.css";
 import Button from "../Button/Button";

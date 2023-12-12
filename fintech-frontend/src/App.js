@@ -8,7 +8,6 @@ import Donations from "./Pages/DonationsPage/Donations.jsx";
 import Sidebar from "./Layouts/Sidebar/Sidebar.jsx";
 import "rsuite/dist/rsuite.min.css";
 import { CustomProvider } from "rsuite";
-import { Hearts } from "react-loader-spinner";
 import SingleCampaign from "./Pages/SingleCampaign/SingleCampaign.jsx";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute.jsx";
 import CampaignsRequests from "./Pages/CampaignsRequests/CampaignsRequestsPage.jsx";
@@ -49,16 +48,14 @@ function App() {
         setIsLoading(false);
         return navigate("/network_error", { replace: true });
       }
-      // console.log(error);
       setIsLoading(false);
     }
   }
   useEffect(() => {
-    console.log("App Effect");
     getUserData();
     socket.on("notify", (data) => {
       if (data.recipientId === user.id) {
-        console.log(data)
+        console.log(data);
         toast.info(data.message, { autoClose: 3000 });
       }
     });

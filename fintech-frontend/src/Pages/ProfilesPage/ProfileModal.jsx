@@ -1,18 +1,14 @@
 import "./ProfileModal.css";
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
 
-function ProfileModal({ closeHandler , userData}) {
-
-  // console.log(userData)
-  // console.log(userData.Admin)
-
+function ProfileModal({ closeHandler, userData }) {
   const [profile, setProfile] = useState({
     firstName: "",
     lastName: "",
-    userName:"",
+    userName: "",
     bio: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, whe",
     password: "",
     phone: "701780560",
@@ -26,15 +22,9 @@ function ProfileModal({ closeHandler , userData}) {
         firstName: userData?.firstName || "",
         lastName: userData?.lastName || "",
         userName: userData?.userName || "",
-        // image:userData.image || '',
-        // bio: userData.bio || "",
-        // password: userData.password || "",
-        // phone: userData.phone || "",
-        // address: userData.address || "",
       });
     }
   }, [userData]);
-
 
   const modalVariants = {
     closed: { opacity: 0, scale: 0, width: 0, height: 0 },
@@ -61,7 +51,16 @@ function ProfileModal({ closeHandler , userData}) {
         exit="closed"
         className="modalItemsWrapper"
       >
-        <div style={{display:"flex", flexDirection:"column" , rowGap:"20px" , alignContent:"center" , justifyContent:"center" , margin:"0 auto"}}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            rowGap: "20px",
+            alignContent: "center",
+            justifyContent: "center",
+            margin: "0 auto",
+          }}
+        >
           <Input
             label="First Name"
             value={profile}
@@ -80,12 +79,6 @@ function ProfileModal({ closeHandler , userData}) {
             setValue={setProfile}
             control="userName"
           />
-          {/* <Input
-            label="Image"
-            value={profile}
-            setValue={setProfile}
-            control="image"
-          /> */}
           <Input
             label="Biography"
             value={profile}
