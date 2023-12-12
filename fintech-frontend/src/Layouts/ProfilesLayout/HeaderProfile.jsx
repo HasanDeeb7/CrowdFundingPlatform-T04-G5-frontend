@@ -58,7 +58,7 @@ const HeaderProfile = () => {
                 />
               </Col>
 
-              <Col xs={24} md={16}>
+              <div>
                 <h1
                   style={{ textAlign: "center" }}
                 >{`${user.firstName} ${user.lastName}`}</h1>
@@ -119,7 +119,7 @@ const HeaderProfile = () => {
                     />
                   )}
                 </div>
-              </Col>
+              </div>
             </Row>
           </Grid>
         </>
