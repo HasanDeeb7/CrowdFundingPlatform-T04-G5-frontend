@@ -58,6 +58,7 @@ function App() {
     getUserData();
     socket.on("notify", (data) => {
       if (data.recipientId === user.id) {
+        console.log(data)
         toast.info(data.message, { autoClose: 3000 });
       }
     });
