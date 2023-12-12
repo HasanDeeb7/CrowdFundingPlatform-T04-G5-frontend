@@ -8,7 +8,6 @@ import Donations from "./Pages/DonationsPage/Donations.jsx";
 import Sidebar from "./Layouts/Sidebar/Sidebar.jsx";
 import "rsuite/dist/rsuite.min.css";
 import { CustomProvider } from "rsuite";
-import { Hearts } from "react-loader-spinner";
 import SingleCampaign from "./Pages/SingleCampaign/SingleCampaign.jsx";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute.jsx";
 import CampaignsRequests from "./Pages/CampaignsRequests/CampaignsRequestsPage.jsx";
@@ -20,9 +19,6 @@ import Loading from "./Components/Loading/Loading.jsx";
 import NotFound from "./Pages/404/NotFound.jsx";
 import Forbidden from "./Pages/403/Forbidden.jsx";
 import NetworkError from "./Pages/NetworkError/NetworkError.jsx";
-import { io } from "socket.io-client";
-import { toast } from "react-toastify";
-const socket = io.connect("http://localhost:3001");
 
 function App() {
   const [user, setUser] = useState(null);
@@ -54,22 +50,12 @@ function App() {
     }
   }
   useEffect(() => {
-    console.log("App Effect");
     getUserData();
-    socket.on("notify", (data) => {
-      if (data.recipientId === user.id) {
-        console.log(data)
-        toast.info(data.message, { autoClose: 3000 });
-      }
-    });
-    return () => {
-      socket.off("notify");
-    };
-  }, [socket]);
+  }, []);
 
   return (
     <CustomProvider theme="dark">
-      <UserContext.Provider value={{ user, setUser, socket }}>
+      <UserContext.Provider value={{ user, setUser }}>
         {!isLoading ? (
           <div className="App">
             <main className="mainContent">

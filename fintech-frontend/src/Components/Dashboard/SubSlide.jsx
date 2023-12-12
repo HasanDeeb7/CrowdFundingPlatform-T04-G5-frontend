@@ -38,12 +38,12 @@ export default function SubSlide({ data }) {
         />
       </div>
       <div className="second">
-        {user.role === "admin" || user.role === "donor" ? (
+        {/* {user.role === "admin" || user.role === "donor"  ( */}
           <NavLink to="/singlecampaign" state={data}>
             <h4>{data.title}</h4>
             <p>{data.description}</p>
           </NavLink>
-        ) : null}
+        {/* ) : null} */}
 
         {user.role === "admin" ? (
           <>

@@ -13,7 +13,7 @@ function DonationConfirmation({
   campaignId,
   creatorId,
 }) {
-  const { user, setUser, socket } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const confirmationVariant = {
     closed: { opacity: 0, scale: 0, transform: "translateX(300px)" },
     opened: {
@@ -31,19 +31,14 @@ function DonationConfirmation({
         campaignId: campaignId,
       });
       if (data) {
-        socket.emit("donation", {
-          senderId: user.id,
-          recipientId: creatorId,
-          message: `${user.firstName} just donated ${donationAmount}$ to your campaign '${campaignName}'`,
-        });
         console.log(data);
-        // setUser({
-        //   ...user,
-        //   Donor: {
-        //     ...user.Donor,
-        //     balance: user.Donor.balance - donationAmount,
-        //   },
-        // });
+        setUser({
+          ...user,
+          Donor: {
+            ...user.Donor,
+            balance: user.Donor.balance - donationAmount,
+          },
+        });
         setCurrentStep(2);
       }
     } catch (error) {

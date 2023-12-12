@@ -21,9 +21,6 @@ function CampaignStats({ data }) {
   const firstDonation = data.Donations[0];
   const navigate = useNavigate();
   console.log(recentDonationsList);
-  const rounded = useTransform(recentItem, (latest) =>
-    Math.round(latest).toLocaleString("en-US")
-  );
 
   const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
 

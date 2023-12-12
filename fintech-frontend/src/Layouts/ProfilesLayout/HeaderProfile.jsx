@@ -16,19 +16,30 @@ import { RiAdminLine } from "react-icons/ri";
 import Loading from "../../Components/Loading/Loading";
 import UserContext from "../../useContext/userContext";
 import DepositModal from "../../Components/DepositModal/DepositModal";
+import axios from "axios";
 
 const HeaderProfile = () => {
   const { user, setUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isDepositModal, setIsDepositModal] = useState(false);
+  const [balance, setBalance] = useState({ balance: null });
 
-  // console.log(user)
-  // console.log(user.userName)
-  // console.log(user.role);
-  // console.log(user.image);
-  // console.log(user.firstName)
-  // console.log(user.lastName)
+  async function deposit() {
+    try {
+      const response = axios.patch(
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}donors/deposit`,
+        {
+          balance: balance,
+        }
+      );
+      if (response) {
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handleEditProfile = () => {
     setIsProfileModalOpen(true);
