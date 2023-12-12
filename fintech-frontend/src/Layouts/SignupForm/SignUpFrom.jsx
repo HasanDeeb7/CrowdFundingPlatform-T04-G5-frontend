@@ -75,6 +75,7 @@ function SignUpFrom({ setLogin }) {
           setValue={setNewUser}
           control="password"
           label="Password"
+          type="password"
         />
       </div>
       <div className="signUpRadioContainer">

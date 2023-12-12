@@ -69,6 +69,7 @@ function LoginForm() {
         label="Password"
         control="password"
         isDisabled={isDisabled}
+        type="password"
       />
       <Button action="Login" onClick={signIn} isDisabled={isDisabled} />
     </div>

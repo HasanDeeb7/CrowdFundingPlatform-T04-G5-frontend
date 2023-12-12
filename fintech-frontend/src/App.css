@@ -56,12 +56,20 @@ h3 {
   width: fit-content;
 }
 .balanceWrapper > div {
-  border: 1px solid var(--light-gold-clr);
-  padding: 10px;
+  background-color: var(--light-gold-clr);
+  color: black;
+  padding: 15px;
+  font-size: 20px;
+
   border-radius: 30px;
 }
 .balanceWrapper > span {
   font-weight: 600;
+}
+@media (max-width:1650px) {
+  .balanceWrapper{
+    display: none;
+  }  
 }
 @media (max-width: 1200px) {
   .rs-sidenav-collapse-in {
