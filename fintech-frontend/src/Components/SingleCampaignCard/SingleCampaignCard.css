@@ -19,9 +19,12 @@
   user-select: none;
 
 }
+ .singleCampaignCard > h4{
+  font-size: 1.4vw;
+ }
 .singleCampaignCard p {
   color: var(--primary-gold-clr);
-  font-size: 25px;
+  font-size: 1.3vw;
 }
 @media (max-width: 920px) {
   .singleCampaignCard {

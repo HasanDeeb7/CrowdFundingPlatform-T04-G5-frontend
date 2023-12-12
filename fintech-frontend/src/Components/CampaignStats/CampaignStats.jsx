@@ -59,6 +59,7 @@ function CampaignStats({ data }) {
           closeHandler={() => setIsDonationModalOpen(false)}
           campaignId={data.id}
           campaignName={data.title}
+          creatorId={data.Creator?.User?.id}
         />
       ) : (
         ""

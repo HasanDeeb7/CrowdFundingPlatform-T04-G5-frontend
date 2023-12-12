@@ -3,3 +3,13 @@
   display: flex;
   justify-content: space-between;
 }
+@media (max-width: 1455px) {
+  .campaignCardsContainer{
+    width: 20%;
+  }
+}
+@media (max-width: 1100px) {
+  .singleCampaignContainer{
+    flex-direction: column;
+  }
+}

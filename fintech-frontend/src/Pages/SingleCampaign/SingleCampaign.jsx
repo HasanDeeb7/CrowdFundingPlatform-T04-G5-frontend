@@ -9,6 +9,7 @@ import fetchDonations from "../../utils/donations";
 import Loading from "../../Components/Loading/Loading";
 function SingleCampaign() {
   const data = useLocation().state;
+  console.log(data);
   const [isLoading, setIsLoading] = useState(true);
   const [donations, setDonations] = useState();
   const [donorsCount, setDonorsCount] = useState(0);

@@ -13,7 +13,6 @@ import { getCategories } from "../../utils/categoriesAxios";
 const { Column, HeaderCell, Cell } = Table;
 
 function ComponentsTableComponent({ setIsLoading }) {
-  const navigate = useNavigate();
   const [sortColumn, setSortColumn] = useState();
   const [sortType, setSortType] = useState();
   const [loading, setLoading] = useState(true);
@@ -34,6 +33,9 @@ function ComponentsTableComponent({ setIsLoading }) {
   async function fetchCampaigns() {
     const data = await getCampaigns();
     if (data) {
+      if (user.role === "creator") {
+        return setCampaigns(data.data);
+      }
       return setCampaigns(data.data.filter((item) => item.status === "active"));
     }
   }

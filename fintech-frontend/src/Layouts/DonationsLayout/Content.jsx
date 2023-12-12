@@ -171,7 +171,7 @@ function Content({ activeFilter, searchText }) {
       ) : (
         <div>
           <div>
-            <Table height={420} className="tableContainer" data={data}>
+            <Table height={420} className="campaignsTable" data={data}>
               <Column width={134} align="center" fixed>
                 <HeaderCell>Id</HeaderCell>
                 <Cell dataKey="id" />

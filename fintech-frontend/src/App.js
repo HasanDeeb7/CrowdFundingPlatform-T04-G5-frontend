@@ -20,11 +20,15 @@ import Loading from "./Components/Loading/Loading.jsx";
 import NotFound from "./Pages/404/NotFound.jsx";
 import Forbidden from "./Pages/403/Forbidden.jsx";
 import NetworkError from "./Pages/NetworkError/NetworkError.jsx";
+import { io } from "socket.io-client";
+import { toast } from "react-toastify";
+const socket = io.connect("http://localhost:3001");
 
 function App() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
   const navigate = useNavigate();
   axios.defaults.withCredentials = true;
 
@@ -50,13 +54,22 @@ function App() {
     }
   }
   useEffect(() => {
-    // fetchUser();
+    console.log("App Effect");
     getUserData();
-  }, []);
+    socket.on("notify", (data) => {
+      if (data.recipientId === user.id) {
+        console.log(data)
+        toast.info(data.message, { autoClose: 3000 });
+      }
+    });
+    return () => {
+      socket.off("notify");
+    };
+  }, [socket]);
 
   return (
     <CustomProvider theme="dark">
-      <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider value={{ user, setUser, socket }}>
         {!isLoading ? (
           <div className="App">
             <main className="mainContent">
