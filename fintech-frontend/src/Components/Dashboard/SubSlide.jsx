@@ -44,10 +44,10 @@ export default function SubSlide({ data }) {
 
         {user.role === "admin" ? (
           <>
-            <Button action="approved" onClick={() => handleApprove(data.id)} />
+            <Button action="Approve" onClick={() => handleApprove(data.id)} />
             <Button
               btnType="danger"
-              action="deny"
+              action="Deny"
               onClick={() => handleDelete(data)}
             />
           </>

@@ -65,7 +65,7 @@ function Slide() {
             : null}
           {user.role === "admin" ? (
             <Link to="adminrequests">
-              <Button action="more" />
+              <Button action="More" />
             </Link>
           ) : null}
         </div>
