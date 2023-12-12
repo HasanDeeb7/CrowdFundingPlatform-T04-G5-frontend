@@ -10,5 +10,3 @@ const fakeCreators = [
   { id: 18, nbCampaign: 7 },
   { id: 19, nbCampaign: 4 },
 ];
-
-console.log(fakeCreators);

@@ -4,16 +4,15 @@ import { Button, ButtonToolbar } from "rsuite";
 import "./Filter.css";
 import { flushSync } from 'react-dom';
 
-function Filter() {
-  const [activeFilter, setActiveFilter] = useState("All");
+function Filter({activeFilter,setActiveFilter}) {
+  // const [activeFilter, setActiveFilter] = useState("All");
+  // const {handleFilterClick} = useFilterContext()
 
   const handleFilterClick = (filter) => {
     flushSync(() => {
       setActiveFilter(filter);
-    });
-    
-    // Add logic to handle the filter click, e.g., fetching data based on the selected filter
-  };
+    })};
+  
 
   return (
     <div>
@@ -42,21 +41,21 @@ function Filter() {
           key="This Week"
             appearance="default"
             className={`filterButton ${
-              activeFilter === "This Week" ? "active" : ""
+              activeFilter === "Week" ? "active" : ""
             }`}
-            onClick={() => handleFilterClick("This Week")}
+            onClick={() => handleFilterClick("Week")}
           >
-            This Week
+            Week
           </Button>
           <Button
           key="This Month"
             appearance="default"
             className={`filterButton ${
-              activeFilter === "This Month" ? "active" : ""
+              activeFilter === "Month" ? "active" : ""
             }`}
-            onClick={() => handleFilterClick("This Month")}
+            onClick={() => handleFilterClick("Month")}
           >
-            This Month
+            Month
           </Button>
         </ButtonToolbar>
       </Stack>

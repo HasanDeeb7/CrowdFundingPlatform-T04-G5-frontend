@@ -21,6 +21,9 @@ function LoginForm() {
   }, []);
 
   async function signIn() {
+    if (credentials.username === "" || credentials.password === "") {
+      return toast.error("All fields are required");
+    }
     setIsDisabled(true);
     const toastId = toast("Loging In", {
       autoClose: false,
@@ -31,7 +34,6 @@ function LoginForm() {
         params: credentials,
       });
       if (data) {
-        console.log(data);
         setUser(data.data);
         setIsDisabled(false);
         localStorage.setItem("userData", JSON.stringify(true));
@@ -44,8 +46,10 @@ function LoginForm() {
         return navigate("/", { replace: true });
       }
     } catch (error) {
-      console.log(error);
       setIsDisabled(false);
+      toast.dismiss(toastId);
+      toast.error(error.response.data.message);
+      console.log(error);
     }
   }
 

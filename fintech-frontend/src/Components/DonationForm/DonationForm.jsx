@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Input, InputGroup } from "rsuite";
 import "./DonationForm.css";
 import Button from "../Button/Button";
 import { AnimatePresence, motion } from "framer-motion";
+import UserContext from "../../useContext/userContext";
+import { toast } from "react-toastify";
 
-function DonationForm({ donationAmount, setDonationAmount, setCurrentStep }) {
+function DonationForm({
+  donationAmount,
+  setDonationAmount,
+  setCurrentStep,
+  campaignName,
+}) {
+  const { user } = useContext(UserContext);
+  function handleProceed() {
+    if (!donationAmount) {
+      return toast.error("Field is required");
+    }
+    setCurrentStep(1);
+  }
+
   const formVariant = {
     closed: { opacity: 0, scale: 0, transform: "translateX(-300px)" },
     opened: {
@@ -13,8 +28,8 @@ function DonationForm({ donationAmount, setDonationAmount, setCurrentStep }) {
       transform: "translateX(0)",
     },
   };
-  const campaignName = "BLAAA";
-  const mockBalance = 800;
+
+  const balance = user.Donor.balance;
   const inputStyles = { width: 200, margin: 0 };
   return (
     <AnimatePresence>
@@ -23,7 +38,7 @@ function DonationForm({ donationAmount, setDonationAmount, setCurrentStep }) {
         initial="closed"
         animate="opened"
         transition={{
-          delay: 0.3,
+          delay: 0.2,
           duration: 0.4,
           ease: [0, 0.71, 0.2, 1.01],
         }}
@@ -38,7 +53,6 @@ function DonationForm({ donationAmount, setDonationAmount, setCurrentStep }) {
             <Input
               type="number"
               value={donationAmount}
-              defaultValue={0}
               onChange={(value) => setDonationAmount(value)}
             />
             <InputGroup.Addon>.00</InputGroup.Addon>
@@ -46,7 +60,7 @@ function DonationForm({ donationAmount, setDonationAmount, setCurrentStep }) {
         </div>
         <div className="donationInputWrapper">
           <label htmlFor="">Current Balance</label>
-          <span>{mockBalance}$</span>
+          <span>{balance}$</span>
         </div>
         <div className="donationInputWrapper">
           <label htmlFor="">Your Donation</label>
@@ -54,9 +68,9 @@ function DonationForm({ donationAmount, setDonationAmount, setCurrentStep }) {
         </div>
         <div className="donationTotalBalance">
           <label htmlFor="">Your total balance</label>
-          <span>{mockBalance - donationAmount}$</span>
+          <span>{balance - donationAmount || balance}$</span>
         </div>
-        <Button action="Proceed" onClick={() => setCurrentStep(1)} />
+        <Button action="Proceed" onClick={() => handleProceed()} />
       </motion.div>
     </AnimatePresence>
   );

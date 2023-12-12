@@ -1,13 +1,16 @@
 import "./DonationDone.css";
 import { FaCheck } from "react-icons/fa6";
-import { delay, motion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 function DonationDone({ closeHandler }) {
   const donationDoneVariant = {
     initial: { opacity: 0, scale: 0, transfrom: "translateX(300px)" },
     computed: { opacity: 1, scale: 1, transfrom: "translateX(0)" },
   };
+  const navigate = useNavigate();
   setTimeout(() => {
     closeHandler(false);
+    return navigate("/campaigns", { replace: true });
   }, 1500);
   return (
     <motion.div

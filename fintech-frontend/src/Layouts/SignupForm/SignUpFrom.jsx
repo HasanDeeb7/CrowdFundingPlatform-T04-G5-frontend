@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input from "../../Components/Input/Input";
 import "./SignUpFrom.css";
 import Button from "../../Components/Button/Button";
-import { CreateUser } from "../../axios/user";
+import { CreateUser } from "../../utils/user";
 import { toast } from "react-toastify";
 
 function SignUpFrom({ setLogin }) {
@@ -19,12 +19,16 @@ function SignUpFrom({ setLogin }) {
       autoClose: false,
       closeButton: false,
     });
+
     try {
       setIsLoading(true);
-      console.log(newUser)
+      if (Object.values(newUser).some((item) => item === "")) {
+        toast.dismiss(toastId);
+        setIsLoading(false);
+        return toast.error("All fields are required");
+      }
       const data = await CreateUser(newUser);
-      if (data) {
-        console.log(data);
+      if (data.status === 200) {
         setLogin(true);
         setIsLoading(false);
         toast.update(toastId, {
@@ -35,21 +39,11 @@ function SignUpFrom({ setLogin }) {
         });
       } else {
         setIsLoading(false);
-        toast.update(toastId, {
-          render: "Failed to Create User",
-          type: toast.TYPE.ERROR,
-          autoClose: 3000,
-          progressStyle: { background: "red" },
-        });
       }
     } catch (error) {
       console.log(error);
       setIsLoading(false);
-      toast.update(toastId, {
-        render: "Failed to Create User",
-        type: toast.TYPE.ERROR,
-        autoClose: 3000,
-      });
+      toast.dismiss(toastId);
     }
   }
   return (
@@ -82,15 +76,14 @@ function SignUpFrom({ setLogin }) {
           control="password"
           label="Password"
         />
-        
       </div>
       <div className="signUpRadioContainer">
         <span className="signUpRadioWrapper">
-          <label htmlFor="roleRadio">Donor</label>
+          <label htmlFor="creatorRadio">Creator</label>
           <input
             type="radio"
             name="roleRadio"
-            id="roleRadio"
+            id="creatorRadio"
             value="creator"
             checked={newUser.role === "creator"}
             onChange={() => setNewUser({ ...newUser, role: "creator" })}
@@ -98,11 +91,11 @@ function SignUpFrom({ setLogin }) {
           <span className="customRadio"></span>
         </span>
         <span className="signUpRadioWrapper">
-          <label htmlFor="creatorRadio">Creator</label>
+          <label htmlFor="donorRadio">Donor</label>
           <input
             type="radio"
             name="roleRadio"
-            id="creatorRadio"
+            id="donorRadio"
             value="donor"
             checked={newUser.role === "donor"}
             onChange={() => setNewUser({ ...newUser, role: "donor" })}

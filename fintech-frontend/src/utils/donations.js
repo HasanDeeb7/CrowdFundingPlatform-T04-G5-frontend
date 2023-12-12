@@ -5,7 +5,6 @@ async function fetchDonations() {
     const response = await axios.get(
       `${process.env.REACT_APP_BACKEND_ENDPOINT}donations/read`
     );
-    console.log(response.data);
 
     return response.data;
   } catch (error) {

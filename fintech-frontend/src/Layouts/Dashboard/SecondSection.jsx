@@ -1,6 +1,6 @@
 import React from "react";
 import DoughnutSection from "../../Components/Dashboard/DoughnutSection";
-import ChartsSeaction from "../../Components/Dashboard/ChartsSection";
+import ChartsSection from "../../Components/Dashboard/ChartsSection";
 import Slide from "../../Components/Dashboard/Slide";
 import { Chart as ChartJS, defaults } from "chart.js/auto";
 import "./SecondSection.css";
@@ -18,7 +18,7 @@ function SecondSection() {
     <div className="secondSection">
       <div className="second1">
         <DoughnutSection />
-        <ChartsSeaction />
+        <ChartsSection />
       </div>
       <div className="second2">
         <Slide />

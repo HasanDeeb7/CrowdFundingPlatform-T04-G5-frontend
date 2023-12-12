@@ -14,14 +14,12 @@ import UserContext from "../../useContext/userContext";
 import axios from "axios";
 import NavItem from "rsuite/esm/Nav/NavItem";
 
-
-
 function Sidebar() {
   const { user } = useContext(UserContext);
 
   const [expanded, setExpanded] = React.useState(true);
 
-  const [activeKey, setActiveKey] = React.useState("2");
+  const [activeKey, setActiveKey] = React.useState("1");
   const { setUser } = useContext(UserContext);
 
   const NavLink = forwardRef(({ href, children, ...rest }, ref) => (

@@ -5,7 +5,6 @@ function CampaignsRequestsLayout() {
   return (
     <div>
       <>
-        <h1>All Requests</h1>
         <CampaignsRequests />
       </>
     </div>

@@ -1,23 +1,13 @@
 import React, { useState } from "react";
 import CampaignsTable from "../../Layouts/CampaignsTable/CampaignsTable.jsx";
 import "./Campaigns.css";
-import CreateCampaign from "../../Components/Dashboard/CreateCampaign.jsx";
-import Button from "../../Components/Button/Button.jsx";
+import Loading from "../../Components/Loading/Loading.jsx";
 function Campaigns() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(true);
   return (
     <div className="CampaignsPageWrapper">
-      <h1>Campaigns</h1>
-      <Button action='New Campaign' onClick={()=> setIsModalOpen(true)} />
-
-      {isModalOpen && (
-        <CreateCampaign
-          action="Create Campaign"
-          closeHandler={() => setIsModalOpen(false)}
-        />
-      )}
-
-      <CampaignsTable />
+      {isLoading && <Loading />}
+      <CampaignsTable setIsLoading={setIsLoading} />
     </div>
   );
 }

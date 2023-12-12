@@ -50,6 +50,14 @@
   color: var(--primary-gold-clr);
   text-decoration: none;
 }
+.first img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.sub .second button:last-of-type {
+  margin-left: 5px;
+}
 @media (max-width: 920px) {
   .container1 h3 {
     font-size: 25px;
@@ -57,6 +65,19 @@
   .container1 {
     margin-top: 30px;
     margin-left: 0;
+  }
+  .sub .second button:last-of-type {
+    margin-left: 5px;
+  }
+}
+@media (max-width: 550px) {
+  .sub .second button:last-of-type {
+    margin-left: 0;
+    margin-top: 5px;
+  }
+  .sub {
+    flex-direction: column;
+    text-align: center;
   }
 }
 @media (max-width: 420px) {
@@ -68,5 +89,9 @@
     white-space: nowrap;
     overflow: hidden;
     width: 10em;
+  }
+  .sub .second button:last-of-type {
+    margin-left: 0;
+    margin-top: 5px;
   }
 }
