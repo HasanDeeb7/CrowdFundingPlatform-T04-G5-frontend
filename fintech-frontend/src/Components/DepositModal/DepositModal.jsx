@@ -3,9 +3,26 @@ import { motion } from "framer-motion";
 import "./DepositModal.css";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
+import axios from "axios";
 
 function DepositModal({ closeHandler }) {
   const [depositAmount, setDepositAmount] = useState({ depositAmount: null });
+
+  async function deposit() {
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}donors/deposit`,
+        {
+          balance: depositAmount,
+        }
+      );
+      if (response) {
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const modalVariants = {
     closed: { opacity: 0, scale: 0, width: 0, height: 0 },
     opened: {
@@ -37,7 +54,7 @@ function DepositModal({ closeHandler }) {
           label="Deposit Amount"
           type="number"
         />
-        <Button action="Deposit" onClick={() => console.log("Deposit")} />
+        <Button action="Deposit" onClick={() => deposit()} />
       </motion.div>
     </div>
   );

@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
-import Button from "../../Components/Button/Button";
 import "./NetworkError.css";
 
-function NetworkError({ setError }) {
+function NetworkError() {
   return (
     <div className="networkErrorContainer">
       <h1>Network Error</h1>

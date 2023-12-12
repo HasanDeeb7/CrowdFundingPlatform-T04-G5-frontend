@@ -11,12 +11,14 @@ import { RiAdminLine } from "react-icons/ri";
 import Loading from "../../Components/Loading/Loading";
 import UserContext from "../../useContext/userContext";
 import DepositModal from "../../Components/DepositModal/DepositModal";
+import axios from "axios";
 
 const HeaderProfile = () => {
   const { user } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isDepositModal, setIsDepositModal] = useState(false);
+  const [balance, setBalance] = useState({ balance: null });
 
   const handleEditProfile = () => {
     setIsProfileModalOpen(true);

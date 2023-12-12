@@ -19,9 +19,6 @@ import Loading from "./Components/Loading/Loading.jsx";
 import NotFound from "./Pages/404/NotFound.jsx";
 import Forbidden from "./Pages/403/Forbidden.jsx";
 import NetworkError from "./Pages/NetworkError/NetworkError.jsx";
-import { io } from "socket.io-client";
-import { toast } from "react-toastify";
-const socket = io.connect("http://localhost:3001");
 
 function App() {
   const [user, setUser] = useState(null);
@@ -53,20 +50,11 @@ function App() {
   }
   useEffect(() => {
     getUserData();
-    socket.on("notify", (data) => {
-      if (data.recipientId === user.id) {
-        console.log(data);
-        toast.info(data.message, { autoClose: 3000 });
-      }
-    });
-    return () => {
-      socket.off("notify");
-    };
-  }, [socket]);
+  }, []);
 
   return (
     <CustomProvider theme="dark">
-      <UserContext.Provider value={{ user, setUser, socket }}>
+      <UserContext.Provider value={{ user, setUser }}>
         {!isLoading ? (
           <div className="App">
             <main className="mainContent">
